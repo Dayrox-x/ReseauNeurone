@@ -2,8 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "neuron.h"
 #include "population.h"
 #include "sdl.h"
+
+// pour compiler : gcc *.c -o main -lm -lSDL2
+// -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
+// pour executer : ./main
  
 int main( int argc, char* args[] ) { 
 	//Demarrer SDL 
