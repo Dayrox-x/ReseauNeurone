@@ -1,4 +1,9 @@
 #include <SDL2/SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "population.h"
+#include "sdl.h"
  
 int main( int argc, char* args[] ) { 
 	//Demarrer SDL 
@@ -6,7 +11,6 @@ int main( int argc, char* args[] ) {
 
 	SDL_Window* window = SDL_CreateWindow( "SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0 );
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
-	
  
 	//Quitter SDL 
 	SDL_Quit(); 
