@@ -64,9 +64,14 @@ Pixel getPixel(Image image, int x, int y) {
     return image.tab[x][y];
 }
 
-void setPixel(Image image, int x, int y, Pixel p) {
-    image.tab[x][y] = p;
+void setPixel(Image *image, int x, int y, Pixel p) {
+    if (x < 0 || x >= image->width || y < 0 || y >= image->height) {
+        printf("Erreur: setPixel hors limites (%d, %d) !\n", x, y);
+        return;
+    }
+    image->tab[x][y] = p;
 }
+
 
 int getWidth(Image image) {
     return image.width;
@@ -80,7 +85,9 @@ int getHeight(Image image) {
 Pixel ** createPixelTab(int width, int height) {
     Pixel ** tab = (Pixel**)malloc(sizeof(Pixel*) * width);
     for (int i = 0; i < width; i++) {
-        tab[i] = (Pixel*)malloc(sizeof(Pixel) * height);
+        for (int j = 0; j < height; j++) {
+            tab[i][j] = createPixel(i, j, createColor(0, 0, 0)); // Pixels noirs par défaut
+        }
     }
     return tab;
 }
@@ -94,15 +101,29 @@ Image createImage(int width, int height) {
 }
 
 void destroyImage(Image image) {
+    if (image.tab == NULL) return;
     for (int i = 0; i < image.width; i++) {
-        free(image.tab[i]);
+        if (image.tab[i] != NULL) {
+            free(image.tab[i]);
+        }
     }
     free(image.tab);
 }
 
 void createPopulation(Image image, int populationSize, Color c, bool val) {
-    for (int i = 0; i < populationSize; i++){
-        Pixel p = createPixel(image.width / 2 + i * (int)cos((double)i), image.height / 2 + i * (int)sin((double)i), c);
-        setPixel(image, getX(p), getY(p), p);
+    int width = getWidth(image);
+    int height = getHeight(image);
+
+    for (int i = 0; i < populationSize; i++) {
+        int x = width / 2 + (int)(50 * cos(i)); 
+        int y = height / 2 + (int)(50 * sin(i));
+
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            printf("Coordonnées invalides : x=%d, y=%d, ignoré.\n", x, y);
+            continue;
+        }
+
+        Pixel p = createPixel(x, y, c);
+        setPixel(&image, x, y, p);
     }
 }
