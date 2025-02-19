@@ -76,6 +76,7 @@ void setPixel(Image image, int x, int y, Pixel p) {
     image->tab[x][y] = p;
 }
 
+
 int getWidth(Image image) {
     return image->width;
 }
