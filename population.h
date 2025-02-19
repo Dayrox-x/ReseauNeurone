@@ -51,7 +51,7 @@ void destroyPixel(Pixel p);
 
 // getters setters de Image
 Pixel getPixel(Image image, int x, int y);
-void setPixel(Image *image, int x, int y, Pixel p);
+void setPixel(Image image, int x, int y, Pixel p);
 
 int getWidth(Image image);
 int getHeight(Image image);
