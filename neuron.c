@@ -2,17 +2,19 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+
 // Fonction de transfert : Tangente hyperbolique
 double transfer(double x) {
     return tanh(x);
 }
 
 // Fonction de propagation 
-double forward(Neuron *neuron, double inputs[INPUT_SIZE]) {
+double forward(Neuron *neuron, double entry[]) {
     double sum = 0;
-    for (int i = 0; i < INPUT_SIZE; i++) {
+    for (int i = 0; i < entry; i++) {
         //multiplication des poids par les entrées correspondantes
-        sum += neuron->weights[i] * inputs[i];
+        sum += neuron->weights[i] * entry[i];
     }
     return transfer(sum);
 }
@@ -33,8 +35,8 @@ Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche,
     }
 	// Initialisation des poids pour chaque neurone
     for (int i = 0; i < nb_neurones; i++) {
-        couche->tab_n[i].weights = malloc(INPUT_SIZE * sizeof(double));
-        for (int j = 0; j < INPUT_SIZE; j++) {
+        couche->tab_n[i] = malloc(sizeof(Neuron));
+        for (int j = 0; j < len(tab_n); j++) {
             couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1; 
         }
     }
