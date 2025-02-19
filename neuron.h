@@ -17,5 +17,5 @@ typedef struct Couche {
 } Couche;
 
 double transfer(double x); // Fonction de transfert
-double forward(Neuron *neuron, double inputs[INPUT_SIZE]); // calcul de la sortie
+double forward(Neuron *neuron, double entry[]); // calcul de la sortie
 
