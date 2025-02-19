@@ -2,10 +2,9 @@
 #ifndef NEURON_H
 #define NEURON_H
 
-#define INPUT_SIZE 2 // Nombre d'entrées (x et y)
 
 typedef struct {
-    double weights[INPUT_SIZE]; // tableau contenant les poids synaptiques
+    double weights[]; // tableau contenant les poids synaptiques
 } Neuron;
 
 
