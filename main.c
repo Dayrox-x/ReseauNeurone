@@ -12,7 +12,7 @@
 // pour executer : ./main
 // SFML et Doxygen
 
-#define PIXEL_SIZE 5
+#define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
@@ -71,6 +71,10 @@ int main( int argc, char* args[] ) {
 	}
 
 	destroyImage(image);
+
+	destroyColor(white);
+	destroyColor(red);
+	destroyColor(blue);
 
 
 	SDL_Delay(5000);
