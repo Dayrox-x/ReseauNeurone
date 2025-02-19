@@ -93,5 +93,6 @@ void interpretation(double *tab_val_sortie, char *tab_sortie[], int len) {
     }
 }
 
+// faire les free dans une fonction
 
 
