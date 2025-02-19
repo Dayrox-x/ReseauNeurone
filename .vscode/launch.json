@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "//wsl.localhost/Ubuntu/home/paul/RacineUbuntu/GLProjet/ReseauNeurone",
-      "program": "//wsl.localhost/Ubuntu/home/paul/RacineUbuntu/GLProjet/ReseauNeurone/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/lordweapons/Documents/Cours/L3/GL/ReseauNeurone",
+      "program": "/home/lordweapons/Documents/Cours/L3/GL/ReseauNeurone/main",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
