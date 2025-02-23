@@ -1,5 +1,6 @@
 #include "neuron.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 
 // Fonction de transfert : Tangente hyperbolique
@@ -11,36 +12,37 @@ double transfer(double x) {
 double forward(Neuron *neuron, double inputs[INPUT_SIZE]) {
     double sum = 0;
     for (int i = 0; i < INPUT_SIZE; i++) {
-        //multiplication des poids par les entrées correspondantes
         sum += neuron->weights[i] * inputs[i];
     }
     return transfer(sum);
 }
 
-
+// Initialisation d'une couche
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche, int is_lst_couche) {
     Couche *couche = malloc(sizeof(Couche));
     if (!couche) {
         printf("Erreur d'allocation mémoire\n");
         exit(1);
     }
-	// Initialisation du tableau de neurones
+
     couche->nb_neurones = nb_neurones;
     couche->tab_n = malloc(nb_neurones * sizeof(Neuron));
     if (!couche->tab_n) {
         printf("Erreur d'allocation mémoire\n");
+        free(couche);
         exit(1);
     }
-	// Initialisation des poids pour chaque neurone
+
     for (int i = 0; i < nb_neurones; i++) {
-        couche->tab_n[i].weights = malloc(INPUT_SIZE * sizeof(double));
         for (int j = 0; j < INPUT_SIZE; j++) {
             couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1; 
         }
     }
+
     couche->p = couche_suivante;
-    couche->is_fst_couche = is_fst;
-    couche->is_lst_couche = is_lst;
+    couche->is_fst_couche = is_fst_couche;
+    couche->is_lst_couche = is_lst_couche;
+
     return couche;
 }
 

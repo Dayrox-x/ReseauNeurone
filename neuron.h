@@ -19,4 +19,6 @@ typedef struct Couche {
 
 double transfer(double x); // Fonction de transfert
 double forward(Neuron *neuron, double inputs[INPUT_SIZE]); // calcul de la sortie
+Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche, int is_lst_couche); // Initialisation d'une couche
 
+#endif // NEURON_H
