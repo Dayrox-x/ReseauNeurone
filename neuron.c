@@ -11,7 +11,7 @@ double transfer(double x) {
 }
 
 // Fonction de propagation 
-double forward(Neuron *neuron, double entry[]) {
+double forward(Neuron *neuron, double inputs[INPUT_SIZE]) {
     double sum = 0;
     for (int i = 0; i < INPUT_SIZE; i++) {
         sum += neuron->weights[i] * inputs[i];
