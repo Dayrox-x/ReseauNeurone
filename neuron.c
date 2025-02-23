@@ -3,13 +3,15 @@
 #include <stdio.h>
 #include <math.h>
 
+
+
 // Fonction de transfert : Tangente hyperbolique
 double transfer(double x) {
     return tanh(x);
 }
 
 // Fonction de propagation 
-double forward(Neuron *neuron, double inputs[INPUT_SIZE]) {
+double forward(Neuron *neuron, double entry[]) {
     double sum = 0;
     for (int i = 0; i < INPUT_SIZE; i++) {
         sum += neuron->weights[i] * inputs[i];
