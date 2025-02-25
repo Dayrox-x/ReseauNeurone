@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
 
-//Pour tester : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c neuron.c -lm
+//Pour tester neuron : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c ../neuron.c -lm
+//Pour tester les deux : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c TestPopulation.c ../neuron.c ../population.c -lm
+
 //Puis exécuter le fichier AllTests : ./AllTests
 //Un point "." signifie que le test a réussi, un "F" signifie qu'il a échoué
 
