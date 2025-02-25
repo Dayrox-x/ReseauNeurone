@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-//Pour tester : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c neuron.c -lm
+//Pour tester : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c ../neuron.c -lm
 //Puis exécuter le fichier AllTests : ./AllTests
 //Un point "." signifie que le test a réussi, un "F" signifie qu'il a échoué
 
