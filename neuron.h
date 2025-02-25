@@ -21,4 +21,8 @@ double transfer(double x); // Fonction de transfert
 double forward(Neuron *neuron, double inputs[INPUT_SIZE]); // calcul de la sortie
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche, int is_lst_couche); // Initialisation d'une couche
 
+double *calcul_couche(Couche *couche, double *tab_val, int input_size); // Calcul de la sortie d'une couche
+double *calcul_reseau(double *tab_val, Couche *fst_couche); // Calcul de la sortie d'un réseau
+Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties); // Initialisation d'un réseau
+
 #endif // NEURON_H
