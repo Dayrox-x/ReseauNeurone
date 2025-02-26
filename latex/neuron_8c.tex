@@ -1,0 +1,76 @@
+\doxysection{neuron.\+c File Reference}
+\label{neuron_8c}\index{neuron.c@{neuron.c}}
+{\ttfamily \#include \char`\"{}neuron.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for neuron.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{neuron_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ transfer} (double x)
+\item 
+double \textbf{ forward} (\textbf{ Neuron} $\ast$neuron, double inputs[\textbf{ INPUT\+\_\+\+SIZE}])
+\item 
+\textbf{ Couche} $\ast$ \textbf{ init\+\_\+couche} (int nb\+\_\+neurones, \textbf{ Couche} $\ast$couche\+\_\+suivante, int is\+\_\+fst\+\_\+couche, int is\+\_\+lst\+\_\+couche)
+\item 
+double $\ast$ \textbf{ calcul\+\_\+couche} (\textbf{ Couche} $\ast$couche, double $\ast$tab\+\_\+val, int input\+\_\+size)
+\item 
+double $\ast$ \textbf{ calcul\+\_\+reseau} (double $\ast$tab\+\_\+val, \textbf{ Couche} $\ast$fst\+\_\+couche)
+\item 
+\textbf{ Couche} $\ast$ \textbf{ init\+\_\+reseau} (int nb\+\_\+couches, int taille\+\_\+max, int taille\+\_\+min, int nb\+\_\+entrees, int nb\+\_\+sorties)
+\item 
+void \textbf{ interpretation} (double $\ast$tab\+\_\+val\+\_\+sortie, char $\ast$tab\+\_\+sortie[$\,$], int len)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{neuron_8c_ac61c026206e140cb0ce72f1e2ddf9baf}} 
+\index{neuron.c@{neuron.c}!calcul\_couche@{calcul\_couche}}
+\index{calcul\_couche@{calcul\_couche}!neuron.c@{neuron.c}}
+\doxysubsubsection{calcul\_couche()}
+{\footnotesize\ttfamily double$\ast$ calcul\+\_\+couche (\begin{DoxyParamCaption}\item[{\textbf{ Couche} $\ast$}]{couche,  }\item[{double $\ast$}]{tab\+\_\+val,  }\item[{int}]{input\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_a134972fc92b0088a6508379272320ea2}} 
+\index{neuron.c@{neuron.c}!calcul\_reseau@{calcul\_reseau}}
+\index{calcul\_reseau@{calcul\_reseau}!neuron.c@{neuron.c}}
+\doxysubsubsection{calcul\_reseau()}
+{\footnotesize\ttfamily double$\ast$ calcul\+\_\+reseau (\begin{DoxyParamCaption}\item[{double $\ast$}]{tab\+\_\+val,  }\item[{\textbf{ Couche} $\ast$}]{fst\+\_\+couche }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_a5ebe269586e5aec40c2f4d46358d7368}} 
+\index{neuron.c@{neuron.c}!forward@{forward}}
+\index{forward@{forward}!neuron.c@{neuron.c}}
+\doxysubsubsection{forward()}
+{\footnotesize\ttfamily double forward (\begin{DoxyParamCaption}\item[{\textbf{ Neuron} $\ast$}]{neuron,  }\item[{double}]{inputs[\+INPUT\+\_\+\+SIZE] }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_ac9ad2933203f54ce2b90af956281165b}} 
+\index{neuron.c@{neuron.c}!init\_couche@{init\_couche}}
+\index{init\_couche@{init\_couche}!neuron.c@{neuron.c}}
+\doxysubsubsection{init\_couche()}
+{\footnotesize\ttfamily \textbf{ Couche}$\ast$ init\+\_\+couche (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+neurones,  }\item[{\textbf{ Couche} $\ast$}]{couche\+\_\+suivante,  }\item[{int}]{is\+\_\+fst\+\_\+couche,  }\item[{int}]{is\+\_\+lst\+\_\+couche }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_abf9a8122c5ecd89201edd7f153efe7e3}} 
+\index{neuron.c@{neuron.c}!init\_reseau@{init\_reseau}}
+\index{init\_reseau@{init\_reseau}!neuron.c@{neuron.c}}
+\doxysubsubsection{init\_reseau()}
+{\footnotesize\ttfamily \textbf{ Couche}$\ast$ init\+\_\+reseau (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+couches,  }\item[{int}]{taille\+\_\+max,  }\item[{int}]{taille\+\_\+min,  }\item[{int}]{nb\+\_\+entrees,  }\item[{int}]{nb\+\_\+sorties }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_a0092e146f949ab93b1963171ed509d08}} 
+\index{neuron.c@{neuron.c}!interpretation@{interpretation}}
+\index{interpretation@{interpretation}!neuron.c@{neuron.c}}
+\doxysubsubsection{interpretation()}
+{\footnotesize\ttfamily void interpretation (\begin{DoxyParamCaption}\item[{double $\ast$}]{tab\+\_\+val\+\_\+sortie,  }\item[{char $\ast$}]{tab\+\_\+sortie[$\,$],  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8c_a610be0c32d07b639cc1eb033551b14cc}} 
+\index{neuron.c@{neuron.c}!transfer@{transfer}}
+\index{transfer@{transfer}!neuron.c@{neuron.c}}
+\doxysubsubsection{transfer()}
+{\footnotesize\ttfamily double transfer (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})}
+

@@ -1,0 +1,297 @@
+\doxysection{population.\+h File Reference}
+\label{population_8h}\index{population.h@{population.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+Include dependency graph for population.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{population_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{population_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ pxl}
+\item 
+struct \textbf{ img}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef SDL\+\_\+\+Color $\ast$ \textbf{ Color}
+\item 
+typedef \textbf{ pxl} $\ast$ \textbf{ Pixel}
+\item 
+typedef \textbf{ img} $\ast$ \textbf{ Image}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ setR} (\textbf{ Color} c, int r)
+\item 
+int \textbf{ getR} (\textbf{ Color} c)
+\item 
+void \textbf{ setG} (\textbf{ Color} c, int g)
+\item 
+int \textbf{ getG} (\textbf{ Color} c)
+\item 
+void \textbf{ setB} (\textbf{ Color} c, int b)
+\item 
+int \textbf{ getB} (\textbf{ Color} c)
+\item 
+void \textbf{ setA} (\textbf{ Color} c, int a)
+\item 
+int \textbf{ getA} (\textbf{ Color} c)
+\item 
+\textbf{ Color} \textbf{ create\+Color} (int r, int g, int b, int a)
+\item 
+void \textbf{ destroy\+Color} (\textbf{ Color} c)
+\item 
+void \textbf{ set\+Color} (\textbf{ Pixel} p, \textbf{ Color} c)
+\item 
+\textbf{ Color} \textbf{ get\+Color} (\textbf{ Pixel} p)
+\item 
+void \textbf{ setX} (\textbf{ Pixel} p, int x)
+\item 
+int \textbf{ getX} (\textbf{ Pixel} p)
+\item 
+void \textbf{ setY} (\textbf{ Pixel} p, int y)
+\item 
+int \textbf{ getY} (\textbf{ Pixel} p)
+\item 
+\textbf{ Pixel} \textbf{ create\+Pixel} (int x, int y, \textbf{ Color} c)
+\item 
+void \textbf{ destroy\+Pixel} (\textbf{ Pixel} p)
+\item 
+\textbf{ Pixel} \textbf{ get\+Pixel} (\textbf{ Image} image, int x, int y)
+\item 
+void \textbf{ set\+Pixel} (\textbf{ Image} image, int x, int y, \textbf{ Pixel} p)
+\item 
+int \textbf{ get\+Width} (\textbf{ Image} image)
+\item 
+int \textbf{ get\+Height} (\textbf{ Image} image)
+\item 
+\textbf{ Color} \textbf{ get\+Pixel\+Color} (\textbf{ Image} image, int x, int y)
+\item 
+void \textbf{ set\+Pixel\+Color} (\textbf{ Image} image, int x, int y, \textbf{ Color} c)
+\item 
+\textbf{ Pixel} $\ast$$\ast$ \textbf{ create\+Pixel\+Tab} (int width, int height, \textbf{ Color} c)
+\item 
+\textbf{ Image} \textbf{ create\+Image} (int width, int height, \textbf{ Color} c)
+\item 
+void \textbf{ destroy\+Pixel\+Tab} (\textbf{ Pixel} $\ast$$\ast$tab)
+\item 
+void \textbf{ destroy\+Image} (\textbf{ Image} image)
+\item 
+void \textbf{ create\+Population} (\textbf{ Image} image, int population\+Size, \textbf{ Color} c, bool val)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{population_8h_aa34ae95f78be57bd947b9ae897a8c3ce}} 
+\index{population.h@{population.h}!Color@{Color}}
+\index{Color@{Color}!population.h@{population.h}}
+\doxysubsubsection{Color}
+{\footnotesize\ttfamily typedef SDL\+\_\+\+Color$\ast$ \textbf{ Color}}
+
+\mbox{\label{population_8h_a540581eff69358c5fc11994df164e961}} 
+\index{population.h@{population.h}!Image@{Image}}
+\index{Image@{Image}!population.h@{population.h}}
+\doxysubsubsection{Image}
+{\footnotesize\ttfamily typedef \textbf{ img}$\ast$ \textbf{ Image}}
+
+\mbox{\label{population_8h_aa3542dc0c85ad12592a01b71289a20bc}} 
+\index{population.h@{population.h}!Pixel@{Pixel}}
+\index{Pixel@{Pixel}!population.h@{population.h}}
+\doxysubsubsection{Pixel}
+{\footnotesize\ttfamily typedef \textbf{ pxl}$\ast$ \textbf{ Pixel}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{population_8h_a4d159e0b80f8b3a406355dce179d8b1d}} 
+\index{population.h@{population.h}!createColor@{createColor}}
+\index{createColor@{createColor}!population.h@{population.h}}
+\doxysubsubsection{createColor()}
+{\footnotesize\ttfamily \textbf{ Color} create\+Color (\begin{DoxyParamCaption}\item[{int}]{r,  }\item[{int}]{g,  }\item[{int}]{b,  }\item[{int}]{a }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a3711caed2be9083275d814c14533263b}} 
+\index{population.h@{population.h}!createImage@{createImage}}
+\index{createImage@{createImage}!population.h@{population.h}}
+\doxysubsubsection{createImage()}
+{\footnotesize\ttfamily \textbf{ Image} create\+Image (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a8eb8d8ee3c5c944e838f65b8c7777f54}} 
+\index{population.h@{population.h}!createPixel@{createPixel}}
+\index{createPixel@{createPixel}!population.h@{population.h}}
+\doxysubsubsection{createPixel()}
+{\footnotesize\ttfamily \textbf{ Pixel} create\+Pixel (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_ab9f918917592d298c8731e2f1de15dd4}} 
+\index{population.h@{population.h}!createPixelTab@{createPixelTab}}
+\index{createPixelTab@{createPixelTab}!population.h@{population.h}}
+\doxysubsubsection{createPixelTab()}
+{\footnotesize\ttfamily \textbf{ Pixel}$\ast$$\ast$ create\+Pixel\+Tab (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a13686a19458e18f6f49ee377ed521bca}} 
+\index{population.h@{population.h}!createPopulation@{createPopulation}}
+\index{createPopulation@{createPopulation}!population.h@{population.h}}
+\doxysubsubsection{createPopulation()}
+{\footnotesize\ttfamily void create\+Population (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image,  }\item[{int}]{population\+Size,  }\item[{\textbf{ Color}}]{c,  }\item[{bool}]{val }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a5bd5e8b493e01c6e8f383d5cd6ae1617}} 
+\index{population.h@{population.h}!destroyColor@{destroyColor}}
+\index{destroyColor@{destroyColor}!population.h@{population.h}}
+\doxysubsubsection{destroyColor()}
+{\footnotesize\ttfamily void destroy\+Color (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1}} 
+\index{population.h@{population.h}!destroyImage@{destroyImage}}
+\index{destroyImage@{destroyImage}!population.h@{population.h}}
+\doxysubsubsection{destroyImage()}
+{\footnotesize\ttfamily void destroy\+Image (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090}} 
+\index{population.h@{population.h}!destroyPixel@{destroyPixel}}
+\index{destroyPixel@{destroyPixel}!population.h@{population.h}}
+\doxysubsubsection{destroyPixel()}
+{\footnotesize\ttfamily void destroy\+Pixel (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a34d4018a1442e7036ade62f5fb149baa}} 
+\index{population.h@{population.h}!destroyPixelTab@{destroyPixelTab}}
+\index{destroyPixelTab@{destroyPixelTab}!population.h@{population.h}}
+\doxysubsubsection{destroyPixelTab()}
+{\footnotesize\ttfamily void destroy\+Pixel\+Tab (\begin{DoxyParamCaption}\item[{\textbf{ Pixel} $\ast$$\ast$}]{tab }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_aecbabb2ee063ebc120d08a6a645943e2}} 
+\index{population.h@{population.h}!getA@{getA}}
+\index{getA@{getA}!population.h@{population.h}}
+\doxysubsubsection{getA()}
+{\footnotesize\ttfamily int getA (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_ab0556c883e94588a26edd75ab97d01db}} 
+\index{population.h@{population.h}!getB@{getB}}
+\index{getB@{getB}!population.h@{population.h}}
+\doxysubsubsection{getB()}
+{\footnotesize\ttfamily int getB (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a9bf843aeef76763dd03994eaaa3caa73}} 
+\index{population.h@{population.h}!getColor@{getColor}}
+\index{getColor@{getColor}!population.h@{population.h}}
+\doxysubsubsection{getColor()}
+{\footnotesize\ttfamily \textbf{ Color} get\+Color (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a257cc683843469b700157978d83704d3}} 
+\index{population.h@{population.h}!getG@{getG}}
+\index{getG@{getG}!population.h@{population.h}}
+\doxysubsubsection{getG()}
+{\footnotesize\ttfamily int getG (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4}} 
+\index{population.h@{population.h}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!population.h@{population.h}}
+\doxysubsubsection{getHeight()}
+{\footnotesize\ttfamily int get\+Height (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a981dbd5ce45085cf21969fb512489f83}} 
+\index{population.h@{population.h}!getPixel@{getPixel}}
+\index{getPixel@{getPixel}!population.h@{population.h}}
+\doxysubsubsection{getPixel()}
+{\footnotesize\ttfamily \textbf{ Pixel} get\+Pixel (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a3671e6f8d057ad8105b472170517d886}} 
+\index{population.h@{population.h}!getPixelColor@{getPixelColor}}
+\index{getPixelColor@{getPixelColor}!population.h@{population.h}}
+\doxysubsubsection{getPixelColor()}
+{\footnotesize\ttfamily \textbf{ Color} get\+Pixel\+Color (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_ae31757e349588b1ed3d6bef7511bdcb5}} 
+\index{population.h@{population.h}!getR@{getR}}
+\index{getR@{getR}!population.h@{population.h}}
+\doxysubsubsection{getR()}
+{\footnotesize\ttfamily int getR (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_aa28668b0cf0c28983e0eed7a6105a6af}} 
+\index{population.h@{population.h}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!population.h@{population.h}}
+\doxysubsubsection{getWidth()}
+{\footnotesize\ttfamily int get\+Width (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a9affe22af789e3f7d9436cdee05e07c8}} 
+\index{population.h@{population.h}!getX@{getX}}
+\index{getX@{getX}!population.h@{population.h}}
+\doxysubsubsection{getX()}
+{\footnotesize\ttfamily int getX (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a06d3b44d29881886e3c4d9ee68a8f6a1}} 
+\index{population.h@{population.h}!getY@{getY}}
+\index{getY@{getY}!population.h@{population.h}}
+\doxysubsubsection{getY()}
+{\footnotesize\ttfamily int getY (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_aabf633ca5dee0e45a7baefd5b10dab6b}} 
+\index{population.h@{population.h}!setA@{setA}}
+\index{setA@{setA}!population.h@{population.h}}
+\doxysubsubsection{setA()}
+{\footnotesize\ttfamily void setA (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c,  }\item[{int}]{a }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a6baa3a368fbcbd415628fee1a6354a25}} 
+\index{population.h@{population.h}!setB@{setB}}
+\index{setB@{setB}!population.h@{population.h}}
+\doxysubsubsection{setB()}
+{\footnotesize\ttfamily void setB (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a448627e7b6e34aebce066bb7a93b0dc9}} 
+\index{population.h@{population.h}!setColor@{setColor}}
+\index{setColor@{setColor}!population.h@{population.h}}
+\doxysubsubsection{setColor()}
+{\footnotesize\ttfamily void set\+Color (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p,  }\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_ad4f7814357de41bb447576447590fb81}} 
+\index{population.h@{population.h}!setG@{setG}}
+\index{setG@{setG}!population.h@{population.h}}
+\doxysubsubsection{setG()}
+{\footnotesize\ttfamily void setG (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c,  }\item[{int}]{g }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e}} 
+\index{population.h@{population.h}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!population.h@{population.h}}
+\doxysubsubsection{setPixel()}
+{\footnotesize\ttfamily void set\+Pixel (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{\textbf{ Pixel}}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627}} 
+\index{population.h@{population.h}!setPixelColor@{setPixelColor}}
+\index{setPixelColor@{setPixelColor}!population.h@{population.h}}
+\doxysubsubsection{setPixelColor()}
+{\footnotesize\ttfamily void set\+Pixel\+Color (\begin{DoxyParamCaption}\item[{\textbf{ Image}}]{image,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{\textbf{ Color}}]{c }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a0faaa3b3f59bafaef2787f703c0e700a}} 
+\index{population.h@{population.h}!setR@{setR}}
+\index{setR@{setR}!population.h@{population.h}}
+\doxysubsubsection{setR()}
+{\footnotesize\ttfamily void setR (\begin{DoxyParamCaption}\item[{\textbf{ Color}}]{c,  }\item[{int}]{r }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a1378c60f9ad7b669f49a7278e8ddffff}} 
+\index{population.h@{population.h}!setX@{setX}}
+\index{setX@{setX}!population.h@{population.h}}
+\doxysubsubsection{setX()}
+{\footnotesize\ttfamily void setX (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p,  }\item[{int}]{x }\end{DoxyParamCaption})}
+
+\mbox{\label{population_8h_a460d191bf6bf252e8bf17e57b5e36961}} 
+\index{population.h@{population.h}!setY@{setY}}
+\index{setY@{setY}!population.h@{population.h}}
+\doxysubsubsection{setY()}
+{\footnotesize\ttfamily void setY (\begin{DoxyParamCaption}\item[{\textbf{ Pixel}}]{p,  }\item[{int}]{y }\end{DoxyParamCaption})}
+

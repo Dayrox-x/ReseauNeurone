@@ -1,0 +1,99 @@
+\doxysection{neuron.\+h File Reference}
+\label{neuron_8h}\index{neuron.h@{neuron.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{neuron_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Neuron}
+\item 
+struct \textbf{ Couche}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ INPUT\+\_\+\+SIZE}~2
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ Couche} \textbf{ Couche}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ transfer} (double x)
+\item 
+double \textbf{ forward} (\textbf{ Neuron} $\ast$neuron, double inputs[\textbf{ INPUT\+\_\+\+SIZE}])
+\item 
+\textbf{ Couche} $\ast$ \textbf{ init\+\_\+couche} (int nb\+\_\+neurones, \textbf{ Couche} $\ast$couche\+\_\+suivante, int is\+\_\+fst\+\_\+couche, int is\+\_\+lst\+\_\+couche)
+\item 
+double $\ast$ \textbf{ calcul\+\_\+couche} (\textbf{ Couche} $\ast$couche, double $\ast$tab\+\_\+val, int input\+\_\+size)
+\item 
+double $\ast$ \textbf{ calcul\+\_\+reseau} (double $\ast$tab\+\_\+val, \textbf{ Couche} $\ast$fst\+\_\+couche)
+\item 
+\textbf{ Couche} $\ast$ \textbf{ init\+\_\+reseau} (int nb\+\_\+couches, int taille\+\_\+max, int taille\+\_\+min, int nb\+\_\+entrees, int nb\+\_\+sorties)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{neuron_8h_abcf72cd23bdafb47b19023d91b4c107d}} 
+\index{neuron.h@{neuron.h}!INPUT\_SIZE@{INPUT\_SIZE}}
+\index{INPUT\_SIZE@{INPUT\_SIZE}!neuron.h@{neuron.h}}
+\doxysubsubsection{INPUT\_SIZE}
+{\footnotesize\ttfamily \#define INPUT\+\_\+\+SIZE~2}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{neuron_8h_ac81d7ca8b2936238311be9a364c65d57}} 
+\index{neuron.h@{neuron.h}!Couche@{Couche}}
+\index{Couche@{Couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{Couche}
+{\footnotesize\ttfamily typedef struct \textbf{ Couche} \textbf{ Couche}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{neuron_8h_ac61c026206e140cb0ce72f1e2ddf9baf}} 
+\index{neuron.h@{neuron.h}!calcul\_couche@{calcul\_couche}}
+\index{calcul\_couche@{calcul\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{calcul\_couche()}
+{\footnotesize\ttfamily double$\ast$ calcul\+\_\+couche (\begin{DoxyParamCaption}\item[{\textbf{ Couche} $\ast$}]{couche,  }\item[{double $\ast$}]{tab\+\_\+val,  }\item[{int}]{input\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8h_a134972fc92b0088a6508379272320ea2}} 
+\index{neuron.h@{neuron.h}!calcul\_reseau@{calcul\_reseau}}
+\index{calcul\_reseau@{calcul\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{calcul\_reseau()}
+{\footnotesize\ttfamily double$\ast$ calcul\+\_\+reseau (\begin{DoxyParamCaption}\item[{double $\ast$}]{tab\+\_\+val,  }\item[{\textbf{ Couche} $\ast$}]{fst\+\_\+couche }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8h_a5ebe269586e5aec40c2f4d46358d7368}} 
+\index{neuron.h@{neuron.h}!forward@{forward}}
+\index{forward@{forward}!neuron.h@{neuron.h}}
+\doxysubsubsection{forward()}
+{\footnotesize\ttfamily double forward (\begin{DoxyParamCaption}\item[{\textbf{ Neuron} $\ast$}]{neuron,  }\item[{double}]{inputs[\+INPUT\+\_\+\+SIZE] }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8h_ac9ad2933203f54ce2b90af956281165b}} 
+\index{neuron.h@{neuron.h}!init\_couche@{init\_couche}}
+\index{init\_couche@{init\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{init\_couche()}
+{\footnotesize\ttfamily \textbf{ Couche}$\ast$ init\+\_\+couche (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+neurones,  }\item[{\textbf{ Couche} $\ast$}]{couche\+\_\+suivante,  }\item[{int}]{is\+\_\+fst\+\_\+couche,  }\item[{int}]{is\+\_\+lst\+\_\+couche }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8h_abf9a8122c5ecd89201edd7f153efe7e3}} 
+\index{neuron.h@{neuron.h}!init\_reseau@{init\_reseau}}
+\index{init\_reseau@{init\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{init\_reseau()}
+{\footnotesize\ttfamily \textbf{ Couche}$\ast$ init\+\_\+reseau (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+couches,  }\item[{int}]{taille\+\_\+max,  }\item[{int}]{taille\+\_\+min,  }\item[{int}]{nb\+\_\+entrees,  }\item[{int}]{nb\+\_\+sorties }\end{DoxyParamCaption})}
+
+\mbox{\label{neuron_8h_a610be0c32d07b639cc1eb033551b14cc}} 
+\index{neuron.h@{neuron.h}!transfer@{transfer}}
+\index{transfer@{transfer}!neuron.h@{neuron.h}}
+\doxysubsubsection{transfer()}
+{\footnotesize\ttfamily double transfer (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})}
+

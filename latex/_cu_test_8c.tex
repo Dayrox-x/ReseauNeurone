@@ -1,0 +1,247 @@
+\doxysection{Tests/\+Cu\+Test.c File Reference}
+\label{_cu_test_8c}\index{Tests/CuTest.c@{Tests/CuTest.c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$setjmp.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Cu\+Test.\+h\char`\"{}}\newline
+Include dependency graph for Cu\+Test.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_cu_test_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \textbf{ Cu\+Str\+Alloc} (int size)
+\item 
+char $\ast$ \textbf{ Cu\+Str\+Copy} (const char $\ast$old)
+\item 
+void \textbf{ Cu\+String\+Init} (\textbf{ Cu\+String} $\ast$str)
+\item 
+\textbf{ Cu\+String} $\ast$ \textbf{ Cu\+String\+New} (void)
+\item 
+void \textbf{ Cu\+String\+Delete} (\textbf{ Cu\+String} $\ast$str)
+\item 
+void \textbf{ Cu\+String\+Resize} (\textbf{ Cu\+String} $\ast$str, int new\+Size)
+\item 
+void \textbf{ Cu\+String\+Append} (\textbf{ Cu\+String} $\ast$str, const char $\ast$text)
+\item 
+void \textbf{ Cu\+String\+Append\+Char} (\textbf{ Cu\+String} $\ast$str, char ch)
+\item 
+void \textbf{ Cu\+String\+Append\+Format} (\textbf{ Cu\+String} $\ast$str, const char $\ast$format,...)
+\item 
+void \textbf{ Cu\+String\+Insert} (\textbf{ Cu\+String} $\ast$str, const char $\ast$text, int pos)
+\item 
+void \textbf{ Cu\+Test\+Init} (\textbf{ Cu\+Test} $\ast$t, const char $\ast$name, \textbf{ Test\+Function} function)
+\item 
+\textbf{ Cu\+Test} $\ast$ \textbf{ Cu\+Test\+New} (const char $\ast$name, \textbf{ Test\+Function} function)
+\item 
+void \textbf{ Cu\+Test\+Delete} (\textbf{ Cu\+Test} $\ast$t)
+\item 
+void \textbf{ Cu\+Test\+Run} (\textbf{ Cu\+Test} $\ast$tc)
+\item 
+void \textbf{ Cu\+Fail\+\_\+\+Line} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message2, const char $\ast$message)
+\item 
+void \textbf{ Cu\+Assert\+\_\+\+Line} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, int condition)
+\item 
+void \textbf{ Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, const char $\ast$expected, const char $\ast$actual)
+\item 
+void \textbf{ Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, int expected, int actual)
+\item 
+void \textbf{ Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, double expected, double actual, double delta)
+\item 
+void \textbf{ Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg} (\textbf{ Cu\+Test} $\ast$tc, const char $\ast$file, int line, const char $\ast$message, void $\ast$expected, void $\ast$actual)
+\item 
+void \textbf{ Cu\+Suite\+Init} (\textbf{ Cu\+Suite} $\ast$test\+Suite)
+\item 
+\textbf{ Cu\+Suite} $\ast$ \textbf{ Cu\+Suite\+New} (void)
+\item 
+void \textbf{ Cu\+Suite\+Delete} (\textbf{ Cu\+Suite} $\ast$test\+Suite)
+\item 
+void \textbf{ Cu\+Suite\+Add} (\textbf{ Cu\+Suite} $\ast$test\+Suite, \textbf{ Cu\+Test} $\ast$test\+Case)
+\item 
+void \textbf{ Cu\+Suite\+Add\+Suite} (\textbf{ Cu\+Suite} $\ast$test\+Suite, \textbf{ Cu\+Suite} $\ast$test\+Suite2)
+\item 
+void \textbf{ Cu\+Suite\+Run} (\textbf{ Cu\+Suite} $\ast$test\+Suite)
+\item 
+void \textbf{ Cu\+Suite\+Summary} (\textbf{ Cu\+Suite} $\ast$test\+Suite, \textbf{ Cu\+String} $\ast$summary)
+\item 
+void \textbf{ Cu\+Suite\+Details} (\textbf{ Cu\+Suite} $\ast$test\+Suite, \textbf{ Cu\+String} $\ast$details)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_cu_test_8c_a6516555a02b63914c05926b8be16ee7d}} 
+\index{CuTest.c@{CuTest.c}!CuAssert\_Line@{CuAssert\_Line}}
+\index{CuAssert\_Line@{CuAssert\_Line}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuAssert\_Line()}
+{\footnotesize\ttfamily void Cu\+Assert\+\_\+\+Line (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{int}]{condition }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a2d802a1b0e030f521d319bfd35de434c}} 
+\index{CuTest.c@{CuTest.c}!CuAssertDblEquals\_LineMsg@{CuAssertDblEquals\_LineMsg}}
+\index{CuAssertDblEquals\_LineMsg@{CuAssertDblEquals\_LineMsg}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuAssertDblEquals\_LineMsg()}
+{\footnotesize\ttfamily void Cu\+Assert\+Dbl\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{double}]{expected,  }\item[{double}]{actual,  }\item[{double}]{delta }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a0c7eef12cc27fdf3c2d45171c9f0b78c}} 
+\index{CuTest.c@{CuTest.c}!CuAssertIntEquals\_LineMsg@{CuAssertIntEquals\_LineMsg}}
+\index{CuAssertIntEquals\_LineMsg@{CuAssertIntEquals\_LineMsg}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuAssertIntEquals\_LineMsg()}
+{\footnotesize\ttfamily void Cu\+Assert\+Int\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{int}]{expected,  }\item[{int}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_ae02f3aa740f67d22d525edec69d3447c}} 
+\index{CuTest.c@{CuTest.c}!CuAssertPtrEquals\_LineMsg@{CuAssertPtrEquals\_LineMsg}}
+\index{CuAssertPtrEquals\_LineMsg@{CuAssertPtrEquals\_LineMsg}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuAssertPtrEquals\_LineMsg()}
+{\footnotesize\ttfamily void Cu\+Assert\+Ptr\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{void $\ast$}]{expected,  }\item[{void $\ast$}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a735c044efbed668cd0cadc5758eed39b}} 
+\index{CuTest.c@{CuTest.c}!CuAssertStrEquals\_LineMsg@{CuAssertStrEquals\_LineMsg}}
+\index{CuAssertStrEquals\_LineMsg@{CuAssertStrEquals\_LineMsg}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuAssertStrEquals\_LineMsg()}
+{\footnotesize\ttfamily void Cu\+Assert\+Str\+Equals\+\_\+\+Line\+Msg (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message,  }\item[{const char $\ast$}]{expected,  }\item[{const char $\ast$}]{actual }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a20ac8bd60bdb8aae384a8c673f27a70c}} 
+\index{CuTest.c@{CuTest.c}!CuFail\_Line@{CuFail\_Line}}
+\index{CuFail\_Line@{CuFail\_Line}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuFail\_Line()}
+{\footnotesize\ttfamily void Cu\+Fail\+\_\+\+Line (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc,  }\item[{const char $\ast$}]{file,  }\item[{int}]{line,  }\item[{const char $\ast$}]{message2,  }\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a47f78d7d0870ca387da239404f667f51}} 
+\index{CuTest.c@{CuTest.c}!CuStrAlloc@{CuStrAlloc}}
+\index{CuStrAlloc@{CuStrAlloc}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStrAlloc()}
+{\footnotesize\ttfamily char$\ast$ Cu\+Str\+Alloc (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_ada3eafe4379d5e838c00f4512b0853a1}} 
+\index{CuTest.c@{CuTest.c}!CuStrCopy@{CuStrCopy}}
+\index{CuStrCopy@{CuStrCopy}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStrCopy()}
+{\footnotesize\ttfamily char$\ast$ Cu\+Str\+Copy (\begin{DoxyParamCaption}\item[{const char $\ast$}]{old }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a8a8236bdc8e67aef0eaa76d3774a9746}} 
+\index{CuTest.c@{CuTest.c}!CuStringAppend@{CuStringAppend}}
+\index{CuStringAppend@{CuStringAppend}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringAppend()}
+{\footnotesize\ttfamily void Cu\+String\+Append (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str,  }\item[{const char $\ast$}]{text }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_aaaf58226c641a630fdd3133a6f7329b1}} 
+\index{CuTest.c@{CuTest.c}!CuStringAppendChar@{CuStringAppendChar}}
+\index{CuStringAppendChar@{CuStringAppendChar}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringAppendChar()}
+{\footnotesize\ttfamily void Cu\+String\+Append\+Char (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str,  }\item[{char}]{ch }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_af38755c5e147eda7e40d686204591d5c}} 
+\index{CuTest.c@{CuTest.c}!CuStringAppendFormat@{CuStringAppendFormat}}
+\index{CuStringAppendFormat@{CuStringAppendFormat}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringAppendFormat()}
+{\footnotesize\ttfamily void Cu\+String\+Append\+Format (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str,  }\item[{const char $\ast$}]{format,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_af1c0464de180ce55cddab465f8272956}} 
+\index{CuTest.c@{CuTest.c}!CuStringDelete@{CuStringDelete}}
+\index{CuStringDelete@{CuStringDelete}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringDelete()}
+{\footnotesize\ttfamily void Cu\+String\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a14fb27a206438e3d576c4d4ef900e4de}} 
+\index{CuTest.c@{CuTest.c}!CuStringInit@{CuStringInit}}
+\index{CuStringInit@{CuStringInit}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringInit()}
+{\footnotesize\ttfamily void Cu\+String\+Init (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a0fb039ab02c0d7e1a05b4770a45ad22f}} 
+\index{CuTest.c@{CuTest.c}!CuStringInsert@{CuStringInsert}}
+\index{CuStringInsert@{CuStringInsert}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringInsert()}
+{\footnotesize\ttfamily void Cu\+String\+Insert (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str,  }\item[{const char $\ast$}]{text,  }\item[{int}]{pos }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_addad5bd8d537b005f88131b660b1d988}} 
+\index{CuTest.c@{CuTest.c}!CuStringNew@{CuStringNew}}
+\index{CuStringNew@{CuStringNew}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringNew()}
+{\footnotesize\ttfamily \textbf{ Cu\+String}$\ast$ Cu\+String\+New (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a5a96ea47c6f08721d609afd04351bedd}} 
+\index{CuTest.c@{CuTest.c}!CuStringResize@{CuStringResize}}
+\index{CuStringResize@{CuStringResize}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuStringResize()}
+{\footnotesize\ttfamily void Cu\+String\+Resize (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+String} $\ast$}]{str,  }\item[{int}]{new\+Size }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a5094269f70ecff9ae52bfccf28ae9aab}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteAdd@{CuSuiteAdd}}
+\index{CuSuiteAdd@{CuSuiteAdd}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteAdd()}
+{\footnotesize\ttfamily void Cu\+Suite\+Add (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite,  }\item[{\textbf{ Cu\+Test} $\ast$}]{test\+Case }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a3d815933350df88d053bb27049898de6}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteAddSuite@{CuSuiteAddSuite}}
+\index{CuSuiteAddSuite@{CuSuiteAddSuite}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteAddSuite()}
+{\footnotesize\ttfamily void Cu\+Suite\+Add\+Suite (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite,  }\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite2 }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a90c4f9afcd05efe5b18db2b4cf1ceb76}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteDelete@{CuSuiteDelete}}
+\index{CuSuiteDelete@{CuSuiteDelete}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteDelete()}
+{\footnotesize\ttfamily void Cu\+Suite\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_ae37002665a4bb477fddd808fb427fd5a}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteDetails@{CuSuiteDetails}}
+\index{CuSuiteDetails@{CuSuiteDetails}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteDetails()}
+{\footnotesize\ttfamily void Cu\+Suite\+Details (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite,  }\item[{\textbf{ Cu\+String} $\ast$}]{details }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_aa5854c4974e2ef1b56006e3729bec299}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteInit@{CuSuiteInit}}
+\index{CuSuiteInit@{CuSuiteInit}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteInit()}
+{\footnotesize\ttfamily void Cu\+Suite\+Init (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a3a0f28baade11a6bc457acf2ac1b5341}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteNew@{CuSuiteNew}}
+\index{CuSuiteNew@{CuSuiteNew}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteNew()}
+{\footnotesize\ttfamily \textbf{ Cu\+Suite}$\ast$ Cu\+Suite\+New (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a4cc0e2d27f2fd499b0477477cf2b6b0b}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteRun@{CuSuiteRun}}
+\index{CuSuiteRun@{CuSuiteRun}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteRun()}
+{\footnotesize\ttfamily void Cu\+Suite\+Run (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a6413759f6fa99345e150ed61fffa8ae2}} 
+\index{CuTest.c@{CuTest.c}!CuSuiteSummary@{CuSuiteSummary}}
+\index{CuSuiteSummary@{CuSuiteSummary}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuSuiteSummary()}
+{\footnotesize\ttfamily void Cu\+Suite\+Summary (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Suite} $\ast$}]{test\+Suite,  }\item[{\textbf{ Cu\+String} $\ast$}]{summary }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a6a0c37c6a3879d2852cb82299cf490ad}} 
+\index{CuTest.c@{CuTest.c}!CuTestDelete@{CuTestDelete}}
+\index{CuTestDelete@{CuTestDelete}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuTestDelete()}
+{\footnotesize\ttfamily void Cu\+Test\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{t }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a9e68d16c690d6e350b7f855123e4e709}} 
+\index{CuTest.c@{CuTest.c}!CuTestInit@{CuTestInit}}
+\index{CuTestInit@{CuTestInit}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuTestInit()}
+{\footnotesize\ttfamily void Cu\+Test\+Init (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{t,  }\item[{const char $\ast$}]{name,  }\item[{\textbf{ Test\+Function}}]{function }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_abfe77e67b5fab8fc24c63192b95167c9}} 
+\index{CuTest.c@{CuTest.c}!CuTestNew@{CuTestNew}}
+\index{CuTestNew@{CuTestNew}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuTestNew()}
+{\footnotesize\ttfamily \textbf{ Cu\+Test}$\ast$ Cu\+Test\+New (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{\textbf{ Test\+Function}}]{function }\end{DoxyParamCaption})}
+
+\mbox{\label{_cu_test_8c_a5a2e94f837202a65f08c7de5e9ef57d9}} 
+\index{CuTest.c@{CuTest.c}!CuTestRun@{CuTestRun}}
+\index{CuTestRun@{CuTestRun}!CuTest.c@{CuTest.c}}
+\doxysubsubsection{CuTestRun()}
+{\footnotesize\ttfamily void Cu\+Test\+Run (\begin{DoxyParamCaption}\item[{\textbf{ Cu\+Test} $\ast$}]{tc }\end{DoxyParamCaption})}
+
