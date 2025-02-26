@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <SDL2/SDL.h>
 
-//Pour tester population : utiliser la commande gcc -o AllTests AllTests.c TestPopulation.c ../population.c CuTest.c -lm
-//Pour tester les deux : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c TestPopulation.c ../neuron.c ../population.c -lm
+//Pour tester population : utiliser la commande gcc -o AllTests AllTests.c TestPopulation.c ../population.c CuTest.c -lm -lSDL2
+//Pour tester les deux : utiliser la commande gcc -o AllTests AllTests.c CuTest.c TestNeuron.c TestPopulation.c ../neuron.c ../population.c -lm -lSDL2
 
 //Puis exécuter le fichier AllTests : ./AllTests
 //Un point "." signifie que le test a réussi, un "F" signifie qu'il a échoué
@@ -16,7 +17,7 @@ void TestGetR(CuTest *tc) {
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
-    int res = getR(Color c);
+    int res = getR(c);
     CuAssertIntEquals(tc, r, res);
 }
 
@@ -26,7 +27,7 @@ void TestGetG(CuTest *tc) {
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
-    int res = getG(Color c);
+    int res = getG(c);
     CuAssertIntEquals(tc, g, res);
 }
 
@@ -36,7 +37,7 @@ void TestGetB(CuTest *tc) {
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
-    int res = getB(Color c);
+    int res = getB(c);
     CuAssertIntEquals(tc, b, res);
 }
 
@@ -46,7 +47,7 @@ void TestGetA(CuTest *tc) {
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
-    int res = getA(Color c);
+    int res = getA(c);
     CuAssertIntEquals(tc, a, res);
 }
 
@@ -58,7 +59,7 @@ void TestSetR(CuTest *tc) {
     int a = 200;
     Color c = createColor(r, g, b, a);
     setR(c, r2);
-    CuAssertIntEquals(tc, r2, getR(Color c));
+    CuAssertIntEquals(tc, r2, getR(c));
 }
 
 void TestSetG(CuTest *tc) {
@@ -69,7 +70,7 @@ void TestSetG(CuTest *tc) {
     int a = 200;
     Color c = createColor(r, g, b, a);
     setG(c, g2);
-    CuAssertIntEquals(tc, g2, getG(Color c));
+    CuAssertIntEquals(tc, g2, getG(c));
 }
 
 void TestSetB(CuTest *tc) {
@@ -80,7 +81,7 @@ void TestSetB(CuTest *tc) {
     int a = 200;
     Color c = createColor(r, g, b, a);
     setB(c, b2);
-    CuAssertIntEquals(tc, b2, getB(Color c));
+    CuAssertIntEquals(tc, b2, getB(c));
 }
 
 void TestSetA(CuTest *tc) {
@@ -91,7 +92,7 @@ void TestSetA(CuTest *tc) {
     int a2 = 183;
     Color c = createColor(r, g, b, a);
     setA(c, a2);
-    CuAssertIntEquals(tc, a2, getA(Color c));
+    CuAssertIntEquals(tc, a2, getA(c));
 }
 
 void TestCreateColor(CuTest *tc) {
@@ -123,13 +124,7 @@ void TestCreatePixelTab (CuTest *tc) {
     //Tests allocations
     CuAssertPtrNotNull(tc, tabPix);
     for (int i = 0; i < width; i++) {
-        CuAssertPtrNotNull(tc, tabPix[i])
-    }
-
-    //Tests dimensions du tableau
-    CuAssertIntEquals(tc, width, len(tabPix));
-    for (int i = 0; i < width; i++) {
-        CuAssertIntEquals(tc, height, len(tabPix[i]));
+        CuAssertPtrNotNull(tc, tabPix[i]);
     }
     
     destroyPixelTab(tabPix, width, height);

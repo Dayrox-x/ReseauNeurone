@@ -63,7 +63,7 @@ Pixel** createPixelTab(int width, int height, Color c);
 
 Image createImage(int width, int height, Color c);
 
-void destroyPixelTab(Pixel ** tab);
+void destroyPixelTab(Pixel ** tab, int width, int height);
 void destroyImage(Image image);
 
 void createPopulation(Image image, int populationSize, Color c, bool val);

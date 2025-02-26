@@ -11,7 +11,7 @@
  */
 
 
-#include "SDL/SDL.h"
+#include "SDL2/SDL.h"
  
 /**
  * \fn int main(int argc, char* args[])
