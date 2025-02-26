@@ -114,14 +114,18 @@ Image createImage(int width, int height, Color c) {
     return image;
 }
 
-void destroyImage(Image image) {
-    for (int i = 0; i < image->width; i++) {
-        for (int j = 0; j < image->height; j++) {
-            destroyPixel(image->tab[i][j]);
+void destroyPixelTab(Pixel ** tab, int width, int height) {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            destroyPixel(tab[i][j]);
         }
-        free(image->tab[i]);
+        free(tab[i]);
     }
-    free(image->tab);
+    free(tab);
+}
+
+void destroyImage(Image image) {
+    destroyPixelTab(image->tab, image->width, image->height);
     free(image);
 }
 
