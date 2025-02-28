@@ -137,16 +137,14 @@ void destroyImage(Image image) {
     free(image);
 }
 
-void createPopulation(Image image, int populationSize, Color c, bool val) {
-    int sign;
-    if (val){sign = 1;} else {sign = -1;}
+void createPopulation(Image image, Color c, int val) {
     int x = 0, y = 0;
     float i = 0;
     while (x < image->width && y < image->height && x >= 0 && y >= 0) {
         float cos_x = cos(i);
         float sin_y = sin(i);
-        x = (image->width / 2 + sign * (int)(i * cos_x));
-        y = (image->height / 2 + sign * (int)(i * sin_y));
+        x = (image->width / 2 + val * (int)(i * cos_x));
+        y = (image->height / 2 + val * (int)(i * sin_y));
         if (x < image->width && y < image->height && x >= 0 && y >= 0) {
             setPixelColor(image, x, y, c);
         }

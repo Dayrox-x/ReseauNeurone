@@ -238,22 +238,134 @@ Pixel createPixel(int x, int y, Color c);
 void destroyPixel(Pixel p);
 
 // getters setters de Image
+
+/**
+ * \fn Pixel getPixel(Image image, int x, int y)
+ * \brief Retourne le pixel de position (x, y) dans une image
+ * \param image
+ * Image dont on récupère le pixel
+ * \param x
+ * Position en abscisse du pixel voulu
+ * \param y
+ * Position en ordonnée du pixel voulu
+ * \return Pixel de position x, y
+ */
 Pixel getPixel(Image image, int x, int y);
+
+/**
+ * \fn void setPixel(Image image, int x, int y, Pixel p)
+ * \brief Définie le pixel de position (x, y) dans une image
+ * \param image Image dont on définie le pixel
+ * \param x
+ * Position en abscisse du pixel défini
+ * \param y
+ * Position en ordonnée du pixel défini
+ * \param p
+ * Pixel que l'on place dans l'image
+ */
 void setPixel(Image image, int x, int y, Pixel p);
 
+/**
+ * \fn int getWidth(Image image)
+ * \brief Retourne la largeur d'une image
+ * \param image
+ * Image dont on récupère la largeur
+ * \return Largeur de l'image
+ */
 int getWidth(Image image);
+
+/**
+ * \fn int getHeight(Image image)
+ * \brief Retourne la hauteur d'une image
+ * \param image
+ * Image dont on récupère la hauteur
+ * \return Hauteur de l'image
+ */
 int getHeight(Image image);
 
+/**
+ * \fn Color getPixelColor(Image image, int x, int y)
+ * \brief Retourne la couleur du pixel de coordonnées (x, y) dans une image
+ * \param image
+ * Image dont on veut récupérer le couleur d'un des pixels
+ * \param x
+ * Position en abscisse du pixel dans l'image
+ * \param y
+ * Position en ordonnée du pixel dans l'image
+ * \return Couleur du pixel sélectionné
+ */
 Color getPixelColor(Image image, int x, int y);
+
+/**
+ * \fn void setPixelColor(Image image, int x, int y, Color c)
+ * \brief Définie la couleur du pixel de coordonnées (x, y) dans une image
+ * \param image
+ * Image dont on définie la couleur d'un des pixels
+ * \param x
+ * Position en abscisse du pixel dans l'image
+ * \param y
+ * Position en ordonnée du pixel dans l'image
+ * \param c
+ * Nouvelle couleur du pixel
+ */
 void setPixelColor(Image image, int x, int y, Color c);
 
+/**
+ * \fn Pixel** createPixelTab(int width, int height, Color c)
+ * \brief Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d'utiliser destroyPixelTab
+ * \param width
+ * Largeur du tableau
+ * \param height
+ * Hauteur du tableau
+ * \param c
+ * Couleur des pixels du tableau
+ * \return Tableau de taille width*height de pixels de couleur c
+ */
 Pixel** createPixelTab(int width, int height, Color c);
 
+/**
+ * \fn Image createImage(int width, int height, Color c)
+ * \brief Alloue et crée une image, ne pas oublier d'utiliser destroyImage
+ * \param width
+ * Largeur de l'image
+ * \param height
+ * Hauteur de l'image
+ * \param c
+ * Couleur des pixels de l'image
+ * \return Image de taille width*height de couleur c
+ */
 Image createImage(int width, int height, Color c);
 
+/**
+ * \fn void destroyPixelTab(Pixel ** tab, int width, int height)
+ * \brief Détruit un tableau de pixels, ne détruit pas les couleurs associées
+ * \param tab
+ * Tableau de Pixel à détruire
+ * \param width
+ * Largeur du tableau
+ * \param height
+ * Hauteur du tableau
+ */
 void destroyPixelTab(Pixel ** tab, int width, int height);
+
+/**
+ * \fn void destroyImage(Image image)
+ * \brief Détruit une Image, ne détruit pas les couleur associées aux pixels
+ * \param image
+ * Image à détruire
+ */
 void destroyImage(Image image);
 
-void createPopulation(Image image, int populationSize, Color c, bool val);
+/**
+ * \fn void createPopulation(Image image, int populationSize, Color c, bool val)
+ * \brief Crée une population de pixels de couleur c selon les fonctions géométriques sin et cos
+ * \param image
+ * Image dans laquelle est crée la population
+ * \param c
+ * Couleur de la population
+ * \param val
+ * valeur du multiplicateur appliqué à sin et cos
+ */
+void createPopulation(Image image, Color c, int val);
 
 #endif

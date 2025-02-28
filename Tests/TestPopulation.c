@@ -144,7 +144,7 @@ void TestCreateImage(CuTest *tc) {
 void TestCreatePopulation(CuTest *tc) {
     Color c = createColor(255, 0, 0, 255);
     Image img = createImage(100, 100, c);
-    createPopulation(img, 10, c, true);
+    createPopulation(img, c, 1);
     CuAssertPtrEquals(tc, c, getPixelColor(img, 50, 50)); // Vérification de l'effet de la création
     destroyImage(img);
     destroyColor(c);
