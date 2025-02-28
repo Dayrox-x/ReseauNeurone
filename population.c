@@ -1,3 +1,11 @@
+/**
+ * \file population.c
+ * \brief Fonctions de gestion des populations (création, destruction, modifications)
+ * \author Simon Cossais
+ * \author Paul Sarazin
+ * \date 28/02/2025
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -5,16 +13,16 @@
 #include "population.h"
 
 // getters setters de Color
-void setR(Color c, int r){c->r = r;}
+void setR(Color c, int r){c->r = r % 256;}
 int getR(Color c){return c->r;}
 
-void setG(Color c, int g){c->g = g;}
+void setG(Color c, int g){c->g = g % 256;}
 int getG(Color c){return c->g;}
 
-void setB(Color c, int b){c->b = b;}
+void setB(Color c, int b){c->b = b % 256;}
 int getB(Color c){return c->b;}
 
-void setA(Color c, int a){c->a = a;}
+void setA(Color c, int a){c->a = a % 256;}
 int getA(Color c){return c->a;}
 
 Color createColor(int r, int g, int b, int a) {
