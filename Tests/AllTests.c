@@ -2,12 +2,15 @@
 #include <stdio.h>
 
 CuSuite* NeuronGetSuite();
+CuSuite* PopulationGetSuite();
 
 void RunAllTests(void) {
     CuString *output = CuStringNew();
     CuSuite* suite = CuSuiteNew();
 
-    CuSuiteAddSuite(suite, NeuronGetSuite());  // Ajout des tests
+    CuSuiteAddSuite(suite, NeuronGetSuite());  // Ajout des tests 
+    CuSuiteAddSuite(suite, PopulationGetSuite());  
+    
 
     CuSuiteRun(suite);
     CuSuiteSummary(suite, output);

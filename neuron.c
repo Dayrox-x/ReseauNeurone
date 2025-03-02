@@ -76,15 +76,14 @@ double *calcul_reseau(double *tab_val, Couche *fst_couche) {
 }
 
 
-Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, 
-int nb_sorties) {
+Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties) {
 	// creation couche de sortie (nb_sorties = nb_neurones)
     Couche *lst_couche = init_couche(nb_sorties, NULL, 0, 1);
     Couche *temp = lst_couche;
 	// ajout des couches cachées (leurs nb de neurones est aléatoire)
     for (int i = 1; i < nb_couches - 1; i++) {
         int taille_courante = rand() % (taille_max - taille_min + 1) + taille_min;
-        //chaque ouvelle couche pointe vers la précédente
+        //chaque nouvelle couche pointe vers la précédente
         temp = init_couche(taille_courante, temp, 0, 0);
     }
     Couche *fst_couche = init_couche(nb_entrees, temp, 1, 0); 
