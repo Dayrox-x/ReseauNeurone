@@ -19,6 +19,14 @@ double forward(Neuron *neuron, double inputs[INPUT_SIZE]) {
     return transfer(sum);
 }
 
+// Fonction pour modifier la valeur des poids d'un neurone
+void setWeights(Neuron *neuron, double new_weights[INPUT_SIZE]) {
+    for (int i = 0; i < INPUT_SIZE; i++) {
+        neuron->weights[i] = new_weights[i];
+    }
+}
+
+
 // Initialisation d'une couche
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche, int is_lst_couche) {
     Couche *couche = malloc(sizeof(Couche));
