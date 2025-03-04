@@ -6,6 +6,7 @@
 
 typedef struct {
     double* weights; // tableau contenant les poids synaptiques
+    double delta //stocke l'erreur de propagation
 } Neuron;
 
 
