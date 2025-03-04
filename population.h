@@ -360,7 +360,7 @@ void destroyImage(Image image);
  * \fn void createPopulation(Image image, int populationSize, Color c, bool val)
  * \brief Crée une population de pixels de couleur c selon les fonctions géométriques sin et cos
  * \param image
- * Image dans laquelle est crée la population
+ * Image dans laquelle est créé la population
  * \param c
  * Couleur de la population
  * \param val
