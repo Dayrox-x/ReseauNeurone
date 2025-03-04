@@ -11,17 +11,14 @@ double transfer(double x) {
 }
 
 double set_nbTab(Neuron *neuron) {
-    int len = 0
-    while (neuron.weigts[len] != NULL){
-        len++;
-    }
+    int len = sizeof(neuron)/sizeof(Neuron);
     return len;
 }
 
 // Fonction de propagation 
 double forward(Neuron *neuron, double* entree) {
     double sum = 0;
-    for (int i = 0; i < set_nbSynapse(Neuron); i++) {
+    for (int i = 0; i < set_nbTab(neuron); i++) {
         sum += neuron->weights[i] * entree[i];
     }
     return transfer(sum);
@@ -29,20 +26,21 @@ double forward(Neuron *neuron, double* entree) {
 
 // Fonction pour modifier la valeur des poids d'un neurone
 void setWeights(Neuron *neuron, double* new_weights) {
-    for (int i = 0; i < set_nbSynapse(Neuron); i++) {
+    for (int i = 0; i < set_nbTab(neuron); i++) {
         neuron->weights[i] = new_weights[i];
     }
 }
 
 void init_neuron(Couche* curr_couche, int nb_synapses){
-    if (curr_couche.p != NULL)
+    if (curr_couche->p != NULL)
     {
-        for (int i = 0; i < nb_neurones; i++) {
-            for (int j = 0; j < nb_synapse; j++) {
-                couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1; 
+        for (int i = 0; i < curr_couche->nb_neurones; i++) {
+            for (int j = 0; j < nb_synapses; j++) {
+                curr_couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1;
+                
             }
         }
-        init_neuron(curr_couche.p, curr_couche.nb_neurones);
+        init_neuron(curr_couche->p, curr_couche->nb_neurones);
     }
 }
 
