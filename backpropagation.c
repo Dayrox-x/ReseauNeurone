@@ -8,7 +8,6 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
     // 1. Propagation de l'exemple à travers le réseau pour obtenir les sorties
     double *sortie = calcul_reseau(vecteur_x, reseau);  
     double max_di = 0;
-    double delta = 0;
 
     // 2. Calcul des deltas pour la couche de sortie
     // Pour chaque neurone de la couche de sortie
@@ -41,14 +40,12 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
     for (Couche *current = reseau; current != NULL; current = current->p) {
         for (int i = 0; i < current->nb_neurones; i++) {
             Neuron *neurone = &current->tab_n[i];
-            double* new_weight = malloc(sizeof(double) * INPUT_SIZE);
-            for (int j = 0; j < INPUT_SIZE; j++) {
+            for (int j = 0; j < current->nb_neurones; j++) {
                 double x_ij = vecteur_x[j];  // Entrée du neurone
-                new_weight[j] = neurone->weights[j] + epsilon * neurone->delta * x_ij;
+                double new_weight = neurone->weights[j] + epsilon * neurone->delta * x_ij;
+                // Mise à jour des poids
+                neurone->weights[j] = new_weight;
             }
-            // Mise à jour des poids
-            setWeights(neurone, new_weight);
-            free(new_weight);
         }
     }
     return max_di;
