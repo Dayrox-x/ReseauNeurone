@@ -1,8 +1,10 @@
 #include "neuron.h"
+#include "population.h"
 #include <math.h>
+#include <stdlib.h>
 
 // Fonction de rétropropagation du gradient
-void backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon) {
+double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon) {
     // 1. Propagation de l'exemple à travers le réseau pour obtenir les sorties
     double *sortie = calcul_reseau(vecteur_x, reseau);  
 
@@ -44,3 +46,30 @@ void backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double 
     }
 }
 
+double* colorToVector(Color c) {
+    double* v = malloc(sizeof(double) * 2);
+    if (getR(c) == 255){ // rouge = [1., 0.] et bleu = [0., 1.]
+        v[0] = 1.;
+        v[1] = 0.;
+    } else {
+        v[0] = 0.;
+        v[1] = 1.;
+    }
+    return v;
+}
+
+void learn(Couche* reseau, Image img, double epsilon, double threshold) {
+    double di_max = threshold;
+    double* v_x = malloc(sizeof(double) * 2);
+    double* v_y;
+    while (di_max >= threshold) {
+        int x = rand()/getWidth(img);
+        int y = rand()/getHeight(img);
+        v_x[0] = (float)x;
+        v_x[1] = (float)y;
+        v_y = colorToVector(getPixelColor(img, x, y));
+        di_max = backpropagate(reseau, v_x, v_y, epsilon);
+        free(v_y);
+    }
+    free(v_x);
+}
