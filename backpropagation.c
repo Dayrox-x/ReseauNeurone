@@ -7,6 +7,7 @@
 double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon) {
     // 1. Propagation de l'exemple à travers le réseau pour obtenir les sorties
     double *sortie = calcul_reseau(vecteur_x, reseau);  
+    double max_di = 0;
 
     // 2. Calcul des deltas pour la couche de sortie
     // Pour chaque neurone de la couche de sortie
@@ -15,6 +16,9 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
         double yi = vecteur_y[i];  // Valeur attendue pour ce neurone
         double di = (1 - si * si) * (yi - si);  // Calcul du delta pour le neurone i
         reseau->p->tab_n[i].delta = di;  // Sauvegarde du delta dans le neurone
+        if (di > max_di) {
+            max_di = di ;
+        }
     }
 
     // 3. Propagation des deltas à travers les couches cachées (de la dernière à la première)
@@ -44,6 +48,7 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
             }
         }
     }
+    return max_di;
 }
 
 double* colorToVector(Color c) {
