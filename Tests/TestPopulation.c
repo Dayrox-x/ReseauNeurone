@@ -54,23 +54,29 @@ void TestGetA(CuTest *tc) {
 void TestSetR(CuTest *tc) {
     int r = 255;
     int r2 = 3;
+    int r3 = 256;
     int g = 100;
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
     setR(c, r2);
     CuAssertIntEquals(tc, r2, getR(c));
+    setR(c, r3);
+    CuAssertIntEquals(tc, 1, getR(c));
 }
 
 void TestSetG(CuTest *tc) {
     int r = 255;
     int g = 100;
     int g2 = 15;
+    int g3 = -254;
     int b = 50;
     int a = 200;
     Color c = createColor(r, g, b, a);
     setG(c, g2);
     CuAssertIntEquals(tc, g2, getG(c));
+    setG(c, g3);
+    CuAssertIntEquals(tc, 1, getG(c));
 }
 
 void TestSetB(CuTest *tc) {
