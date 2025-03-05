@@ -6,10 +6,6 @@
  * \date 28/02/2025
  */
 
- #include <stdlib.h>
- #include <stdio.h>
- #include <stdbool.h>
- #include <math.h>
  #include "population.h"
  
  // getters setters de Color

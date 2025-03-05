@@ -9,9 +9,10 @@
  * \date 28/02/2025
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <stdbool.h>
+ #include <math.h>
 #include <SDL2/SDL.h>
 
 /**

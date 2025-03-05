@@ -1,9 +1,4 @@
 #include "neuron.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-
-
 
 // Fonction de transfert : Tangente hyperbolique
 double transfer(double x) {
@@ -21,7 +16,8 @@ double forward(Neuron *neuron, double* entree) {
     for (int i = 0; i < set_nbTab(neuron); i++) {
         sum += neuron->weights[i] * entree[i];
     }
-    return transfer(sum);
+    neuron->output = transfer(sum);
+    return neuron->output;
 }
 
 // Fonction pour modifier la valeur des poids d'un neurone
@@ -32,20 +28,21 @@ void setWeights(Neuron *neuron, double* new_weights) {
 }
 
 void init_neuron(Couche* curr_couche, int nb_synapses){
-    if (curr_couche->p != NULL)
+    if (curr_couche->next != NULL)
     {
         for (int i = 0; i < curr_couche->nb_neurones; i++) {
+            curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
                 curr_couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1;
-                
+                curr_couche->tab_n[i].delta = 1.0;
             }
         }
-        init_neuron(curr_couche->p, curr_couche->nb_neurones);
+        init_neuron(curr_couche->next, curr_couche->nb_neurones);
     }
 }
 
 // Initialisation d'une couche
-Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche, int is_lst_couche) {
+Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_prec, int is_fst_couche, int is_lst_couche) {
     Couche *couche = malloc(sizeof(Couche));
     if (!couche) {
         printf("Erreur d'allocation mémoire\n");
@@ -60,7 +57,8 @@ Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche,
         exit(1);
     }
 
-    couche->p = couche_suivante;
+    couche->next = couche_suivante;
+    couche->prev = couche_prec;
     couche->is_fst_couche = is_fst_couche;
     couche->is_lst_couche = is_lst_couche;
 
@@ -70,15 +68,19 @@ Couche *init_couche(int nb_neurones, Couche *couche_suivante, int is_fst_couche,
 
 Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties) {
 	// creation couche de sortie (nb_sorties = nb_neurones)
-    Couche *lst_couche = init_couche(nb_sorties, NULL, 0, 1);
+    Couche *lst_couche = init_couche(nb_sorties, NULL, NULL, false, true);
     Couche *temp = lst_couche;
+    Couche *previous = lst_couche;
 	// ajout des couches cachées (leurs nb de neurones est aléatoire)
     for (int i = 1; i < nb_couches - 1; i++) {
         int taille_courante = rand() % (taille_max - taille_min + 1) + taille_min;
         //chaque nouvelle couche pointe vers la précédente
-        temp = init_couche(taille_courante, temp, 0, 0);
+        temp = init_couche(taille_courante, temp, NULL, false, false);
+        previous->prev = temp;
+        previous = temp;
     }
-    Couche *fst_couche = init_couche(nb_entrees, temp, 1, 0);
+    Couche *fst_couche = init_couche(nb_entrees, temp, NULL, true, false);
+    previous->prev = fst_couche;
     init_neuron(fst_couche, nb_entrees);
     return fst_couche;
 }
@@ -106,7 +108,7 @@ double *calcul_reseau(double *tab_val, Couche *fst_couche) {
     double *result = tab_val; 
     while (current) { // tant qu'on n'est pas à la dernière couche => sorties deviennent les entrées de couche suivante.
         result = calcul_couche(current, result, INPUT_SIZE); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
-        current = current->p;
+        current = current->next;
     }
     return result;
 }

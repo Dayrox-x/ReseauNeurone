@@ -6,52 +6,55 @@
 // Fonction de rétropropagation du gradient
 double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon) {
     // 1. Propagation de l'exemple à travers le réseau pour obtenir les sorties
-    double *sortie = calcul_reseau(vecteur_x, reseau);  
-    double max_di = 0;
-    double delta = 0;
+    double *sortie = calcul_reseau(vecteur_x, reseau);
+    double max_delta = 0.;
 
     // 2. Calcul des deltas pour la couche de sortie
-    // Pour chaque neurone de la couche de sortie
-    for (int i = 0; i < reseau->p->nb_neurones; i++) {
-        double si = sortie[i];  // Sortie calculée du neurone i
-        double yi = vecteur_y[i];  // Valeur attendue pour ce neurone
-        double di = (1 - si * si) * (yi - si);  // Calcul du delta pour le neurone i
-        reseau->p->tab_n[i].delta = di;  // Sauvegarde du delta dans le neurone
-        if (di > max_di) {
-            max_di = di ;
+    int nb_couches = 1;
+    Couche* last = reseau;
+    while (!last->is_lst_couche) { // acces a la derniere couche du reseau + comptage du nombre de couche
+        last = last->next;
+        nb_couches++;
+    }
+    for (int i = 0; i < last->nb_neurones; i++) {
+        last->tab_n[i].delta = (1 - sortie[i] * sortie[i]) * (vecteur_y[i] - sortie[i]);
+        if (last->tab_n[i].delta > max_delta) {
+            max_delta = last->tab_n[i].delta;
         }
     }
 
     // 3. Propagation des deltas à travers les couches cachées (de la dernière à la première)
-    for (Couche *current = reseau->p; current != NULL; current = current->p) {
-        for (int i = 0; i < current->nb_neurones; i++) {
-            Neuron *neurone = &current->tab_n[i];
-            double oi = *sortie;  // Sortie calculée du neurone i de la couche cachée
-
-            // Calcul du delta pour chaque neurone caché
-            double somme_deltas = 0;
-            for (int k = 0; k < current->p->nb_neurones; k++) {
-                somme_deltas += current->p->tab_n[k].delta * current->p->tab_n[k].weights[i];
+    Couche* curr = last->prev;
+    for (int q = nb_couches-1; q > 0; q--) {
+        for (int i = 0; i < curr->nb_neurones; i++) {
+            double sum = 0.;
+            for (int k = 0; k < last->nb_neurones; k++) {
+                sum += last->tab_n[k].delta * last->tab_n[k].weights[i];
             }
-            neurone->delta = (1 - oi * oi) * somme_deltas;  // Calcul du delta pour le neurone i
+            curr->tab_n[i].delta = (1 - curr->tab_n[i].output * curr->tab_n[i].output) * sum;
+            if (curr->tab_n[i].delta > max_delta) {
+                max_delta = curr->tab_n[i].delta;
+            }
+            curr = curr->prev;
+            last = last->prev;
         }
     }
 
     // 4. Mise à jour des poids
-    for (Couche *current = reseau; current != NULL; current = current->p) {
-        for (int i = 0; i < current->nb_neurones; i++) {
-            Neuron *neurone = &current->tab_n[i];
-            double* new_weight = malloc(sizeof(double) * INPUT_SIZE);
-            for (int j = 0; j < INPUT_SIZE; j++) {
-                double x_ij = vecteur_x[j];  // Entrée du neurone
-                new_weight[j] = neurone->weights[j] + epsilon * neurone->delta * x_ij;
+    last = curr;
+    curr = curr->next;
+
+    while (curr) {
+        for (int i = 0; i < curr->nb_neurones; i++) {
+            for (int j = 0; j < last->nb_neurones; j++) {
+                curr->tab_n[i].weights[j] += epsilon * curr->tab_n[i].delta * last->tab_n[j].output;
             }
-            // Mise à jour des poids
-            setWeights(neurone, new_weight);
-            free(new_weight);
         }
+        curr = curr->next;
+        last = last->next;
     }
-    return max_di;
+
+    return max_delta;
 }
 
 double* colorToVector(Color c) {
