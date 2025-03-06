@@ -6,4 +6,10 @@
 // Fonction de rétropropagation du gradient
 double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon);
 
+// Fonction qui convertit une couleur en vecteur
+double* colorToVector(Color c);
+
+// Fonction qui permet l'apprentissage des neurones 
+void learn(Couche* reseau, Image img, double epsilon, double threshold);
+
 #endif // BACKPROPAGATION_H
