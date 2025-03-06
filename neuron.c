@@ -28,12 +28,12 @@ void setWeights(Neuron *neuron, double* new_weights) {
 }
 
 void init_neuron(Couche* curr_couche, int nb_synapses){
-    if (curr_couche->next != NULL)
+    if (curr_couche != NULL)
     {
         for (int i = 0; i < curr_couche->nb_neurones; i++) {
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
-                curr_couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX) * 2 - 1;
+                curr_couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX);
                 curr_couche->tab_n[i].delta = 1.0;
             }
         }
@@ -79,7 +79,7 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
         previous->prev = temp;
         previous = temp;
     }
-    Couche *fst_couche = init_couche(nb_entrees, temp, NULL, true, false);
+    Couche *fst_couche = init_couche(2, temp, NULL, true, false);
     previous->prev = fst_couche;
     init_neuron(fst_couche, nb_entrees);
     return fst_couche;
@@ -87,7 +87,7 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
 
 
 
-double *calcul_couche(Couche *couche, double *tab_val, int input_size) {
+double *calcul_couche(Couche *couche, double *tab_val) {
 	//allocation du tab qui stocke la sortie de chaque neurone de la couche
     double *tab_result = malloc(couche->nb_neurones * sizeof(double));
     if (!tab_result) {
@@ -107,7 +107,7 @@ double *calcul_reseau(double *tab_val, Couche *fst_couche) {
     Couche *current = fst_couche;
     double *result = tab_val; 
     while (current) { // tant qu'on n'est pas à la dernière couche => sorties deviennent les entrées de couche suivante.
-        result = calcul_couche(current, result, INPUT_SIZE); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
+        result = calcul_couche(current, result); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
         current = current->next;
     }
     return result;
@@ -116,6 +116,35 @@ double *calcul_reseau(double *tab_val, Couche *fst_couche) {
 void interpretation(double *tab_val_sortie, char *tab_sortie[], int len) {
     for (int i = 0; i < len; i++) {
         printf("Le point a une probabilité de %f d’être %s\n", tab_val_sortie[i], tab_sortie[i]);
+    }
+}
+
+void print_couche(Couche* couche) {
+    for (int i = 0; i < couche->nb_neurones; i++) {
+        printf("   Neurone %d : \n", i+1);
+        int nb_synapses = 1;
+        if (couche->prev != NULL) {
+            nb_synapses = couche->prev->nb_neurones;
+        }
+        for (int j = 0; j < nb_synapses; j++){
+            printf("      Poids synapse %d : %lf\n", j+1, couche->tab_n[i].weights[j]);
+        }
+        printf("      Output : %lf\n      Delta : %lf\n", couche->tab_n[i].output, couche->tab_n[i].delta);
+    }
+}
+
+void print_reseau(Couche* reseau) {
+    Couche* curr = reseau;
+    while(!curr->is_fst_couche) {
+        curr = curr->prev;
+    }
+
+    int i = 1;
+    while(curr != NULL) {
+        printf("Couche %d : \n", i);
+        i++;
+        print_couche(curr);
+        curr = curr->next;
     }
 }
 

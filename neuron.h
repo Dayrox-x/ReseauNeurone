@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-#define INPUT_SIZE 2 // Nombre d'entrées (x et y)
+//#define INPUT_SIZE 2 // Nombre d'entrées (x et y)
 
 typedef struct {
     double* weights; // tableau contenant les poids synaptiques
@@ -17,7 +17,7 @@ typedef struct {
 } Neuron;
 
 
-typedef struct {
+typedef struct Couche {
     Neuron *tab_n;        // Tableau de neurones
     struct Couche *next;     // Pointeur vers la couche suivante
     struct Couche *prev;     // Pointeur vers la couche précédente
@@ -33,8 +33,9 @@ void init_neuron(Couche* curr_couche, int nb_synapses);
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_prec, int is_fst_couche, int is_lst_couche); // Initialisation d'une couche
 Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties); // Initialisation d'un réseau
 
-double *calcul_couche(Couche *couche, double *tab_val, int input_size); // Calcul de la sortie d'une couche
+double *calcul_couche(Couche *couche, double *tab_val); // Calcul de la sortie d'une couche
 double *calcul_reseau(double *tab_val, Couche *fst_couche); // Calcul de la sortie d'un réseau
 
+void print_reseau(Couche* reseau);
 
 #endif // NEURON_H

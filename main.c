@@ -12,11 +12,11 @@
 // pour executer : ./main
 // SFML et Doxygen
 
-#define PIXEL_SIZE 10
+#define PIXEL_SIZE 2
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
-int main( int argc, char* args[] ) {
+int main( int argc, char* args[] ) {/*
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
 	assert(ret == 0 && "SDL_Init failed");
@@ -61,6 +61,13 @@ int main( int argc, char* args[] ) {
 	SDL_DestroyRenderer( renderer );
 	SDL_DestroyWindow( window );
 	SDL_Quit(); 
- 
+ */
+
+	Couche* reseau = init_reseau(5, 5, 2, 1, 2);
+
+	print_reseau(reseau);
+
+
+
 	return 0; 
 }
