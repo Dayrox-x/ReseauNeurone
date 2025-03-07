@@ -2,6 +2,9 @@
 #define BACKPROPAGATION_H
 
 #include "neuron.h"
+#include "population.h"
+#include <math.h>
+#include <stdlib.h>
 
 // Fonction de rétropropagation du gradient
 double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon);

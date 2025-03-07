@@ -5,24 +5,18 @@ double transfer(double x) {
     return tanh(x);
 }
 
-double set_nbTab(Neuron *neuron) {
-    int len = sizeof(neuron)/sizeof(Neuron);
-    return len;
-}
-
 // Fonction de propagation 
-double forward(Neuron *neuron, double* entree) {
+void forward(Neuron* neuron, Neuron* entree, int nb_synapses) {
     double sum = 0;
-    for (int i = 0; i < set_nbTab(neuron); i++) {
-        sum += neuron->weights[i] * entree[i];
+    for (int i = 0; i < nb_synapses; i++) {
+        sum += neuron->weights[i] * entree[i].output;
     }
     neuron->output = transfer(sum);
-    return neuron->output;
 }
 
 // Fonction pour modifier la valeur des poids d'un neurone
-void setWeights(Neuron *neuron, double* new_weights) {
-    for (int i = 0; i < set_nbTab(neuron); i++) {
+void setWeights(Neuron *neuron, double* new_weights, int nb_synapses) {
+    for (int i = 0; i < nb_synapses; i++) {
         neuron->weights[i] = new_weights[i];
     }
 }
@@ -33,7 +27,9 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
         for (int i = 0; i < curr_couche->nb_neurones; i++) {
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
-                curr_couche->tab_n[i].weights[j] = ((double)rand() / RAND_MAX);
+                double weight;
+                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX);
+                curr_couche->tab_n[i].weights[j] = weight;
                 curr_couche->tab_n[i].delta = 1.0;
             }
         }
@@ -71,6 +67,7 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
     Couche *lst_couche = init_couche(nb_sorties, NULL, NULL, false, true);
     Couche *temp = lst_couche;
     Couche *previous = lst_couche;
+    srand(time(NULL));
 	// ajout des couches cachées (leurs nb de neurones est aléatoire)
     for (int i = 1; i < nb_couches - 1; i++) {
         int taille_courante = rand() % (taille_max - taille_min + 1) + taille_min;
@@ -79,38 +76,31 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
         previous->prev = temp;
         previous = temp;
     }
-    Couche *fst_couche = init_couche(2, temp, NULL, true, false);
+    Couche *fst_couche = init_couche(nb_entrees, temp, NULL, true, false);
     previous->prev = fst_couche;
-    init_neuron(fst_couche, nb_entrees);
+    init_neuron(fst_couche, 1);
     return fst_couche;
 }
 
 
 
-double *calcul_couche(Couche *couche, double *tab_val) {
-	//allocation du tab qui stocke la sortie de chaque neurone de la couche
-    double *tab_result = malloc(couche->nb_neurones * sizeof(double));
-    if (!tab_result) {
-        printf("Erreur d'allocation mémoire\n");
-        exit(1);
-    }
-		
+void calcul_couche(Couche *couche, Neuron *tab_n) {
 	//pour chaque neurone on applique la fonction de propagation
     for (int i = 0; i < couche->nb_neurones; i++) {
-        tab_result[i] = forward(&couche->tab_n[i], tab_val);
+        forward(&(couche->tab_n[i]), tab_n, couche->prev->nb_neurones);
     }
-    return tab_result;
 }
 
 
-double *calcul_reseau(double *tab_val, Couche *fst_couche) {
-    Couche *current = fst_couche;
-    double *result = tab_val; 
+void calcul_reseau(double *tab_val, Couche *fst_couche) {
+    for (int i = 0; i < fst_couche->nb_neurones; i++) { // on part du principe que c'est effectivement la premiere couche
+        fst_couche->tab_n[i].output = tab_val[i];
+    }
+    Couche *current = fst_couche->next;
     while (current) { // tant qu'on n'est pas à la dernière couche => sorties deviennent les entrées de couche suivante.
-        result = calcul_couche(current, result); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
+        calcul_couche(current, current->prev->tab_n); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
         current = current->next;
     }
-    return result;
 }
 
 void interpretation(double *tab_val_sortie, char *tab_sortie[], int len) {
@@ -141,7 +131,7 @@ void print_reseau(Couche* reseau) {
 
     int i = 1;
     while(curr != NULL) {
-        printf("Couche %d : \n", i);
+        printf("Couche %d : [is_fst_couche : %d ; is_lst_couche : %d ; nb_neurones : %d]\n", i, curr->is_fst_couche, curr->is_lst_couche, curr->nb_neurones);
         i++;
         print_couche(curr);
         curr = curr->next;

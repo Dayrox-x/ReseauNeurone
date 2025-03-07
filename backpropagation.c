@@ -1,12 +1,9 @@
-#include "neuron.h"
-#include "population.h"
-#include <math.h>
-#include <stdlib.h>
+#include "backpropagation.h"
 
 // Fonction de rétropropagation du gradient
 double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, double epsilon) {
     // 1. Propagation de l'exemple à travers le réseau pour obtenir les sorties
-    double *sortie = calcul_reseau(vecteur_x, reseau);
+    calcul_reseau(vecteur_x, reseau);
     double max_delta = 0.;
 
     // 2. Calcul des deltas pour la couche de sortie
@@ -17,7 +14,7 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
         nb_couches++;
     }
     for (int i = 0; i < last->nb_neurones; i++) {
-        last->tab_n[i].delta = (1 - sortie[i] * sortie[i]) * (vecteur_y[i] - sortie[i]);
+        last->tab_n[i].delta = (1 - last->tab_n[i].output * last->tab_n[i].output) * (vecteur_y[i] - last->tab_n[i].output);
         if (last->tab_n[i].delta > max_delta) {
             max_delta = last->tab_n[i].delta;
         }
@@ -25,7 +22,7 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
 
     // 3. Propagation des deltas à travers les couches cachées (de la dernière à la première)
     Couche* curr = last->prev;
-    for (int q = nb_couches-1; q > 0; q--) {
+    for (int q = nb_couches-1; q > 1; q--) {
         for (int i = 0; i < curr->nb_neurones; i++) {
             double sum = 0.;
             for (int k = 0; k < last->nb_neurones; k++) {
@@ -35,9 +32,9 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
             if (curr->tab_n[i].delta > max_delta) {
                 max_delta = curr->tab_n[i].delta;
             }
-            curr = curr->prev;
-            last = last->prev;
         }
+        curr = curr->prev;
+        last = last->prev;
     }
 
     // 4. Mise à jour des poids
@@ -59,13 +56,8 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
 
 double* colorToVector(Color c) {
     double* v = malloc(sizeof(double) * 2);
-    if (getR(c) == 255){ // rouge = [1., 0.] et bleu = [0., 1.]
-        v[0] = 1.;
-        v[1] = 0.;
-    } else {
-        v[0] = 0.;
-        v[1] = 1.;
-    }
+    v[0] = (double)getR(c) / 255.0;
+    v[1] = (double)getB(c) / 255.0;
     return v;
 }
 
@@ -73,14 +65,20 @@ void learn(Couche* reseau, Image img, double epsilon, double threshold) {
     double di_max = threshold;
     double* v_x = malloc(sizeof(double) * 2);
     double* v_y;
+    int i = 0;
     while (di_max >= threshold) {
-        int x = rand()/getWidth(img);
-        int y = rand()/getHeight(img);
+        int x = rand()%getWidth(img);
+        int y = rand()%getHeight(img);
         v_x[0] = (float)x;
         v_x[1] = (float)y;
         v_y = colorToVector(getPixelColor(img, x, y));
         di_max = backpropagate(reseau, v_x, v_y, epsilon);
         free(v_y);
+        i = (i+1)%1000;
+        if (i == 0) {
+            printf("------------------------------------------------------------------------------------\n");
+            print_reseau(reseau);
+        }
     }
     free(v_x);
 }

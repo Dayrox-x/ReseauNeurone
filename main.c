@@ -6,13 +6,14 @@
 #include "neuron.h"
 #include "population.h"
 #include "sdl.h"
+#include "backpropagation.h"
 
 // pour compiler : gcc *.c -g -o main -lm -lSDL2
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
 // pour executer : ./main
 // SFML et Doxygen
 
-#define PIXEL_SIZE 2
+#define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
@@ -53,7 +54,7 @@ int main( int argc, char* args[] ) {/*
 	destroyColor(blue);
 
 
-	SDL_Delay(5000);
+	SDL_Delay(50000);
 
 	SDL_RenderPresent( renderer );
  
@@ -63,11 +64,23 @@ int main( int argc, char* args[] ) {/*
 	SDL_Quit(); 
  */
 
-	Couche* reseau = init_reseau(5, 5, 2, 1, 2);
+	Color red = createColor(255, 0, 0, 255);
+	Color blue = createColor(0, 0, 255, 255);
+ 	Image image = createImage(WIDTH, HEIGHT, blue);
+
+	Couche* reseau = init_reseau(10, 5, 2, 2, 2);
 
 	print_reseau(reseau);
 
+	
+	learn(reseau, image, 0.001, 0.01);
+	print_reseau(reseau);
 
+
+
+	destroyImage(image);
+	destroyColor(red);
+	destroyColor(blue);
 
 	return 0; 
 }
