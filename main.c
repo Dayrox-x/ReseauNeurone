@@ -11,13 +11,13 @@
 // pour compiler : gcc *.c -g -o main -lm -lSDL2
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
 // pour executer : ./main
-// SFML et Doxygen
 
 #define PIXEL_SIZE 1
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
 int main( int argc, char* args[] ) {
+	/*
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
 	assert(ret == 0 && "SDL_Init failed");
@@ -69,8 +69,8 @@ int main( int argc, char* args[] ) {
 	SDL_DestroyRenderer( renderer );
 	SDL_DestroyWindow( window );
 	SDL_Quit(); 
- 
-/*
+ */
+
 	Color red = createColor(255, 0, 0, 255);
 	Color blue = createColor(0, 0, 255, 255);
  	Image image = createImage(WIDTH, HEIGHT, blue);
@@ -88,6 +88,8 @@ int main( int argc, char* args[] ) {
 	destroyImage(image);
 	destroyColor(red);
 	destroyColor(blue);
-*/
+
+	free_reseau(reseau);
+
 	return 0; 
 }

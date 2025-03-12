@@ -156,7 +156,6 @@ void free_couche(Couche* couche) {
         }
         free(couche->tab_n);
         couche->tab_n = NULL;
-        free_couche(couche->next);
 
         free(couche);
         couche = NULL;
@@ -164,7 +163,11 @@ void free_couche(Couche* couche) {
 }
 
 void free_reseau(Couche* reseau) {
-    free_couche(reseau);
+    if (reseau != NULL) {
+        Couche* next = reseau->next;
+        free_couche(reseau);
+        free_reseau(next);
+    }
 }
 
 

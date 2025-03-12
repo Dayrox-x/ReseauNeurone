@@ -39,4 +39,6 @@ void calcul_reseau(double *tab_val, Couche *fst_couche); // Calcul de la sortie 
 
 void print_reseau(Couche* reseau);
 
+void free_reseau(Couche* reseau);
+
 #endif // NEURON_H
