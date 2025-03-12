@@ -138,6 +138,33 @@ void print_reseau(Couche* reseau) {
     }
 }
 
-// faire les free dans une fonction
+
+// Fonctions de liberation de mémoire
+// on free le neuron, la couche, et l'ensemble du reseau
+
+void free_neuron(Neuron* neuron) {
+    if (neuron->weights != NULL) {
+        free(neuron->weights);
+        neuron->weights = NULL;
+    }
+}
+
+void free_couche(Couche* couche) {
+    if (couche != NULL) {
+        for (int i = 0; i < couche->nb_neurones; i++) {
+            free_neuron(&(couche->tab_n[i]));
+        }
+        free(couche->tab_n);
+        couche->tab_n = NULL;
+        free_couche(couche->next);
+
+        free(couche);
+        couche = NULL;
+    }
+}
+
+void free_reseau(Couche* reseau) {
+    free_couche(reseau);
+}
 
 
