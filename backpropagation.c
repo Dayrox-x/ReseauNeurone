@@ -61,7 +61,7 @@ double* colorToVector(Color c) {
     return v;
 }
 
-void learn(Couche* reseau, Image img, double epsilon, double threshold) {
+void learn(Couche* reseau, Image img, double epsilon, double threshold) { // plus epsilon et threshold sont bas, plus le résultat est précis
     double di_max = threshold;
     double* v_x = malloc(sizeof(double) * 2);
     double* v_y;

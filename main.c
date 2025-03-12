@@ -13,11 +13,11 @@
 // pour executer : ./main
 // SFML et Doxygen
 
-#define PIXEL_SIZE 10
+#define PIXEL_SIZE 1
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
-int main( int argc, char* args[] ) {/*
+int main( int argc, char* args[] ) {
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
 	assert(ret == 0 && "SDL_Init failed");
@@ -47,23 +47,30 @@ int main( int argc, char* args[] ) {/*
 
 	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 
+	bool end = false;
+	SDL_Event e;
+	while(!end) {
+		while( SDL_PollEvent( &e ) != 0 )
+		{
+			if( e.type == SDL_QUIT )
+			{
+				end = true;
+			}
+		}
+	}
+
 	destroyImage(image);
 
 	destroyColor(white);
 	destroyColor(red);
 	destroyColor(blue);
-
-
-	SDL_Delay(50000);
-
-	SDL_RenderPresent( renderer );
  
 	//Quitter SDL 
 	SDL_DestroyRenderer( renderer );
 	SDL_DestroyWindow( window );
 	SDL_Quit(); 
- */
-
+ 
+/*
 	Color red = createColor(255, 0, 0, 255);
 	Color blue = createColor(0, 0, 255, 255);
  	Image image = createImage(WIDTH, HEIGHT, blue);
@@ -81,6 +88,6 @@ int main( int argc, char* args[] ) {/*
 	destroyImage(image);
 	destroyColor(red);
 	destroyColor(blue);
-
+*/
 	return 0; 
 }
