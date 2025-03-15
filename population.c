@@ -157,12 +157,16 @@ void addDatasetPixel(Dataset d, Pixel p){
         d->tab = realloc(d->tab, sizeof(Pixel*) * d->size);
     }
     assert(d->tab != NULL);
-    d->tab[d->size-1] = p;
+    d->tab[d->size-1] = createPixel(getX(p), getY(p), getColor(p));
 }
 
 void destroyDataset(Dataset d){
-    if (d->tab != NULL)
-        free(d->tab);
+    if (d->tab != NULL){
+      for (int i = 0; i < d->size; i++){
+         destroyPixel(d->tab[i]);
+      }
+      free(d->tab);
+    }
     free(d);
 }
 

@@ -76,6 +76,7 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
     double* v_y;
     int i = 0;
     int iteration = 0;
+    double lowest = di_max;
 
     while (di_max - threshold >= 0.) {
         i = rand() % getDatasetSize(d);
@@ -89,8 +90,9 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
 
         // Log de la progression
         iteration++;
-        if (iteration % 1000 == 0) {
-            printf("Iteration %d, di_max: %f\n", iteration, di_max);
+        if (lowest - di_max > 0.0) {
+            lowest = di_max;
+            printf("Iteration %d, lowest di_max: %f\n", iteration, lowest);
         }
     }
 

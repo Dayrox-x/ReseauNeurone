@@ -15,6 +15,8 @@
 #define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
+#define EPSILON 0.00001
+#define THRESHOLD 0.00001
  
 int main( int argc, char* args[] ) {
 	
@@ -28,15 +30,18 @@ int main( int argc, char* args[] ) {
 
 	Dataset d = createDataset();
 
-	createPopulation(image, d, red, 1);
-	createPopulation(image, d, blue, -1);
-
-	Couche* reseau = init_reseau(10, 100, 50, 2, 2);
 	
-	learn(reseau, d, 0.00001, 0.00001);
-	// double v[2] = {1., 0.};
-	// calcul_reseau(v, reseau);
-	print_reseau(reseau);
+	// setPixelColor(image, WIDTH/4, HEIGHT/2, red);
+	// setPixelColor(image, WIDTH/4 * 3, HEIGHT/2, blue);
+	// addDatasetPixel(d, getPixel(image, WIDTH/4, HEIGHT/2));
+	// addDatasetPixel(d, getPixel(image, WIDTH/4 * 3, HEIGHT/2));
+
+	createPopulation(image, d, red, -1);
+	createPopulation(image, d, blue, 1);
+
+	Couche* reseau = init_reseau(10, 100, 80, 2, 2);
+	
+	learn(reseau, d, EPSILON, THRESHOLD);
 
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
@@ -71,8 +76,10 @@ int main( int argc, char* args[] ) {
 		}
 		generalize(reseau, image);
 		i++;
-		if (i % WIDTH == 0)
+		if (i % WIDTH == 0){
 			renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+			// learn(reseau, d, EPSILON, THRESHOLD);
+		}
 	}
 
 	//Quitter SDL 
