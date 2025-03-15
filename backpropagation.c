@@ -78,7 +78,7 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
     int iteration = 0;
 
     while (di_max - threshold >= 0.) {
-        i = (i+1) % getDatasetSize(d);
+        i = rand() % getDatasetSize(d);
         int x = getX(getDatasetPixel(d, i));
         int y = getY(getDatasetPixel(d, i));
         v_x[0] = (float)x + 1.;

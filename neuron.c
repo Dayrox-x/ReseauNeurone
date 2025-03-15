@@ -28,7 +28,7 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
                 double weight;
-                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX);
+                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX) * 2. - 1.;
                 curr_couche->tab_n[i].weights[j] = weight;
                 curr_couche->tab_n[i].output = 1.0;
                 curr_couche->tab_n[i].delta = 1.0;
