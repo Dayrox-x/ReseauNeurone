@@ -12,7 +12,7 @@
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
 // pour executer : ./main
 
-#define PIXEL_SIZE 20
+#define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
@@ -31,9 +31,11 @@ int main( int argc, char* args[] ) {
 	createPopulation(image, d, red, 1);
 	createPopulation(image, d, blue, -1);
 
-	Couche* reseau = init_reseau(20, 5, 5, 2, 2);
+	Couche* reseau = init_reseau(10, 100, 50, 2, 2);
 	
-	learn(reseau, d, 0.01, 0.001);
+	learn(reseau, d, 0.00001, 0.00001);
+	// double v[2] = {1., 0.};
+	// calcul_reseau(v, reseau);
 	print_reseau(reseau);
 
 	//Demarrer SDL 
@@ -57,6 +59,7 @@ int main( int argc, char* args[] ) {
 	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 
 	bool end = false;
+	int i = 0;
 	SDL_Event e;
 	while(!end) {
 		while( SDL_PollEvent( &e ) != 0 )
@@ -67,7 +70,9 @@ int main( int argc, char* args[] ) {
 			}
 		}
 		generalize(reseau, image);
-		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+		i++;
+		if (i % WIDTH == 0)
+			renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 	}
 
 	//Quitter SDL 

@@ -63,34 +63,47 @@ double* colorToVector(Color c) {
 }
 
 Color vectorToColor(double* v){
-    return createColor((int)(v[0] * 255.0), 0., (int)(v[1] * 255.0), 255.0);
+    int r, g, b;
+    r = (int)(v[0] * 255.0);
+    g = 0.;
+    b = (int)(v[1] * 255.0);
+    return createColor(r, g, b, 255.0);
 }
 
-void learn(Couche* reseau, Dataset d, double epsilon, double threshold) { // plus epsilon et threshold sont bas, plus le résultat est précis
+void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
     double di_max = threshold;
     double* v_x = malloc(sizeof(double) * 2);
     double* v_y;
     int i = 0;
+    int iteration = 0;
+
     while (di_max - threshold >= 0.) {
-        i = (i+1) /*rand()*/ % getDatasetSize(d);
+        i = (i+1) % getDatasetSize(d);
         int x = getX(getDatasetPixel(d, i));
         int y = getY(getDatasetPixel(d, i));
-        v_x[0] = (float)x;
-        v_x[1] = (float)y;
+        v_x[0] = (float)x + 1.;
+        v_x[1] = (float)y + 1.;
         v_y = colorToVector(getColor(getDatasetPixel(d, i)));
         di_max = backpropagate(reseau, v_x, v_y, epsilon);
         free(v_y);
+
+        // Log de la progression
+        iteration++;
+        if (iteration % 1000 == 0) {
+            printf("Iteration %d, di_max: %f\n", iteration, di_max);
+        }
     }
+
+    printf("Learning completed in %d iterations with final di_max: %f\n", iteration, di_max);
     free(v_x);
 }
-
 
 void generalize(Couche* reseau, Image image){
     int x = rand() % getWidth(image);
     int y = rand() % getHeight(image);
     double* v = malloc(sizeof(double) * 2);
-    v[0] = (double)x;
-    v[1] = (double)y;
+    v[0] = (double)x + 1.;
+    v[1] = (double)y + 1.;
     calcul_reseau(v, reseau);
 
     Couche* last = getLastCouche(reseau);
