@@ -30,6 +30,7 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
                 double weight;
                 weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX);
                 curr_couche->tab_n[i].weights[j] = weight;
+                curr_couche->tab_n[i].output = 1.0;
                 curr_couche->tab_n[i].delta = 1.0;
             }
         }
@@ -142,17 +143,17 @@ void print_reseau(Couche* reseau) {
 // Fonctions de liberation de mémoire
 // on free le neuron, la couche, et l'ensemble du reseau
 
-void free_neuron(Neuron* neuron) {
-    if (neuron->weights != NULL) {
-        free(neuron->weights);
-        neuron->weights = NULL;
+void free_neuron(Neuron neuron) {
+    if (neuron.weights != NULL) {
+        free(neuron.weights);
+        neuron.weights = NULL;
     }
 }
 
 void free_couche(Couche* couche) {
     if (couche != NULL) {
         for (int i = 0; i < couche->nb_neurones; i++) {
-            free_neuron(&(couche->tab_n[i]));
+            free_neuron(couche->tab_n[i]);
         }
         free(couche->tab_n);
         couche->tab_n = NULL;

@@ -15,7 +15,7 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
     }
     for (int i = 0; i < last->nb_neurones; i++) {
         last->tab_n[i].delta = (1 - last->tab_n[i].output * last->tab_n[i].output) * (vecteur_y[i] - last->tab_n[i].output);
-        if (last->tab_n[i].delta > max_delta) {
+        if (last->tab_n[i].delta - max_delta > 0.) {
             max_delta = last->tab_n[i].delta;
         }
     }
@@ -29,7 +29,7 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
                 sum += last->tab_n[k].delta * last->tab_n[k].weights[i];
             }
             curr->tab_n[i].delta = (1 - curr->tab_n[i].output * curr->tab_n[i].output) * sum;
-            if (curr->tab_n[i].delta > max_delta) {
+            if (curr->tab_n[i].delta - max_delta > 0.) {
                 max_delta = curr->tab_n[i].delta;
             }
         }
@@ -65,20 +65,20 @@ void learn(Couche* reseau, Image img, double epsilon, double threshold) { // plu
     double di_max = threshold;
     double* v_x = malloc(sizeof(double) * 2);
     double* v_y;
-    int i = 0;
+    // int i = 0;
     while (di_max >= threshold) {
-        int x = rand()%getWidth(img);
-        int y = rand()%getHeight(img);
+        int x = rand() % getWidth(img);
+        int y = rand() % getHeight(img);
         v_x[0] = (float)x;
         v_x[1] = (float)y;
         v_y = colorToVector(getPixelColor(img, x, y));
         di_max = backpropagate(reseau, v_x, v_y, epsilon);
         free(v_y);
-        i = (i+1)%1000;
-        if (i == 0) {
-            printf("------------------------------------------------------------------------------------\n");
-            print_reseau(reseau);
-        }
+        // i = (i+1)%1000;
+        // if (i == 0) {
+        //     printf("------------------------------------------------------------------------------------\n");
+        //     print_reseau(reseau);
+        // }
     }
     free(v_x);
 }

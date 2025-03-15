@@ -9,10 +9,11 @@
  * \date 28/02/2025
  */
 
- #include <stdlib.h>
- #include <stdio.h>
- #include <stdbool.h>
- #include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+#include <assert.h>
 #include <SDL2/SDL.h>
 
 /**
@@ -63,6 +64,14 @@ typedef struct {
  * \brief Pointeur sur une structure pxl
  */
 typedef img* Image;
+
+
+typedef struct {
+    Pixel* tab;
+    int size;
+} data;
+
+typedef data* Dataset;
 
 // getters setters de Color
 /**
@@ -239,7 +248,6 @@ Pixel createPixel(int x, int y, Color c);
 void destroyPixel(Pixel p);
 
 // getters setters de Image
-
 /**
  * \fn Pixel getPixel(Image image, int x, int y)
  * \brief Retourne le pixel de position (x, y) dans une image
@@ -357,6 +365,19 @@ void destroyPixelTab(Pixel ** tab, int width, int height);
  */
 void destroyImage(Image image);
 
+
+// getters setters de Dataset
+int getDatasetSize(Dataset dataset);
+
+Dataset createDataset();
+
+void addDatasetPixel(Dataset d, Pixel p);
+
+void destroyDataset(Dataset dataset);
+
+Pixel getDatasetPixel(Dataset dataset, int i);
+
+
 /**
  * \fn void createPopulation(Image image, int populationSize, Color c, bool val)
  * \brief Crée une population de pixels de couleur c selon les fonctions géométriques sin et cos
@@ -367,6 +388,6 @@ void destroyImage(Image image);
  * \param val
  * valeur du multiplicateur appliqué à sin et cos
  */
-void createPopulation(Image image, Color c, int val);
+void createPopulation(Image image, Dataset d, Color c, int val);
 
 #endif
