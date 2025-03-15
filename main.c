@@ -12,13 +12,29 @@
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
 // pour executer : ./main
 
-#define PIXEL_SIZE 4
+#define PIXEL_SIZE 20
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
 int main( int argc, char* args[] ) {
 	
 	srand(time(NULL));
+
+	Color white = createColor(255, 255, 255, 255);
+	Color red = createColor(255, 0, 0, 255);
+	Color blue = createColor(0, 0, 255, 255);
+
+	Image image = createImage(WIDTH, HEIGHT, white);
+
+	Dataset d = createDataset();
+
+	createPopulation(image, d, red, 1);
+	createPopulation(image, d, blue, -1);
+
+	Couche* reseau = init_reseau(20, 5, 5, 2, 2);
+	
+	learn(reseau, d, 0.01, 0.001);
+	print_reseau(reseau);
 
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
@@ -36,18 +52,7 @@ int main( int argc, char* args[] ) {
 	ret = SDL_RenderClear( renderer );
 	assert(ret == 0 && "SDL_RenderClear failed");
 
-	Color white = createColor(255, 255, 255, 255);
-	Color red = createColor(255, 0, 0, 255);
-	Color blue = createColor(0, 0, 255, 255);
-
 	SDL_Rect pixel = {0, 0, PIXEL_SIZE, PIXEL_SIZE};
-
-	Image image = createImage(WIDTH, HEIGHT, white);
-
-	Dataset d = createDataset();
-
-	createPopulation(image, d, red, 1);
-	createPopulation(image, d, blue, -1);
 
 	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 
@@ -61,8 +66,15 @@ int main( int argc, char* args[] ) {
 				end = true;
 			}
 		}
+		generalize(reseau, image);
+		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 	}
 
+	//Quitter SDL 
+	SDL_DestroyRenderer( renderer );
+	SDL_DestroyWindow( window );
+	SDL_Quit();
+	
 	destroyImage(image);
 
 	destroyColor(white);
@@ -70,32 +82,8 @@ int main( int argc, char* args[] ) {
 	destroyColor(blue);
 
 	destroyDataset(d);
+	free_reseau(reseau);
  
-	//Quitter SDL 
-	SDL_DestroyRenderer( renderer );
-	SDL_DestroyWindow( window );
-	SDL_Quit(); 
-
-
-	// Color red = createColor(255, 0, 0, 255);
-	// Color blue = createColor(0, 0, 255, 255);
- 	// Image image = createImage(WIDTH, HEIGHT, blue);
-	// Image image2 = createImage(WIDTH, HEIGHT, red);
-
-	// Couche* reseau = init_reseau(10, 5, 2, 2, 2);
-
-	// print_reseau(reseau);
-
-	
-	// learn(reseau, image, 0.0001, 0.0001); // ne pas aller en dessous de 0.0001
-	// print_reseau(reseau);
-
-	// destroyImage(image);
-	// destroyImage(image2);
-	// destroyColor(red);
-	// destroyColor(blue);
-
-	// free_reseau(reseau);
 
 	return 0; 
 }

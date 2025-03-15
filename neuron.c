@@ -83,6 +83,13 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
     return fst_couche;
 }
 
+Couche* getLastCouche(Couche* reseau){
+    Couche* last = reseau;
+    while (!last->is_lst_couche) { // acces a la derniere couche du reseau + comptage du nombre de couche
+        last = last->next;
+    }
+    return last;
+}
 
 
 void calcul_couche(Couche *couche, Neuron *tab_n) {
