@@ -6,17 +6,20 @@
 #include "neuron.h"
 #include "population.h"
 #include "sdl.h"
+#include "backpropagation.h"
 
 // pour compiler : gcc *.c -g -o main -lm -lSDL2
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
 // pour executer : ./main
-// SFML et Doxygen
 
-#define PIXEL_SIZE 10
+#define PIXEL_SIZE 4
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
  
 int main( int argc, char* args[] ) {
+	
+	srand(time(NULL));
+
 	//Demarrer SDL 
 	int ret = SDL_Init( SDL_INIT_VIDEO );
 	assert(ret == 0 && "SDL_Init failed");
@@ -41,32 +44,22 @@ int main( int argc, char* args[] ) {
 
 	Image image = createImage(WIDTH, HEIGHT, white);
 
-	createPopulation(image, PIXEL_SIZE, red, false);
-	createPopulation(image, PIXEL_SIZE, blue, true);
+	Dataset d = createDataset();
 
-	for (int i = 0; i < getWidth(image); i++) {
-		for (int j = 0; j < getHeight(image); j++) {
-			// evite le msg d'erreur "la fenetre ne repond pas"
-			SDL_Event event;
-			while (SDL_PollEvent(&event)) {
-				if (event.type == SDL_QUIT) {
-					SDL_DestroyRenderer( renderer );
-					SDL_DestroyWindow( window );
-					SDL_Quit();
-					destroyImage(image);
-					return 0;
-				}
+	createPopulation(image, d, red, 1);
+	createPopulation(image, d, blue, -1);
+
+	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+
+	bool end = false;
+	SDL_Event e;
+	while(!end) {
+		while( SDL_PollEvent( &e ) != 0 )
+		{
+			if( e.type == SDL_QUIT )
+			{
+				end = true;
 			}
-
-			ret = SDL_SetRenderDrawColor( renderer, getR(getPixelColor(image, i, j)), getG(getPixelColor(image, i, j)), getB(getPixelColor(image, i, j)), getA(getPixelColor(image, i, j)) );
-			assert(ret == 0 && "SDL_SetRenderDrawColor failed");
-
-			pixel.x = i * PIXEL_SIZE;
-			pixel.y = j * PIXEL_SIZE;
-			ret = SDL_RenderFillRect( renderer, &pixel);
-			assert(ret == 0 && "SDL_RenderFillRect failed");
-
-			SDL_RenderPresent( renderer );
 		}
 	}
 
@@ -76,15 +69,33 @@ int main( int argc, char* args[] ) {
 	destroyColor(red);
 	destroyColor(blue);
 
-
-	SDL_Delay(5000);
-
-	SDL_RenderPresent( renderer );
+	destroyDataset(d);
  
 	//Quitter SDL 
 	SDL_DestroyRenderer( renderer );
 	SDL_DestroyWindow( window );
 	SDL_Quit(); 
- 
+
+
+	// Color red = createColor(255, 0, 0, 255);
+	// Color blue = createColor(0, 0, 255, 255);
+ 	// Image image = createImage(WIDTH, HEIGHT, blue);
+	// Image image2 = createImage(WIDTH, HEIGHT, red);
+
+	// Couche* reseau = init_reseau(10, 5, 2, 2, 2);
+
+	// print_reseau(reseau);
+
+	
+	// learn(reseau, image, 0.0001, 0.0001); // ne pas aller en dessous de 0.0001
+	// print_reseau(reseau);
+
+	// destroyImage(image);
+	// destroyImage(image2);
+	// destroyColor(red);
+	// destroyColor(blue);
+
+	// free_reseau(reseau);
+
 	return 0; 
 }
