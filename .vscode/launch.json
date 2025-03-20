@@ -27,8 +27,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/lordweapons/Documents/Cours/L3/GL/ReseauNeurone/Tests",
-      "program": "/home/lordweapons/Documents/Cours/L3/GL/ReseauNeurone/Tests/AllTests",
+      "cwd": "/home/paul/RacineUbuntu/ReseauNeurone/Tests",
+      "program": "/home/paul/RacineUbuntu/ReseauNeurone/Tests/AllTests",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

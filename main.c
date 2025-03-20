@@ -47,17 +47,35 @@ int main( int argc, char* args[] ) {
 	int ret = SDL_Init( SDL_INIT_VIDEO );
 	assert(ret == 0 && "SDL_Init failed");
 
-	SDL_Window* window = SDL_CreateWindow( "SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH * PIXEL_SIZE, HEIGHT * PIXEL_SIZE, SDL_WINDOW_SHOWN );
-	assert(window != NULL && "SDL_CreateWindow failed");
+    log_debug("Initialisation de SDL");
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        log_fatal("Échec de SDL_Init : %s", SDL_GetError());
+        return EXIT_FAILURE;
+    }
+    log_info("SDL initialisé avec succès");
 
-	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_SOFTWARE );
-	assert(renderer != NULL && "SDL_CreateRenderer failed");
+    SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH * PIXEL_SIZE, HEIGHT * PIXEL_SIZE, SDL_WINDOW_SHOWN);
+    if (!window) {
+        log_fatal("Échec de SDL_CreateWindow : %s", SDL_GetError());
+        SDL_Quit();
+        return EXIT_FAILURE;
+    }
+    log_info("Fenêtre SDL créée avec succès");
 
-	ret = SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
-	assert(ret == 0 && "SDL_SetRenderDrawColor failed");
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    if (!renderer) {
+        log_fatal("Échec de SDL_CreateRenderer : %s", SDL_GetError());
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return EXIT_FAILURE;
+    }
+    log_info("Renderer SDL créé avec succès");
 
-	ret = SDL_RenderClear( renderer );
-	assert(ret == 0 && "SDL_RenderClear failed");
+    // Définition des couleurs
+    log_debug("Initialisation des couleurs");
+    Color red = createColor(255, 0, 0, 255);
+    Color blue = createColor(0, 0, 255, 255);
+    log_info("Couleurs initialisées");
 
 	SDL_Rect pixel = {0, 0, PIXEL_SIZE, PIXEL_SIZE};
 
