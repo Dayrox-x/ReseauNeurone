@@ -55,6 +55,7 @@ int getNbNeurones(Couche *couche);
 void setNbNeurones(Couche *couche, int nbNeuron);
 
 void init_neuron(Couche* curr_couche, int nb_synapses);
+void init_tab_neuron(int nb_neurones, Couche* couche);
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_prec, int is_fst_couche, int is_lst_couche); // Initialisation d'une couche
 Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties); // Initialisation d'un réseau
 
@@ -64,7 +65,9 @@ void calcul_couche(Couche *couche, Neuron *tab_val); // Calcul de la sortie d'un
 void calcul_reseau(double *tab_val, Couche *fst_couche); // Calcul de la sortie d'un réseau
 
 void print_reseau(Couche* reseau);
-
+void free_neuron(Neuron neuron);
+void free_tab_neurons(Couche* couche);
+void free_couche(Couche* couche);
 void free_reseau(Couche* reseau);
 
 #endif // NEURON_H

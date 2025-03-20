@@ -8,6 +8,7 @@
 #include "sdl.h"
 #include "backpropagation.h"
 #include "log.h"
+#include "saveRead.h"
 
 // pour compiler : gcc *.c -g -o main -lm -lSDL2
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
@@ -120,9 +121,24 @@ int main( int argc, char* args[] ) {
 			{
 				end = true;
 			}
+			else if (e.type == SDL_KEYDOWN)
+			{
+				switch (e.key.keysym.sym){
+					case SDLK_s:
+						save(reseau);
+						printf("Save reseau \n");
+						break;
+					case SDLK_l:
+						read(reseau);
+						printf("Load Reseau \n");
+						break;
+				}
+			}
+			
 		}
 		generalize(reseau, image);
 		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+		//renderDataset(d, renderer, window, pixel, 10);
 		learn(reseau, d, EPSILON, THRESHOLD);
 	}
 

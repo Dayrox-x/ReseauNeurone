@@ -1,3 +1,5 @@
 .vscode/launch.json
 Tests/AllTests
 main
+*.o
+*.cls

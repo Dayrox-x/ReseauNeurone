@@ -1,9 +1,11 @@
 /**
- * \file save.h
+ * \file saveRead.h
  * \brief Fonctions de sauvegarde et de chargement d'un reseau de neurones
  * \author Claire Besançon
  * \date 20/03/2025
  */
+#ifndef SAVEREAD_H
+#define SAVEREAD_H
 
  #include "neuron.h"
  #include "population.h"
@@ -24,3 +26,6 @@
   * Réseau de neurones -> pointeur sur la première couche du réseau
   */
  void read(Couche *reseau);
+
+
+#endif

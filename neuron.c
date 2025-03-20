@@ -130,6 +130,15 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
     }
 }
 
+void init_tab_neuron(int nb_neurones, Couche* couche)
+{
+    couche->tab_n = malloc(nb_neurones * sizeof(Neuron));
+    if (!couche->tab_n) {
+        printf("Erreur d'allocation mémoire\n");
+        free(couche);
+        exit(1);
+    }
+}
 // Initialisation d'une couche
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_prec, int is_fst_couche, int is_lst_couche) {
     Couche *couche = malloc(sizeof(Couche));
@@ -139,12 +148,8 @@ Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_pre
     }
 
     couche->nb_neurones = nb_neurones;
-    couche->tab_n = malloc(nb_neurones * sizeof(Neuron));
-    if (!couche->tab_n) {
-        printf("Erreur d'allocation mémoire\n");
-        free(couche);
-        exit(1);
-    }
+    
+    init_tab_neuron(nb_neurones, couche);
 
     couche->next = couche_suivante;
     couche->prev = couche_prec;
@@ -249,13 +254,17 @@ void free_neuron(Neuron neuron) {
     }
 }
 
+void free_tab_neurons(Couche* couche){
+    for (int i = 0; i < couche->nb_neurones; i++) {
+        free_neuron(couche->tab_n[i]);
+    }
+    free(couche->tab_n);
+    couche->tab_n = NULL;
+}
+
 void free_couche(Couche* couche) {
     if (couche != NULL) {
-        for (int i = 0; i < couche->nb_neurones; i++) {
-            free_neuron(couche->tab_n[i]);
-        }
-        free(couche->tab_n);
-        couche->tab_n = NULL;
+        free_tab_neurons(couche);
 
         free(couche);
         couche = NULL;
