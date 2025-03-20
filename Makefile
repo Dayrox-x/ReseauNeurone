@@ -12,7 +12,7 @@ PROJECT  = main
 BENCHMARK = benchmark
 
 # Fichiers sources pour l'exécutable principal
-SRCS = main.c sdl.c population.c backpropagation.c neuron.c
+SRCS = main.c sdl.c population.c backpropagation.c neuron.c saveRead.c
 
 # Fichiers sources pour les benchmarks
 BENCHMARK_SRCS = benchmark.c sdl.c population.c backpropagation.c neuron.c 
