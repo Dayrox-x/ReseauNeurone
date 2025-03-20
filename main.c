@@ -75,24 +75,9 @@ int main( int argc, char* args[] ) {
 			{
 				end = true;
 			}
-			else if (e.type == SDL_KEYDOWN)
-			{
-				switch (e.key.keysym.sym){
-					case SDLK_s:
-						save(reseau);
-						printf("Save reseau \n");
-						break;
-					case SDLK_l:
-						read(reseau);
-						printf("Charge reseau");
-						break;
-				}
-			}
-			
 		}
 		generalize(reseau, image);
 		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
-		//renderDataset(d, renderer, window, pixel, 10);
 		learn(reseau, d, EPSILON, THRESHOLD);
 	}
 

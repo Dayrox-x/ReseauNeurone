@@ -5,15 +5,43 @@ SRC = main.c neuron.c population.c sdl.c backpropagation.c saveRead.c
 OBJ = $(SRC:.c=.o)
 EXEC = reseau
 
-all: $(EXEC) # Règle par défaut pour construire l'exécutable
+# Nom de l'exécutable principal
+PROJECT  = main
 
-$(EXEC): $(OBJ)
-	$(CC) $(OBJ) $(LIBS) -o $(EXEC)
+# Nom de l'exécutable des benchmarks
+BENCHMARK = benchmark
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Fichiers sources pour l'exécutable principal
+SRCS = main.c sdl.c population.c backpropagation.c neuron.c
 
+# Fichiers sources pour les benchmarks
+BENCHMARK_SRCS = benchmark.c sdl.c population.c backpropagation.c neuron.c 
+
+# Fichiers objets pour l'exécutable principal
+OBJS = $(SRCS:.c=.o)
+
+# Fichiers objets pour les benchmarks
+BENCHMARK_OBJS = $(BENCHMARK_SRCS:.c=.o)
+
+# Drapeaux de compilation
+CFLAGS = -g -lm -lSDL2
+
+# Règle pour compiler le projet principal
+$(PROJECT): $(SRCS)
+	$(CC) $(SRCS) $(CFLAGS) -o $(PROJECT)
+
+# Règle pour compiler les benchmarks
+$(BENCHMARK): $(BENCHMARK_SRCS)
+	$(CC) $(BENCHMARK_SRCS) $(CFLAGS) -o $(BENCHMARK)
+
+# Règle pour exécuter le projet principal
+run: $(PROJECT)
+	./$(PROJECT)
+
+# Règle pour exécuter les benchmarks
+run_benchmarks: $(BENCHMARK)
+	./$(BENCHMARK)
+
+# Nettoyer les fichiers compilés
 clean:
-	rm -f $(OBJ) $(EXEC)
-
-.PHONY: all clean
+	rm -f $(PROJECT) $(BENCHMARK)
