@@ -4,7 +4,7 @@
 
 #define SORTIE_SEQ "partieseq.cls"
 
-void SaveSeq(Couche *reseau, Image img)
+void SaveSeq(Couche *reseau)
 {
     FILE * fichier = fopen(SORTIE_SEQ,"w");
 
@@ -53,7 +53,7 @@ void SaveSeq(Couche *reseau, Image img)
         
 }
 
-void ReadSeq(Couche *reseau, Image img) {
+void ReadSeq(Couche *reseau) {
     FILE *fichier = fopen(SORTIE_SEQ, "r");
 
     if (fichier == NULL) {
