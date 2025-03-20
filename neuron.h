@@ -59,6 +59,8 @@ void init_neuron(Couche* curr_couche, int nb_synapses);
 Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_prec, int is_fst_couche, int is_lst_couche); // Initialisation d'une couche
 Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entrees, int nb_sorties); // Initialisation d'un réseau
 
+Couche* getLastCouche(Couche* reseau); // renvoie la derniere couche d'un reseau
+
 void calcul_couche(Couche *couche, Neuron *tab_val); // Calcul de la sortie d'une couche
 void calcul_reseau(double *tab_val, Couche *fst_couche); // Calcul de la sortie d'un réseau
 

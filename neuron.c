@@ -128,7 +128,7 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
                 double weight;
-                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX);
+                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX) * 2. - 1.;
                 curr_couche->tab_n[i].weights[j] = weight;
                 curr_couche->tab_n[i].output = 1.0;
                 curr_couche->tab_n[i].delta = 1.0;
@@ -183,6 +183,13 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
     return fst_couche;
 }
 
+Couche* getLastCouche(Couche* reseau){
+    Couche* last = reseau;
+    while (!last->is_lst_couche) { // acces a la derniere couche du reseau + comptage du nombre de couche
+        last = last->next;
+    }
+    return last;
+}
 
 
 void calcul_couche(Couche *couche, Neuron *tab_n) {
