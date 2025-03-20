@@ -45,23 +45,23 @@
     return p->color;
  }
  
- void setX(Pixel p, int x) {
+ void setX(Pixel p, double x) {
     p->x = x;
  }
  
- int getX(Pixel p) {
+ double getX(Pixel p) {
     return p->x;
  }
  
- void setY(Pixel p, int y) {
+ void setY(Pixel p, double y) {
     p->y = y;
  }
  
- int getY(Pixel p) {
+ double getY(Pixel p) {
     return p->y;
  }
  
- Pixel createPixel(int x, int y, Color c) {
+ Pixel createPixel(double x, double y, Color c) {
     Pixel p = malloc(sizeof(pxl));
     setX(p, x);
     setY(p, y);
@@ -109,7 +109,7 @@
     for (int i = 0; i < width; i++) {
         tab[i] = (Pixel*)malloc(sizeof(Pixel) * height);
         for (int j = 0; j < height; j++) {
-            tab[i][j] = createPixel(i, j, c);
+            tab[i][j] = createPixel((double)i - (double)(width / 2), (double)j - (double)(height / 2), c);
         }
     }
     return tab;
@@ -157,32 +157,38 @@ void addDatasetPixel(Dataset d, Pixel p){
         d->tab = realloc(d->tab, sizeof(Pixel*) * d->size);
     }
     assert(d->tab != NULL);
-    d->tab[d->size-1] = p;
+    d->tab[d->size-1] = createPixel(getX(p), getY(p), getColor(p));
 }
 
 void destroyDataset(Dataset d){
-    if (d->tab != NULL)
-        free(d->tab);
+    if (d->tab != NULL){
+      for (int i = 0; i < d->size; i++){
+         destroyPixel(d->tab[i]);
+      }
+      free(d->tab);
+    }
     free(d);
 }
 
 Pixel getDatasetPixel(Dataset d, int i){
     return d->tab[i];
 }
- 
 
- void createPopulation(Image image, Dataset d, Color c, int val) {
-    int x = 0, y = 0;
-    float i = 0;
-    while (x < image->width && y < image->height && x >= 0 && y >= 0) {
-        float cos_x = cos(i);
-        float sin_y = sin(i);
-        x = (image->width / 2 + val * (int)(i * cos_x));
-        y = (image->height / 2 + val * (int)(i * sin_y));
-        if (x < image->width && y < image->height && x >= 0 && y >= 0) {
-            setPixelColor(image, x, y, c);
-            addDatasetPixel(d, getPixel(image, x, y));
-        }
-        i += 0.2;
-    }
- }
+void createPopulation(Dataset d, Color c, double val, int size) {
+	double t = 0.;
+	for (int i = 0; i < size; i++){
+		double x = val * (t * cos(t));
+		double y = val * (t * sin(t));
+		addDatasetPixel(d, createPixel(x, y, c));
+		t += 0.2;
+	}
+}
+
+void createSpiral(Dataset d){
+	Color red = createColor(255, 0, 0, 255);
+	Color blue = createColor(0, 0, 255, 255);
+	createPopulation(d, blue, 80, 50);
+	createPopulation(d, red, -80, 50);
+	destroyColor(red);
+	destroyColor(blue);
+}

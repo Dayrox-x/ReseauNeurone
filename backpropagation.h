@@ -13,6 +13,8 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
 double* colorToVector(Color c);
 
 // Fonction qui permet l'apprentissage des neurones 
-void learn(Couche* reseau, Image img, double epsilon, double threshold);
+void learn(Couche* reseau, Dataset d, double epsilon, double threshold);
+
+void generalize(Couche* reseau, Image image);
 
 #endif // BACKPROPAGATION_H

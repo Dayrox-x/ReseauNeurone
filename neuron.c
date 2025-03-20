@@ -17,8 +17,108 @@ void forward(Neuron* neuron, Neuron* entree, int nb_synapses) {
 // Fonction pour modifier la valeur des poids d'un neurone
 void setWeights(Neuron *neuron, double* new_weights, int nb_synapses) {
     for (int i = 0; i < nb_synapses; i++) {
-        neuron->weights[i] = new_weights[i];
+        setWeight(neuron, i, new_weights[i]);
     }
+}
+
+double getWeight(Neuron neuron, int synapse) {
+    return neuron.weights[synapse];
+}
+
+void setWeight(Neuron *neuron, int i, double new_weight){
+    neuron->weights[i] = new_weight;
+}
+
+double* getWeights(Neuron neuron, int nb_synapses) {
+    double weights[nb_synapses];
+    for (int i = 0; i < nb_synapses; i++) {
+        weights[i]=getWeight(neuron, i);
+    }
+    return weights;
+}
+
+double getWeightC(Couche *couche, int neurone, int synapse){
+    return getWeight(getNeuron(couche, neurone), synapse);
+}
+
+double getOutputN(Neuron neuron){
+    return neuron.output;
+}
+
+double getOutputC(Couche *couche, int i){
+    return getOutputN(getNeuron(couche, i));
+}
+
+void setOutput(Neuron *neuron, double new_output){
+    neuron->output = new_output;
+}
+
+double getDeltaN(Neuron neuron){
+    return neuron.delta;
+}
+
+double getDeltaC(Couche *couche, int i){
+    return getDeltaN(getNeuron(couche, i));
+}
+
+void setDelta(Neuron *neuron, double new_delta){
+    neuron->delta = new_delta;
+}
+
+Neuron getNeuron(Couche *couche, int i){
+    return couche->tab_n[i];
+}
+
+void setNeuron (Couche *couche, int i, Neuron new_neuron){
+    couche->tab_n[i] = new_neuron;
+}
+
+Neuron* getNeurons(Couche *couche){
+    return couche->tab_n;
+}
+
+void setNeurons(Couche *couche, Neuron *tab_n){
+    couche->tab_n = tab_n;
+}
+
+Couche* getNextCouche(Couche *currCouche){
+    return currCouche->next;
+}
+
+void setNextCouche(Couche *currCouche, Couche *nextCouche){
+    currCouche->next = nextCouche;
+}
+
+Couche* getPrevCouche(Couche *currCouche){
+    return currCouche->prev;
+}
+
+void setPrevCouche(Couche *currCouche, Couche *prevCouche){
+    currCouche->prev = prevCouche;
+}
+
+bool getIsFstCouche(Couche *couche){
+    return couche->is_fst_couche;
+}
+
+void setIsFstCouche(Couche *couche, bool isFstCouche){
+    couche->is_fst_couche = isFstCouche;
+}
+
+bool getIsLstCouche(Couche *couche){
+    return couche->is_lst_couche;
+}
+
+void setIsLstCouche(Couche *couche, bool isLstCouche){
+    couche->is_lst_couche = isLstCouche;
+}
+
+int getNbNeurones(Couche *couche){
+    return couche->nb_neurones;
+}
+
+void setNbNeurones(Couche *couche, int nbNeuron){
+    couche->nb_neurones = nbNeuron;
 }
 
 void init_neuron(Couche* curr_couche, int nb_synapses){
@@ -28,7 +128,7 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
                 double weight;
-                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX);
+                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX) * 2. - 1.;
                 curr_couche->tab_n[i].weights[j] = weight;
                 curr_couche->tab_n[i].output = 1.0;
                 curr_couche->tab_n[i].delta = 1.0;
@@ -83,12 +183,19 @@ Couche *init_reseau(int nb_couches, int taille_max, int taille_min, int nb_entre
     return fst_couche;
 }
 
+Couche* getLastCouche(Couche* reseau){
+    Couche* last = reseau;
+    while (!last->is_lst_couche) { // acces a la derniere couche du reseau + comptage du nombre de couche
+        last = last->next;
+    }
+    return last;
+}
 
 
 void calcul_couche(Couche *couche, Neuron *tab_n) {
 	//pour chaque neurone on applique la fonction de propagation
-    for (int i = 0; i < couche->nb_neurones; i++) {
-        forward(&(couche->tab_n[i]), tab_n, couche->prev->nb_neurones);
+    for (int i = 0; i < getNbNeurones(couche); i++) {
+        forward(&(couche->tab_n[i]), tab_n, getNbNeurones(getPrevCouche(couche)));
     }
 }
 

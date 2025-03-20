@@ -14,3 +14,20 @@ void renderImage(Image image, SDL_Renderer* renderer, SDL_Window* window, SDL_Re
 	}
 	SDL_RenderPresent( renderer );
 }
+
+void renderDataset(Dataset d, SDL_Renderer* renderer, SDL_Window* window, SDL_Rect pixel, int pxl_size){
+	for (int i = 0; i < getDatasetSize(d); i++){
+		SDL_SetRenderDrawColor(renderer, getR(getColor(getDatasetPixel(d, i))), getG(getColor(getDatasetPixel(d, i))), getB(getColor(getDatasetPixel(d, i))), getA(getColor(getDatasetPixel(d, i))));
+		
+		int width = 0;
+		int height = 0;
+
+		SDL_GetWindowSize(window, &width, &height);
+		
+		pixel.x = (int)(getX(getDatasetPixel(d, i))) + width / 2;
+		pixel.y = (int)(getY(getDatasetPixel(d, i))) + height / 2;
+
+		SDL_RenderFillRect(renderer, &pixel);
+	}
+	SDL_RenderPresent(renderer);
+}
