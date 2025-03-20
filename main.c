@@ -22,11 +22,11 @@ int main( int argc, char* args[] ) {
 	
 	srand(time(NULL));
 
-	Color white = createColor(255, 255, 255, 255);
+	Color black = createColor(0, 0, 0, 255);
 	Color red = createColor(255, 0, 0, 255);
 	Color blue = createColor(0, 0, 255, 255);
 
-	Image image = createImage(WIDTH, HEIGHT, white);
+	Image image = createImage(WIDTH, HEIGHT, black);
 
 	Dataset d = createDataset();
 
@@ -36,10 +36,9 @@ int main( int argc, char* args[] ) {
 	// addDatasetPixel(d, getPixel(image, WIDTH/4, HEIGHT/2));
 	// addDatasetPixel(d, getPixel(image, WIDTH/4 * 3, HEIGHT/2));
 
-	createPopulation(image, d, red, -1);
-	createPopulation(image, d, blue, 1);
+	createSpiral(d);
 
-	Couche* reseau = init_reseau(10, 100, 80, 2, 2);
+	Couche* reseau = init_reseau(7, 128, 64, 2, 2);
 	
 	learn(reseau, d, EPSILON, THRESHOLD);
 
@@ -63,6 +62,8 @@ int main( int argc, char* args[] ) {
 
 	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
 
+	renderDataset(d, renderer, window, pixel, 10);
+
 	bool end = false;
 	int i = 0;
 	SDL_Event e;
@@ -75,11 +76,8 @@ int main( int argc, char* args[] ) {
 			}
 		}
 		generalize(reseau, image);
-		i++;
-		if (i % WIDTH == 0){
-			renderImage(image, renderer, window, pixel, PIXEL_SIZE);
-			// learn(reseau, d, EPSILON, THRESHOLD);
-		}
+		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+		learn(reseau, d, EPSILON, THRESHOLD);
 	}
 
 	//Quitter SDL 
@@ -89,7 +87,7 @@ int main( int argc, char* args[] ) {
 	
 	destroyImage(image);
 
-	destroyColor(white);
+	destroyColor(black);
 	destroyColor(red);
 	destroyColor(blue);
 

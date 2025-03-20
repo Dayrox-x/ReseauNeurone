@@ -33,8 +33,8 @@ typedef SDL_Color* Color;
  * Couleur du pxl
  */
 typedef struct {
-    int x;
-    int y;
+    double x;
+    double y;
     Color color; // RGB
 } pxl;
 
@@ -198,7 +198,7 @@ Color getColor(Pixel p);
  * \param x
  * Nouvelle position en abscisse du pixel
  */
-void setX(Pixel p, int x);
+void setX(Pixel p, double x);
 
 /**
  * \fn int getX(Pixel p)
@@ -206,7 +206,7 @@ void setX(Pixel p, int x);
  * \param p
  * Pixel dont on récupère la position
  */
-int getX(Pixel p);
+double getX(Pixel p);
 
 /**
  * \fn void setY(Pixel p, int y)
@@ -216,7 +216,7 @@ int getX(Pixel p);
  * \param y
  * Nouvelle position en ordonnée du pixel
  */
-void setY(Pixel p, int y);
+void setY(Pixel p, double y);
 
 /**
  * \fn int getY(Pixel p)
@@ -224,7 +224,7 @@ void setY(Pixel p, int y);
  * \param p
  * Pixel dont on récupère la position
  */
-int getY(Pixel p);
+double getY(Pixel p);
 
 /**
  * \fn Pixel createPixel(int x, int y, Color c)
@@ -237,7 +237,7 @@ int getY(Pixel p);
  * Couleur du nouveau pixel
  * \return Pixel créé
  */
-Pixel createPixel(int x, int y, Color c);
+Pixel createPixel(double x, double y, Color c);
 
 /**
  * \fn void destroyPixel(Pixel p)
@@ -388,6 +388,8 @@ Pixel getDatasetPixel(Dataset dataset, int i);
  * \param val
  * valeur du multiplicateur appliqué à sin et cos
  */
-void createPopulation(Image image, Dataset d, Color c, int val);
+void createPopulation(Dataset d, Color c, double val, int size);
+
+void createSpiral(Dataset d);
 
 #endif

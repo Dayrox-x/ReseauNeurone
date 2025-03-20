@@ -7,4 +7,6 @@
 
 void renderImage(Image image, SDL_Renderer* renderer, SDL_Window* window, SDL_Rect pixel, int pxl_size);
 
+void renderDataset(Dataset d, SDL_Renderer* renderer, SDL_Window* window, SDL_Rect pixel, int pxl_size);
+
 #endif

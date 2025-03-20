@@ -16,8 +16,8 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
 
     for (int i = 0; i < last->nb_neurones; i++) {
         last->tab_n[i].delta = (1 - last->tab_n[i].output * last->tab_n[i].output) * (vecteur_y[i] - last->tab_n[i].output);
-        if (last->tab_n[i].delta - max_delta > 0.) {
-            max_delta = last->tab_n[i].delta;
+        if (fabs(last->tab_n[i].delta) - max_delta > 0.) {
+            max_delta = fabs(last->tab_n[i].delta);
         }
     }
 
@@ -30,8 +30,8 @@ double backpropagate(Couche *reseau, double *vecteur_x, double *vecteur_y, doubl
                 sum += last->tab_n[k].delta * last->tab_n[k].weights[i];
             }
             curr->tab_n[i].delta = (1 - curr->tab_n[i].output * curr->tab_n[i].output) * sum;
-            if (curr->tab_n[i].delta - max_delta > 0.) {
-                max_delta = curr->tab_n[i].delta;
+            if (fabs(curr->tab_n[i].delta) - max_delta > 0.) {
+                max_delta = fabs(curr->tab_n[i].delta);
             }
         }
         curr = curr->prev;
@@ -65,7 +65,7 @@ double* colorToVector(Color c) {
 Color vectorToColor(double* v){
     int r, g, b;
     r = (int)(v[0] * 255.0);
-    g = 0.;
+    g = 0;
     b = (int)(v[1] * 255.0);
     return createColor(r, g, b, 255.0);
 }
@@ -79,11 +79,11 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
     double lowest = di_max;
 
     while (di_max - threshold >= 0.) {
-        i = rand() % getDatasetSize(d);
-        int x = getX(getDatasetPixel(d, i));
-        int y = getY(getDatasetPixel(d, i));
-        v_x[0] = (float)x + 1.;
-        v_x[1] = (float)y + 1.;
+        i = (i + 1) % getDatasetSize(d);
+        double x = getX(getDatasetPixel(d, i));
+        double y = getY(getDatasetPixel(d, i));
+        v_x[0] = x;
+        v_x[1] = y;
         v_y = colorToVector(getColor(getDatasetPixel(d, i)));
         di_max = backpropagate(reseau, v_x, v_y, epsilon);
         free(v_y);
@@ -92,32 +92,37 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
         iteration++;
         if (lowest - di_max > 0.0) {
             lowest = di_max;
-            printf("Iteration %d, lowest di_max: %f\n", iteration, lowest);
+            printf("Iteration %d, lowest di_max: %2f\n", iteration, lowest);
         }
+        // if (iteration % 100 == 0){
+        //     printf("Iteration : %d, lowest di_max : %2f\n", iteration, lowest);
+        // }
     }
-
+    
     printf("Learning completed in %d iterations with final di_max: %f\n", iteration, di_max);
     free(v_x);
 }
 
 void generalize(Couche* reseau, Image image){
-    int x = rand() % getWidth(image);
-    int y = rand() % getHeight(image);
-    double* v = malloc(sizeof(double) * 2);
-    v[0] = (double)x + 1.;
-    v[1] = (double)y + 1.;
-    calcul_reseau(v, reseau);
+    for (int x = 0; x < getWidth(image); x++){
+        for(int y = 0; y < getHeight(image); y++){
+            double* v = malloc(sizeof(double) * 2);
+            v[0] = getX(getPixel(image, x, y));
+            v[1] = getY(getPixel(image, x, y));
+            calcul_reseau(v, reseau);
 
-    Couche* last = getLastCouche(reseau);
-    double* outputs = malloc(sizeof(double) * last->nb_neurones);
-    for (int i = 0; i < last->nb_neurones; i++){
-        outputs[i] = last->tab_n[i].output;
+            Couche* last = getLastCouche(reseau);
+            double* outputs = malloc(sizeof(double) * last->nb_neurones);
+            for (int i = 0; i < last->nb_neurones; i++){
+                outputs[i] = last->tab_n[i].output;
+            }
+            Color c = vectorToColor(outputs);
+            
+            setPixelColor(image, x, y, c);
+
+            free(v);
+            free(outputs);
+            destroyColor(c);
+        }
     }
-    Color c = vectorToColor(outputs);
-    
-    setPixelColor(image, x, y, c);
-
-    free(v);
-    free(outputs);
-    destroyColor(c);
 }
