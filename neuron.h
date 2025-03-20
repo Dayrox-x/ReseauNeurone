@@ -33,7 +33,6 @@ void setWeights(Neuron *neuron, double* new_weights, int nb_synapses);
 
 double getWeight(Neuron neuron, int synapse);
 void setWeight(Neuron *neuron, int i, double new_weight);
-double* getWeights(Neuron neuron, int nb_synapses);
 double getOutputN(Neuron neuron);
 double getOutputC(Couche *couche, int i);
 void setOutput(Neuron *neuron, double new_output);

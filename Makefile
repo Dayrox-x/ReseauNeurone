@@ -1,8 +1,7 @@
-
 CC = gcc    #définit le compilateur
 CFLAGS = -Wall -g   # Options de compilation (affichage des warnings et debug)
 LIBS = -lSDL2 -lm # # Bibliothèques
-SRC = main.c neuron.c population.c sdl.c backpropagation.c
+SRC = main.c neuron.c population.c sdl.c backpropagation.c saveRead.c
 OBJ = $(SRC:.c=.o)
 EXEC = reseau
 

@@ -29,14 +29,6 @@ void setWeight(Neuron *neuron, int i, double new_weight){
     neuron->weights[i] = new_weight;
 }
 
-double* getWeights(Neuron neuron, int nb_synapses) {
-    double weights[nb_synapses];
-    for (int i = 0; i < nb_synapses; i++) {
-        weights[i]=getWeight(neuron, i);
-    }
-    return weights;
-}
-
 double getWeightC(Couche *couche, int neurone, int synapse){
     return getWeight(getNeuron(couche, neurone), synapse);
 }

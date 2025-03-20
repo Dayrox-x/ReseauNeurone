@@ -7,7 +7,7 @@
 #include "population.h"
 #include "sdl.h"
 #include "backpropagation.h"
-#include "save.h"
+#include "saveRead.h"
 
 // pour compiler : gcc *.c -g -o main -lm -lSDL2
 // -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
@@ -66,7 +66,7 @@ int main( int argc, char* args[] ) {
 	renderDataset(d, renderer, window, pixel, 10);
 
 	bool end = false;
-	int i = 0;
+	
 	SDL_Event e;
 	while(!end) {
 		while( SDL_PollEvent( &e ) != 0 )
