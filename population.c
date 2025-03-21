@@ -146,6 +146,7 @@ Dataset createDataset(){
     Dataset d = malloc(sizeof(data));
     d->size = 0;
     d->tab = NULL;
+    return d;
 }
 
 void addDatasetPixel(Dataset d, Pixel p){
