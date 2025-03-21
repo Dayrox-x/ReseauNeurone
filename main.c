@@ -15,11 +15,10 @@
 #define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
-#define EPSILON 0.00001
-#define THRESHOLD 0.00001
+#define EPSILON 0.001
+#define THRESHOLD 0.001
  
 int main( int argc, char* args[] ) {
-	
 	srand(time(NULL));
 
 	Color black = createColor(0, 0, 0, 255);
@@ -30,15 +29,9 @@ int main( int argc, char* args[] ) {
 
 	Dataset d = createDataset();
 
-	
-	// setPixelColor(image, WIDTH/4, HEIGHT/2, red);
-	// setPixelColor(image, WIDTH/4 * 3, HEIGHT/2, blue);
-	// addDatasetPixel(d, getPixel(image, WIDTH/4, HEIGHT/2));
-	// addDatasetPixel(d, getPixel(image, WIDTH/4 * 3, HEIGHT/2));
-
 	createSpiral(d);
 
-	Couche* reseau = init_reseau(7, 128, 64, 2, 2);
+	Couche* reseau = init_reseau(7, 128, 80, 2, 2);
 	
 	learn(reseau, d, EPSILON, THRESHOLD);
 
@@ -51,9 +44,6 @@ int main( int argc, char* args[] ) {
 
 	SDL_Renderer* renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_SOFTWARE );
 	assert(renderer != NULL && "SDL_CreateRenderer failed");
-
-	ret = SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
-	assert(ret == 0 && "SDL_SetRenderDrawColor failed");
 
 	ret = SDL_RenderClear( renderer );
 	assert(ret == 0 && "SDL_RenderClear failed");

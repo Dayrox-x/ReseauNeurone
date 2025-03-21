@@ -76,7 +76,6 @@
  }
  
  // getters setters de Image
- 
  Pixel getPixel(Image image, int x, int y) {
     return image->tab[x][y];
  }
@@ -187,8 +186,8 @@ void createPopulation(Dataset d, Color c, double val, int size) {
 void createSpiral(Dataset d){
 	Color red = createColor(255, 0, 0, 255);
 	Color blue = createColor(0, 0, 255, 255);
-	createPopulation(d, blue, 80, 50);
-	createPopulation(d, red, -80, 50);
+	createPopulation(d, blue, 80, 100);
+	createPopulation(d, red, -80, 100);
 	destroyColor(red);
 	destroyColor(blue);
 }
