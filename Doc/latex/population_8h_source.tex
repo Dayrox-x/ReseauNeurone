@@ -1,0 +1,119 @@
+\doxysection{population.\+h}
+\hypertarget{population_8h_source}{}\label{population_8h_source}\mbox{\hyperlink{population_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ POPULATION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ POPULATION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <SDL2/SDL.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ SDL\_Color*\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structpxl_ad500653b6ed607e2fedea6756b6b14c6}{x}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structpxl_a4e1c2375dc7bd0bd5cb40ff36dcb74b9}{y}};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ \mbox{\hyperlink{structpxl_a45340259f7eee0331d321289dbc7efd9}{color}};}
+\DoxyCodeLine{00039\ \}\ \mbox{\hyperlink{structpxl}{pxl}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structpxl}{pxl}}*\ \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{structpxl}{Pixel}}**\ \mbox{\hyperlink{structimg_a942f51b96823ac214b4a5ccb9d9f7169}{tab}};}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{int}\ width,\ \mbox{\hyperlink{structimg_a47b1dc175ccec5c6ed849469383b511a}{height}};}
+\DoxyCodeLine{00060\ \}\ \mbox{\hyperlink{structimg}{img}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structimg}{img}}*\ \mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{structpxl}{Pixel}}*\ \mbox{\hyperlink{structdata_a796efcaf6b076a34f3750a8957ffe503}{tab}};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structdata_a009251604d979d26652bbd672d6face8}{size}};}
+\DoxyCodeLine{00079\ \}\ \mbox{\hyperlink{structdata}{data}};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structdata}{data}}*\ \mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ getters\ setters\ de\ Color}}
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a0faaa3b3f59bafaef2787f703c0e700a}{setR}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c,\ \textcolor{keywordtype}{int}\ r);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_ae31757e349588b1ed3d6bef7511bdcb5}{getR}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_ad4f7814357de41bb447576447590fb81}{setG}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c,\ \textcolor{keywordtype}{int}\ g);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00118\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_a257cc683843469b700157978d83704d3}{getG}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00127\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a6baa3a368fbcbd415628fee1a6354a25}{setB}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c,\ \textcolor{keywordtype}{int}\ b);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_ab0556c883e94588a26edd75ab97d01db}{getB}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00143\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_aabf633ca5dee0e45a7baefd5b10dab6b}{setA}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c,\ \textcolor{keywordtype}{int}\ a);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_aecbabb2ee063ebc120d08a6a645943e2}{getA}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00164\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ \mbox{\hyperlink{population_8h_a4d159e0b80f8b3a406355dce179d8b1d}{createColor}}(\textcolor{keywordtype}{int}\ r,\ \textcolor{keywordtype}{int}\ g,\ \textcolor{keywordtype}{int}\ b,\ \textcolor{keywordtype}{int}\ a);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00171\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a5bd5e8b493e01c6e8f383d5cd6ae1617}{destroyColor}}(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ getters\ setters\ de\ Pixel}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00182\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a448627e7b6e34aebce066bb7a93b0dc9}{setColor}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00190\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ \mbox{\hyperlink{population_8h_a9bf843aeef76763dd03994eaaa3caa73}{getColor}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00199\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_ac8174058bfb37376990978f37fb1b98e}{setX}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p,\ \textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00207\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{population_8h_ab448025c35e5ca0ead8da48a789d2995}{getX}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00216\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a204df88ec09a17a540737ae271444775}{setY}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p,\ \textcolor{keywordtype}{double}\ y);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00224\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{population_8h_a9b004c12a3f0fd6042118f74288c5fa1}{getY}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00236\ \mbox{\hyperlink{structpxl}{Pixel}}\ \mbox{\hyperlink{population_8h_a24910da61a3c203052738d792acf02e4}{createPixel}}(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00243\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090}{destroyPixel}}(\mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \textcolor{comment}{//\ getters\ setters\ de\ Image}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00257\ \mbox{\hyperlink{structpxl}{Pixel}}\ \mbox{\hyperlink{population_8h_a981dbd5ce45085cf21969fb512489f83}{getPixel}}(\mbox{\hyperlink{structimg}{Image}}\ image,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00269\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e}{setPixel}}(\mbox{\hyperlink{structimg}{Image}}\ image,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00277\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_aa28668b0cf0c28983e0eed7a6105a6af}{getWidth}}(\mbox{\hyperlink{structimg}{Image}}\ image);}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00285\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4}{getHeight}}(\mbox{\hyperlink{structimg}{Image}}\ image);}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00297\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ \mbox{\hyperlink{population_8h_a3671e6f8d057ad8105b472170517d886}{getPixelColor}}(\mbox{\hyperlink{structimg}{Image}}\ image,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00310\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627}{setPixelColor}}(\mbox{\hyperlink{structimg}{Image}}\ image,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00322\ \mbox{\hyperlink{structpxl}{Pixel}}**\ \mbox{\hyperlink{population_8h_a3b2cd6142173aaadd8c979252e4b19d0}{createPixelTab}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00334\ \mbox{\hyperlink{structimg}{Image}}\ \mbox{\hyperlink{population_8h_a3711caed2be9083275d814c14533263b}{createImage}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00345\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2}{destroyPixelTab}}(\mbox{\hyperlink{structpxl}{Pixel}}\ **\ tab,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00352\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1}{destroyImage}}(\mbox{\hyperlink{structimg}{Image}}\ image);}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00355\ \textcolor{comment}{//\ getters\ setters\ de\ Dataset}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00363\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{population_8h_a8b84d154f0b93cd44ecbd6584188b816}{getDatasetSize}}(\mbox{\hyperlink{structdata}{Dataset}}\ dataset);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00369\ \mbox{\hyperlink{structdata}{Dataset}}\ \mbox{\hyperlink{population_8h_ac87718c11c5b3073ef885e9a081589e9}{createDataset}}();}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00378\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_aa44c0f7e184f2d25b08d1c08c7714283}{addDatasetPixel}}(\mbox{\hyperlink{structdata}{Dataset}}\ d,\ \mbox{\hyperlink{structpxl}{Pixel}}\ p);}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00385\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_abe45b8f37e3e8b5fc143e59d06a45d08}{destroyDataset}}(\mbox{\hyperlink{structdata}{Dataset}}\ dataset);}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00395\ \mbox{\hyperlink{structpxl}{Pixel}}\ \mbox{\hyperlink{population_8h_a85656b606bc1a21db070cd885cfc5882}{getDatasetPixel}}(\mbox{\hyperlink{structdata}{Dataset}}\ dataset,\ \textcolor{keywordtype}{int}\ i);}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00407\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a9d682bf84a74223b3b82f279f57a79f8}{createPopulation}}(\mbox{\hyperlink{structdata}{Dataset}}\ d,\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c,\ \textcolor{keywordtype}{double}\ val,\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00414\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{population_8h_a17a466530655aa211b9e2a4f113f8a7d}{createSpiral}}(\mbox{\hyperlink{structdata}{Dataset}}\ d);}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

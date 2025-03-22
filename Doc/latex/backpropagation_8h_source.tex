@@ -1,0 +1,24 @@
+\doxysection{backpropagation.\+h}
+\hypertarget{backpropagation_8h_source}{}\label{backpropagation_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BACKPROPAGATION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BACKPROPAGATION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{neuron_8h}{neuron.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{population_8h}{population.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{double}\ backpropagate(\mbox{\hyperlink{structCouche}{Couche}}\ *reseau,\ \textcolor{keywordtype}{double}\ *vecteur\_x,\ \textcolor{keywordtype}{double}\ *vecteur\_y,\ \textcolor{keywordtype}{double}\ epsilon);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{double}*\ colorToVector(\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ c);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00037\ \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}\ vectorToColor(\textcolor{keywordtype}{double}*\ v);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ learn(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau,\ \mbox{\hyperlink{structdata}{Dataset}}\ d,\ \textcolor{keywordtype}{double}\ epsilon,\ \textcolor{keywordtype}{double}\ threshold);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ generalize(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau,\ \mbox{\hyperlink{structimg}{Image}}\ image);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BACKPROPAGATION\_H}}
+
+\end{DoxyCode}

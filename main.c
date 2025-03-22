@@ -98,11 +98,9 @@ int main( int argc, char* args[] ) {
 	}
 	log_info("Renderer nettoyé avec succès");
 
-	SDL_Rect pixel = {0, 0, PIXEL_SIZE, PIXEL_SIZE};
+	renderImage(image, renderer, window, PIXEL_SIZE);
 
-	renderImage(image, renderer, window, pixel, PIXEL_SIZE);
-
-	renderDataset(d, renderer, window, pixel, 10);
+	renderDataset(d, renderer, window, PIXEL_SIZE);
 
 	bool end = false;
 	
@@ -116,7 +114,7 @@ int main( int argc, char* args[] ) {
 			}
 		}
 		generalize(reseau, image);
-		renderImage(image, renderer, window, pixel, PIXEL_SIZE);
+		renderImage(image, renderer, window, PIXEL_SIZE);
 		learn(reseau, d, EPSILON, THRESHOLD);
 	}
 

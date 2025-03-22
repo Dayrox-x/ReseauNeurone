@@ -1,17 +1,12 @@
 #include "neuron.h"
 
-// Fonction de transfert : Tangente hyperbolique
-double transfer(double x) {
-    return tanh(x);
-}
-
 // Fonction de propagation 
 void forward(Neuron* neuron, Neuron* entree, int nb_synapses) {
     double sum = 0;
     for (int i = 0; i < nb_synapses; i++) {
         sum += neuron->weights[i] * entree[i].output;
     }
-    neuron->output = transfer(sum);
+    neuron->output = tanh(sum);
 }
 
 // Fonction pour modifier la valeur des poids d'un neurone
@@ -201,12 +196,6 @@ void calcul_reseau(double *tab_val, Couche *fst_couche) {
     while (current) { // tant qu'on n'est pas à la dernière couche => sorties deviennent les entrées de couche suivante.
         calcul_couche(current, current->prev->tab_n); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
         current = current->next;
-    }
-}
-
-void interpretation(double *tab_val_sortie, char *tab_sortie[], int len) {
-    for (int i = 0; i < len; i++) {
-        printf("Le point a une probabilité de %f d’être %s\n", tab_val_sortie[i], tab_sortie[i]);
     }
 }
 

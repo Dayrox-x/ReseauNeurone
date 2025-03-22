@@ -1,0 +1,50 @@
+\doxysection{log.\+h}
+\hypertarget{log_8h_source}{}\label{log_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LOG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LOG\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Niveaux\ de\ log}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ LOG\_TRACE,\ \ \ \textcolor{comment}{//\ Trace\ des\ événements}}
+\DoxyCodeLine{00011\ \ \ \ \ LOG\_DEBUG,\ \ \ \textcolor{comment}{//\ Infos\ de\ débogage}}
+\DoxyCodeLine{00012\ \ \ \ \ LOG\_INFO,\ \ \ \ \textcolor{comment}{//\ Infos\ générales}}
+\DoxyCodeLine{00013\ \ \ \ \ LOG\_WARN,\ \ \ \ \textcolor{comment}{//\ Avertissements}}
+\DoxyCodeLine{00014\ \ \ \ \ LOG\_ERROR,\ \ \ \textcolor{comment}{//\ Erreurs}}
+\DoxyCodeLine{00015\ \ \ \ \ LOG\_FATAL\ \ \ \ \textcolor{comment}{//\ Erreurs\ fatales}}
+\DoxyCodeLine{00016\ \}\ LogLevel;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Infos\ d'un\ événement\ de\ log}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fmt;\ \ \ \ \ \ \textcolor{comment}{//\ Format\ du\ message}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *file;\ \ \ \ \ \textcolor{comment}{//\ Nom\ du\ fichier}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ line;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Numéro\ de\ ligne}}
+\DoxyCodeLine{00023\ \ \ \ \ LogLevel\ level;\ \ \ \ \ \ \ \textcolor{comment}{//\ Niveau\ de\ log}}
+\DoxyCodeLine{00024\ \ \ \ \ va\_list\ ap;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Liste\ d'arguments\ pour\ le\ message\ formaté}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{struct\ }tm\ *time;\ \ \ \ \ \ \textcolor{comment}{//\ Heure}}
+\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{structlogEvent}{logEvent}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Variable\ externe\ pour\ stocker\ le\ niveau\ de\ log\ courant}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{extern}\ LogLevel\ current\_log\_level;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ Macros\ pour\ simplifier\ l'appel\ des\ fonctions\ de\ log}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ log\_trace(...)\ log\_log(LOG\_TRACE,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ log\_debug(...)\ log\_log(LOG\_DEBUG,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ log\_info(...)\ \ log\_log(LOG\_INFO,\ \ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ log\_warn(...)\ \ log\_log(LOG\_WARN,\ \ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ log\_error(...)\ log\_log(LOG\_ERROR,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ log\_fatal(...)\ log\_log(LOG\_FATAL,\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Fonction\ pour\ définir\ le\ niveau\ de\ log}}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ log\_set\_level(LogLevel\ level);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ Fonction\ principale\ de\ log}}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ log\_log(LogLevel\ level,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *file,\ \textcolor{keywordtype}{int}\ line,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fmt,\ ...);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOG\_H}}
+
+\end{DoxyCode}

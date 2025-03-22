@@ -1,6 +1,7 @@
 #include "sdl.h"
 
-void renderImage(Image image, SDL_Renderer* renderer, SDL_Window* window, SDL_Rect pixel, int pxl_size) {
+void renderImage(Image image, SDL_Renderer* renderer, SDL_Window* window, int pxl_size) {
+	SDL_Rect pixel = {0, 0, pxl_size, pxl_size};
     for (int i = 0; i < getWidth(image); i++) {
 		for (int j = 0; j < getHeight(image); j++) {
 			int ret = SDL_SetRenderDrawColor( renderer, getR(getPixelColor(image, i, j)), getG(getPixelColor(image, i, j)), getB(getPixelColor(image, i, j)), getA(getPixelColor(image, i, j)) );
@@ -15,7 +16,8 @@ void renderImage(Image image, SDL_Renderer* renderer, SDL_Window* window, SDL_Re
 	SDL_RenderPresent( renderer );
 }
 
-void renderDataset(Dataset d, SDL_Renderer* renderer, SDL_Window* window, SDL_Rect pixel, int pxl_size){
+void renderDataset(Dataset d, SDL_Renderer* renderer, SDL_Window* window, int pxl_size){
+	SDL_Rect pixel = {0, 0, pxl_size, pxl_size};
 	for (int i = 0; i < getDatasetSize(d); i++){
 		SDL_SetRenderDrawColor(renderer, getR(getColor(getDatasetPixel(d, i))), getG(getColor(getDatasetPixel(d, i))), getB(getColor(getDatasetPixel(d, i))), getA(getColor(getDatasetPixel(d, i))));
 		

@@ -1,0 +1,691 @@
+\doxysection{population.\+h File Reference}
+\hypertarget{population_8h}{}\label{population_8h}\index{population.h@{population.h}}
+
+
+Fonctions de gestion des populations (création, destruction, modifications)  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+Include dependency graph for population.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpxl}{pxl}}
+\begin{DoxyCompactList}\small\item\em Structure d\textquotesingle{}un Pixel. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structimg}{img}}
+\begin{DoxyCompactList}\small\item\em Structure d\textquotesingle{}une Image. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structdata}{data}}
+\begin{DoxyCompactList}\small\item\em Structure d\textquotesingle{}un jeu de donnée Dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}\label{population_8h_a6dfd6ab1be13c76b8b735952b6199b48} 
+typedef SDL\+\_\+\+Color \texorpdfstring{$\ast$}{*} {\bfseries Color}
+\begin{DoxyCompactList}\small\item\em Pointeur sur une structure de type SDL\+\_\+\+Color. \end{DoxyCompactList}\item 
+\Hypertarget{population_8h_a06903669d0ae34c35d85bf50abc3364c}\label{population_8h_a06903669d0ae34c35d85bf50abc3364c} 
+typedef \mbox{\hyperlink{structpxl}{pxl}} \texorpdfstring{$\ast$}{*} {\bfseries Pixel}
+\begin{DoxyCompactList}\small\item\em Pointeur sur une structure pxl. \end{DoxyCompactList}\item 
+\Hypertarget{population_8h_ad3ac06807275a5f8e874be71c1575520}\label{population_8h_ad3ac06807275a5f8e874be71c1575520} 
+typedef \mbox{\hyperlink{structimg}{img}} \texorpdfstring{$\ast$}{*} {\bfseries Image}
+\begin{DoxyCompactList}\small\item\em Pointeur sur une structure pxl. \end{DoxyCompactList}\item 
+\Hypertarget{population_8h_a840efa5d244459492a0e1cdf9b619b2c}\label{population_8h_a840efa5d244459492a0e1cdf9b619b2c} 
+typedef \mbox{\hyperlink{structdata}{data}} \texorpdfstring{$\ast$}{*} {\bfseries Dataset}
+\begin{DoxyCompactList}\small\item\em Pointeur sur une structure data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{population_8h_a0faaa3b3f59bafaef2787f703c0e700a}{setR}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c, int r)
+\begin{DoxyCompactList}\small\item\em Définie la valeur de r (rouge) de la couleur c. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_ae31757e349588b1ed3d6bef7511bdcb5}{getR}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Renvoie la valeur de r d\textquotesingle{}une couleur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_ad4f7814357de41bb447576447590fb81}{setG}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c, int g)
+\begin{DoxyCompactList}\small\item\em Définie la valeur de g (vert) de la couleur c. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_a257cc683843469b700157978d83704d3}{getG}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Renvoie la valeur de g. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a6baa3a368fbcbd415628fee1a6354a25}{setB}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c, int b)
+\begin{DoxyCompactList}\small\item\em Définie la valeur de b (bleu) de la couleur c. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_ab0556c883e94588a26edd75ab97d01db}{getB}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Renvoie la valeur de b. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_aabf633ca5dee0e45a7baefd5b10dab6b}{setA}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c, int a)
+\begin{DoxyCompactList}\small\item\em Définie la valeur de a (alpha = opacité) de la couleur c. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_aecbabb2ee063ebc120d08a6a645943e2}{getA}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Renvoie la valeur de a. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} \mbox{\hyperlink{population_8h_a4d159e0b80f8b3a406355dce179d8b1d}{create\+Color}} (int r, int g, int b, int a)
+\begin{DoxyCompactList}\small\item\em Alloue et crée une couleur depuis des valeur RGBA, penser à utiliser destroy\+Color. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a5bd5e8b493e01c6e8f383d5cd6ae1617}{destroy\+Color}} (\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Détruit une couleur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a448627e7b6e34aebce066bb7a93b0dc9}{set\+Color}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Définie la couleur d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} \mbox{\hyperlink{population_8h_a9bf843aeef76763dd03994eaaa3caa73}{get\+Color}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Renvoie la couleur d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_ac8174058bfb37376990978f37fb1b98e}{setX}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p, double x)
+\begin{DoxyCompactList}\small\item\em Définie la position x d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{population_8h_ab448025c35e5ca0ead8da48a789d2995}{getX}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Renvoie la position en abscisse d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a204df88ec09a17a540737ae271444775}{setY}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p, double y)
+\begin{DoxyCompactList}\small\item\em Définie la position y d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{population_8h_a9b004c12a3f0fd6042118f74288c5fa1}{getY}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Renvoie la position en ordonnée d\textquotesingle{}un pixel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \mbox{\hyperlink{population_8h_a24910da61a3c203052738d792acf02e4}{create\+Pixel}} (double x, double y, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Alloue et crée un pixel depuis des coordonnées et une couleur, penser à utiliser destroy\+Pixel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090}{destroy\+Pixel}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Détruit un pixel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \mbox{\hyperlink{population_8h_a981dbd5ce45085cf21969fb512489f83}{get\+Pixel}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y)
+\begin{DoxyCompactList}\small\item\em Retourne le pixel de position (x, y) dans une image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e}{set\+Pixel}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y, \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Définie le pixel de position (x, y) dans une image. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_aa28668b0cf0c28983e0eed7a6105a6af}{get\+Width}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image)
+\begin{DoxyCompactList}\small\item\em Retourne la largeur d\textquotesingle{}une image. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4}{get\+Height}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image)
+\begin{DoxyCompactList}\small\item\em Retourne la hauteur d\textquotesingle{}une image. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} \mbox{\hyperlink{population_8h_a3671e6f8d057ad8105b472170517d886}{get\+Pixel\+Color}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y)
+\begin{DoxyCompactList}\small\item\em Retourne la couleur du pixel de coordonnées (x, y) dans une image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627}{set\+Pixel\+Color}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Définie la couleur du pixel de coordonnées (x, y) dans une image. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{population_8h_a3b2cd6142173aaadd8c979252e4b19d0}{create\+Pixel\+Tab}} (int width, int height, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d\textquotesingle{}utiliser destroy\+Pixel\+Tab. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} \mbox{\hyperlink{population_8h_a3711caed2be9083275d814c14533263b}{create\+Image}} (int width, int height, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Alloue et crée une image, ne pas oublier d\textquotesingle{}utiliser destroy\+Image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2}{destroy\+Pixel\+Tab}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}tab, int width, int height)
+\begin{DoxyCompactList}\small\item\em Détruit un tableau de pixels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1}{destroy\+Image}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image)
+\begin{DoxyCompactList}\small\item\em Détruit une Image. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{population_8h_a8b84d154f0b93cd44ecbd6584188b816}{get\+Dataset\+Size}} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} dataset)
+\begin{DoxyCompactList}\small\item\em Renvoie la taille du jeu de donnée passé en paramètre. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} \mbox{\hyperlink{population_8h_ac87718c11c5b3073ef885e9a081589e9}{create\+Dataset}} ()
+\begin{DoxyCompactList}\small\item\em Alloue l\textquotesingle{}espace pour un jeu de donnée vide, ne pas oublier d\textquotesingle{}utiliser destroy\+Dataset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_aa44c0f7e184f2d25b08d1c08c7714283}{add\+Dataset\+Pixel}} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} d, \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
+\begin{DoxyCompactList}\small\item\em Ajoute un pixel a un jeu de donnée. \end{DoxyCompactList}\item 
+\Hypertarget{population_8h_abe45b8f37e3e8b5fc143e59d06a45d08}\label{population_8h_abe45b8f37e3e8b5fc143e59d06a45d08} 
+void {\bfseries destroy\+Dataset} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} dataset)
+\begin{DoxyCompactList}\small\item\em Libère l\textquotesingle{}espace alloué pour Dataset. \end{DoxyCompactList}\item 
+\Hypertarget{population_8h_a85656b606bc1a21db070cd885cfc5882}\label{population_8h_a85656b606bc1a21db070cd885cfc5882} 
+\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} {\bfseries get\+Dataset\+Pixel} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} dataset, int i)
+\item 
+\Hypertarget{population_8h_a9d682bf84a74223b3b82f279f57a79f8}\label{population_8h_a9d682bf84a74223b3b82f279f57a79f8} 
+void {\bfseries create\+Population} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} d, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c, double val, int size)
+\item 
+\Hypertarget{population_8h_a17a466530655aa211b9e2a4f113f8a7d}\label{population_8h_a17a466530655aa211b9e2a4f113f8a7d} 
+void {\bfseries create\+Spiral} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} d)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions de gestion des populations (création, destruction, modifications) 
+
+\begin{DoxyAuthor}{Author}
+Simon Cossais 
+
+Paul Sarazin 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+28/02/2025 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{population_8h_aa44c0f7e184f2d25b08d1c08c7714283}\label{population_8h_aa44c0f7e184f2d25b08d1c08c7714283} 
+\index{population.h@{population.h}!addDatasetPixel@{addDatasetPixel}}
+\index{addDatasetPixel@{addDatasetPixel}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{addDatasetPixel()}{addDatasetPixel()}}
+{\footnotesize\ttfamily void add\+Dataset\+Pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}}}]{d,  }\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Ajoute un pixel a un jeu de donnée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & Jeu de donnée \\
+\hline
+{\em p} & Pixel a ajouter \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a4d159e0b80f8b3a406355dce179d8b1d}\label{population_8h_a4d159e0b80f8b3a406355dce179d8b1d} 
+\index{population.h@{population.h}!createColor@{createColor}}
+\index{createColor@{createColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{createColor()}{createColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} create\+Color (\begin{DoxyParamCaption}\item[{int}]{r,  }\item[{int}]{g,  }\item[{int}]{b,  }\item[{int}]{a }\end{DoxyParamCaption})}
+
+
+
+Alloue et crée une couleur depuis des valeur RGBA, penser à utiliser destroy\+Color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & Intensité de la couleur rouge \\
+\hline
+{\em g} & Intensité de la couleur verte \\
+\hline
+{\em b} & Intensité de la couleur bleue \\
+\hline
+{\em a} & Opacité de la couleur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Couleur créée 
+\end{DoxyReturn}
+\Hypertarget{population_8h_ac87718c11c5b3073ef885e9a081589e9}\label{population_8h_ac87718c11c5b3073ef885e9a081589e9} 
+\index{population.h@{population.h}!createDataset@{createDataset}}
+\index{createDataset@{createDataset}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{createDataset()}{createDataset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} create\+Dataset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Alloue l\textquotesingle{}espace pour un jeu de donnée vide, ne pas oublier d\textquotesingle{}utiliser destroy\+Dataset. 
+
+\begin{DoxyReturn}{Returns}
+Dataset vide 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a3711caed2be9083275d814c14533263b}\label{population_8h_a3711caed2be9083275d814c14533263b} 
+\index{population.h@{population.h}!createImage@{createImage}}
+\index{createImage@{createImage}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{createImage()}{createImage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} create\+Image (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Alloue et crée une image, ne pas oublier d\textquotesingle{}utiliser destroy\+Image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Largeur de l\textquotesingle{}image \\
+\hline
+{\em height} & Hauteur de l\textquotesingle{}image \\
+\hline
+{\em c} & Couleur des pixels de l\textquotesingle{}image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Image de taille width\texorpdfstring{$\ast$}{*}height de couleur c 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a24910da61a3c203052738d792acf02e4}\label{population_8h_a24910da61a3c203052738d792acf02e4} 
+\index{population.h@{population.h}!createPixel@{createPixel}}
+\index{createPixel@{createPixel}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{createPixel()}{createPixel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} create\+Pixel (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Alloue et crée un pixel depuis des coordonnées et une couleur, penser à utiliser destroy\+Pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Position en abscisse du nouveau pixel \\
+\hline
+{\em y} & Position en ordonnée du nouveau pixel \\
+\hline
+{\em c} & Couleur du nouveau pixel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pixel créé 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a3b2cd6142173aaadd8c979252e4b19d0}\label{population_8h_a3b2cd6142173aaadd8c979252e4b19d0} 
+\index{population.h@{population.h}!createPixelTab@{createPixelTab}}
+\index{createPixelTab@{createPixelTab}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{createPixelTab()}{createPixelTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} create\+Pixel\+Tab (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d\textquotesingle{}utiliser destroy\+Pixel\+Tab. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Largeur du tableau \\
+\hline
+{\em height} & Hauteur du tableau \\
+\hline
+{\em c} & Couleur des pixels du tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tableau de taille width\texorpdfstring{$\ast$}{*}height de pixels de couleur c 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a5bd5e8b493e01c6e8f383d5cd6ae1617}\label{population_8h_a5bd5e8b493e01c6e8f383d5cd6ae1617} 
+\index{population.h@{population.h}!destroyColor@{destroyColor}}
+\index{destroyColor@{destroyColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{destroyColor()}{destroyColor()}}
+{\footnotesize\ttfamily void destroy\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Détruit une couleur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Color a détruire \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1}\label{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1} 
+\index{population.h@{population.h}!destroyImage@{destroyImage}}
+\index{destroyImage@{destroyImage}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{destroyImage()}{destroyImage()}}
+{\footnotesize\ttfamily void destroy\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image }\end{DoxyParamCaption})}
+
+
+
+Détruit une Image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image à détruire \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090}\label{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090} 
+\index{population.h@{population.h}!destroyPixel@{destroyPixel}}
+\index{destroyPixel@{destroyPixel}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{destroyPixel()}{destroyPixel()}}
+{\footnotesize\ttfamily void destroy\+Pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Détruit un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on libère l\textquotesingle{}espace \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2}\label{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2} 
+\index{population.h@{population.h}!destroyPixelTab@{destroyPixelTab}}
+\index{destroyPixelTab@{destroyPixelTab}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{destroyPixelTab()}{destroyPixelTab()}}
+{\footnotesize\ttfamily void destroy\+Pixel\+Tab (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{tab,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+Détruit un tableau de pixels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & Tableau de Pixel à détruire \\
+\hline
+{\em width} & Largeur du tableau \\
+\hline
+{\em height} & Hauteur du tableau \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_aecbabb2ee063ebc120d08a6a645943e2}\label{population_8h_aecbabb2ee063ebc120d08a6a645943e2} 
+\index{population.h@{population.h}!getA@{getA}}
+\index{getA@{getA}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getA()}{getA()}}
+{\footnotesize\ttfamily int getA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Renvoie la valeur de a. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on renvoie la valeur de a \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_ab0556c883e94588a26edd75ab97d01db}\label{population_8h_ab0556c883e94588a26edd75ab97d01db} 
+\index{population.h@{population.h}!getB@{getB}}
+\index{getB@{getB}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getB()}{getB()}}
+{\footnotesize\ttfamily int getB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Renvoie la valeur de b. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on renvoie la valeur de b \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a9bf843aeef76763dd03994eaaa3caa73}\label{population_8h_a9bf843aeef76763dd03994eaaa3caa73} 
+\index{population.h@{population.h}!getColor@{getColor}}
+\index{getColor@{getColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} get\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Renvoie la couleur d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on récupère la couleur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Couleur du pixel p 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a8b84d154f0b93cd44ecbd6584188b816}\label{population_8h_a8b84d154f0b93cd44ecbd6584188b816} 
+\index{population.h@{population.h}!getDatasetSize@{getDatasetSize}}
+\index{getDatasetSize@{getDatasetSize}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getDatasetSize()}{getDatasetSize()}}
+{\footnotesize\ttfamily int get\+Dataset\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}}}]{d }\end{DoxyParamCaption})}
+
+
+
+Renvoie la taille du jeu de donnée passé en paramètre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & Jeu de donnée dont on récupère la taille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Taille du jeu de donnée 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a257cc683843469b700157978d83704d3}\label{population_8h_a257cc683843469b700157978d83704d3} 
+\index{population.h@{population.h}!getG@{getG}}
+\index{getG@{getG}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getG()}{getG()}}
+{\footnotesize\ttfamily int getG (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Renvoie la valeur de g. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on renvoie la valeur de g \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4}\label{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4} 
+\index{population.h@{population.h}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int get\+Height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image }\end{DoxyParamCaption})}
+
+
+
+Retourne la hauteur d\textquotesingle{}une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on récupère la hauteur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hauteur de l\textquotesingle{}image 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a981dbd5ce45085cf21969fb512489f83}\label{population_8h_a981dbd5ce45085cf21969fb512489f83} 
+\index{population.h@{population.h}!getPixel@{getPixel}}
+\index{getPixel@{getPixel}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getPixel()}{getPixel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} get\+Pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Retourne le pixel de position (x, y) dans une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on récupère le pixel \\
+\hline
+{\em x} & Position en abscisse du pixel voulu \\
+\hline
+{\em y} & Position en ordonnée du pixel voulu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pixel de position x, y 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a3671e6f8d057ad8105b472170517d886}\label{population_8h_a3671e6f8d057ad8105b472170517d886} 
+\index{population.h@{population.h}!getPixelColor@{getPixelColor}}
+\index{getPixelColor@{getPixelColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getPixelColor()}{getPixelColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} get\+Pixel\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Retourne la couleur du pixel de coordonnées (x, y) dans une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on veut récupérer le couleur d\textquotesingle{}un des pixels \\
+\hline
+{\em x} & Position en abscisse du pixel dans l\textquotesingle{}image \\
+\hline
+{\em y} & Position en ordonnée du pixel dans l\textquotesingle{}image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Couleur du pixel sélectionné 
+\end{DoxyReturn}
+\Hypertarget{population_8h_ae31757e349588b1ed3d6bef7511bdcb5}\label{population_8h_ae31757e349588b1ed3d6bef7511bdcb5} 
+\index{population.h@{population.h}!getR@{getR}}
+\index{getR@{getR}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getR()}{getR()}}
+{\footnotesize\ttfamily int getR (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Renvoie la valeur de r d\textquotesingle{}une couleur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on renvoie la valeur de r \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_aa28668b0cf0c28983e0eed7a6105a6af}\label{population_8h_aa28668b0cf0c28983e0eed7a6105a6af} 
+\index{population.h@{population.h}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int get\+Width (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image }\end{DoxyParamCaption})}
+
+
+
+Retourne la largeur d\textquotesingle{}une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on récupère la largeur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Largeur de l\textquotesingle{}image 
+\end{DoxyReturn}
+\Hypertarget{population_8h_ab448025c35e5ca0ead8da48a789d2995}\label{population_8h_ab448025c35e5ca0ead8da48a789d2995} 
+\index{population.h@{population.h}!getX@{getX}}
+\index{getX@{getX}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily double getX (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Renvoie la position en abscisse d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on récupère la position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Coordonnée x du Pixel 
+\end{DoxyReturn}
+\Hypertarget{population_8h_a9b004c12a3f0fd6042118f74288c5fa1}\label{population_8h_a9b004c12a3f0fd6042118f74288c5fa1} 
+\index{population.h@{population.h}!getY@{getY}}
+\index{getY@{getY}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily double getY (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Renvoie la position en ordonnée d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on récupère la position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Coordonnée x du Pixel 
+\end{DoxyReturn}
+\Hypertarget{population_8h_aabf633ca5dee0e45a7baefd5b10dab6b}\label{population_8h_aabf633ca5dee0e45a7baefd5b10dab6b} 
+\index{population.h@{population.h}!setA@{setA}}
+\index{setA@{setA}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setA()}{setA()}}
+{\footnotesize\ttfamily void setA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c,  }\item[{int}]{a }\end{DoxyParamCaption})}
+
+
+
+Définie la valeur de a (alpha = opacité) de la couleur c. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on modifie la valeur de a \\
+\hline
+{\em r} & Nouvelle valeur de a, fait modulo 256 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a6baa3a368fbcbd415628fee1a6354a25}\label{population_8h_a6baa3a368fbcbd415628fee1a6354a25} 
+\index{population.h@{population.h}!setB@{setB}}
+\index{setB@{setB}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setB()}{setB()}}
+{\footnotesize\ttfamily void setB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Définie la valeur de b (bleu) de la couleur c. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on modifie la valeur de b \\
+\hline
+{\em r} & Nouvelle valeur de b, fait modulo 256 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a448627e7b6e34aebce066bb7a93b0dc9}\label{population_8h_a448627e7b6e34aebce066bb7a93b0dc9} 
+\index{population.h@{population.h}!setColor@{setColor}}
+\index{setColor@{setColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void set\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p,  }\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Définie la couleur d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on définit la couleur \\
+\hline
+{\em c} & Nouvelle couleur du pixel \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_ad4f7814357de41bb447576447590fb81}\label{population_8h_ad4f7814357de41bb447576447590fb81} 
+\index{population.h@{population.h}!setG@{setG}}
+\index{setG@{setG}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setG()}{setG()}}
+{\footnotesize\ttfamily void setG (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c,  }\item[{int}]{g }\end{DoxyParamCaption})}
+
+
+
+Définie la valeur de g (vert) de la couleur c. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on modifie la valeur de g \\
+\hline
+{\em r} & Nouvelle valeur de g, fait modulo 256 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e}\label{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e} 
+\index{population.h@{population.h}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setPixel()}{setPixel()}}
+{\footnotesize\ttfamily void set\+Pixel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p }\end{DoxyParamCaption})}
+
+
+
+Définie le pixel de position (x, y) dans une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on définie le pixel \\
+\hline
+{\em x} & Position en abscisse du pixel défini \\
+\hline
+{\em y} & Position en ordonnée du pixel défini \\
+\hline
+{\em p} & Pixel que l\textquotesingle{}on place dans l\textquotesingle{}image \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627}\label{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627} 
+\index{population.h@{population.h}!setPixelColor@{setPixelColor}}
+\index{setPixelColor@{setPixelColor}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setPixelColor()}{setPixelColor()}}
+{\footnotesize\ttfamily void set\+Pixel\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}}}]{image,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c }\end{DoxyParamCaption})}
+
+
+
+Définie la couleur du pixel de coordonnées (x, y) dans une image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & Image dont on définie la couleur d\textquotesingle{}un des pixels \\
+\hline
+{\em x} & Position en abscisse du pixel dans l\textquotesingle{}image \\
+\hline
+{\em y} & Position en ordonnée du pixel dans l\textquotesingle{}image \\
+\hline
+{\em c} & Nouvelle couleur du pixel \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a0faaa3b3f59bafaef2787f703c0e700a}\label{population_8h_a0faaa3b3f59bafaef2787f703c0e700a} 
+\index{population.h@{population.h}!setR@{setR}}
+\index{setR@{setR}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setR()}{setR()}}
+{\footnotesize\ttfamily void setR (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}}}]{c,  }\item[{int}]{r }\end{DoxyParamCaption})}
+
+
+
+Définie la valeur de r (rouge) de la couleur c. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Couleur dont on modifie la valeur de r \\
+\hline
+{\em r} & Nouvelle valeur de r, fait modulo 256 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_ac8174058bfb37376990978f37fb1b98e}\label{population_8h_ac8174058bfb37376990978f37fb1b98e} 
+\index{population.h@{population.h}!setX@{setX}}
+\index{setX@{setX}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setX()}{setX()}}
+{\footnotesize\ttfamily void setX (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p,  }\item[{double}]{x }\end{DoxyParamCaption})}
+
+
+
+Définie la position x d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on définie la position \\
+\hline
+{\em x} & Nouvelle position en abscisse du pixel \\
+\hline
+\end{DoxyParams}
+\Hypertarget{population_8h_a204df88ec09a17a540737ae271444775}\label{population_8h_a204df88ec09a17a540737ae271444775} 
+\index{population.h@{population.h}!setY@{setY}}
+\index{setY@{setY}!population.h@{population.h}}
+\doxysubsubsection{\texorpdfstring{setY()}{setY()}}
+{\footnotesize\ttfamily void setY (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}}}]{p,  }\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+
+Définie la position y d\textquotesingle{}un pixel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pixel dont on définie la position \\
+\hline
+{\em y} & Nouvelle position en ordonnée du pixel \\
+\hline
+\end{DoxyParams}

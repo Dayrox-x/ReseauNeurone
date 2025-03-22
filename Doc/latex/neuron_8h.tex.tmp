@@ -1,0 +1,749 @@
+\doxysection{neuron.\+h File Reference}
+\hypertarget{neuron_8h}{}\label{neuron_8h}\index{neuron.h@{neuron.h}}
+
+
+Fonctions de gestion des neurones et réseaux (création, destruction, modification)  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+Include dependency graph for neuron.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structNeuron}{Neuron}}
+\begin{DoxyCompactList}\small\item\em Structure d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCouche}{Couche}}
+\begin{DoxyCompactList}\small\item\em Structure d\textquotesingle{}une couche de neurone. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{neuron_8h_ac81d7ca8b2936238311be9a364c65d57}\label{neuron_8h_ac81d7ca8b2936238311be9a364c65d57} 
+typedef struct \mbox{\hyperlink{structCouche}{Couche}} {\bfseries Couche}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{neuron_8h_aeb7f1bf450e516568efc383902ecd629}{forward}} (\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}neuron, \mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}entree, int nb\+\_\+synapses)
+\begin{DoxyCompactList}\small\item\em Fonction de propagation, modifie l\textquotesingle{}output d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a20d6ca87c34546b921f242f6b3833907}{set\+Weights}} (\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}neuron, double \texorpdfstring{$\ast$}{*}new\+\_\+weights, int nb\+\_\+synapses)
+\begin{DoxyCompactList}\small\item\em Définit les nouveaux poids synaptiques d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{neuron_8h_a579371d50a5c4719930002d14abb6b02}{get\+Weight}} (\mbox{\hyperlink{structNeuron}{Neuron}} neuron, int synapse)
+\begin{DoxyCompactList}\small\item\em Retourne le poids d\textquotesingle{}un synapse d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a1cf213dad546550563e95e06cb4dde88}{set\+Weight}} (\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}neuron, int i, double new\+\_\+weight)
+\begin{DoxyCompactList}\small\item\em Définit le nouveau poids du ième synapse d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{neuron_8h_a00940b39b9bd984726a2cba79971dac2}{get\+OutputN}} (\mbox{\hyperlink{structNeuron}{Neuron}} neuron)
+\begin{DoxyCompactList}\small\item\em Retourne la valeur en sortie d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{neuron_8h_a8e598eaa43c1f549d0d5776414f2a821}{get\+OutputC}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, int i)
+\begin{DoxyCompactList}\small\item\em Retourne la valeur en sortie du ième neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a7d2ed81e1d9890cea8f5e30fca349423}{set\+Output}} (\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}neuron, double new\+\_\+output)
+\begin{DoxyCompactList}\small\item\em Définit la valeur en sortie d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{neuron_8h_a60409a8e63ef5dcb0ccecb9b632b907d}{get\+DeltaN}} (\mbox{\hyperlink{structNeuron}{Neuron}} neuron)
+\begin{DoxyCompactList}\small\item\em Retourne la valeur du delta d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{neuron_8h_affe90434fbc490080bf47a69675caf44}{get\+DeltaC}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, int i)
+\begin{DoxyCompactList}\small\item\em Retourne la valeur du delta du ième neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a9ee68be3bd3aa9a357ed27e3f716928a}{set\+Delta}} (\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}neuron, double new\+\_\+delta)
+\begin{DoxyCompactList}\small\item\em Définit la valeur du delta d\textquotesingle{}un neurone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structNeuron}{Neuron}} \mbox{\hyperlink{neuron_8h_a9a526d36b34f753ddb9013cdc9501169}{get\+Neuron}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, int i)
+\begin{DoxyCompactList}\small\item\em Retourne la ième neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a2def707012f44a903ecfe6a067b91900}{set\+Neuron}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, int i, \mbox{\hyperlink{structNeuron}{Neuron}} new\+\_\+neuron)
+\begin{DoxyCompactList}\small\item\em Place un neurone en ième position dans une couche. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_ad70a16d472b89cb350dae0e74e1fa20e}{get\+Neurons}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Retourne le tableau de neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a266c243b354c05f27ec74272c32e232d}{set\+Neurons}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, \mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}tab\+\_\+n)
+\begin{DoxyCompactList}\small\item\em Définit le tableau de neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_a54244f9085cec9d1ca6af1a6ff118e6f}{get\+Next\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}curr\+Couche)
+\begin{DoxyCompactList}\small\item\em Retourne la couche suivante dans le réseau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a0c33c3ffb4fc33f77a59c1de4d5e6109}{set\+Next\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}curr\+Couche, \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}next\+Couche)
+\begin{DoxyCompactList}\small\item\em Définit la couche suivante dans le réseau. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_a057e7a4889e519ea86a8507fa57f6b20}{get\+Prev\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}curr\+Couche)
+\begin{DoxyCompactList}\small\item\em Retourne la couche précédente dans le réseau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_af1bd2526cbf2b270caddcbe07b92b22c}{set\+Prev\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}curr\+Couche, \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}prev\+Couche)
+\begin{DoxyCompactList}\small\item\em Définit la couche précédente dans le réseau. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{neuron_8h_a83aa17f07131b586ef704b5fddb4f9cf}{get\+Is\+Fst\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Retourne si une couche est la première du réseau ou non. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a1d650d20109c1360872e1a02488bddf1}{set\+Is\+Fst\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, bool is\+Fst\+Couche)
+\begin{DoxyCompactList}\small\item\em Définit si une couche est la première du réseau ou non. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{neuron_8h_a340581d9784f3aa92abfbd19959ef48e}{get\+Is\+Lst\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Retourne si une couche est la dernière du réseau ou non. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a60394a6f79bf428518d70293a9d47ddd}{set\+Is\+Lst\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, bool is\+Lst\+Couche)
+\begin{DoxyCompactList}\small\item\em Définit si une couche est la dernière du réseau ou non. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{neuron_8h_a33945b52b61acdf11aab443e426df250}{get\+Nb\+Neurones}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Retourne le nombre de neurone dans la couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a26748be06258481708fa07a934e6f298}{set\+Nb\+Neurones}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, int nb\+Neuron)
+\begin{DoxyCompactList}\small\item\em Définit le nombre de neurone dans le couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_aacb42db5b4339516361fcf12bfc07a1b}{init\+\_\+neuron}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}curr\+\_\+couche, int nb\+\_\+synapses)
+\begin{DoxyCompactList}\small\item\em Initialise les valeurs des neurone d\textquotesingle{}un réseau. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_ae23e460db1781a3d23fc6febda84eb4a}{init\+\_\+couche}} (int nb\+\_\+neurones, \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche\+\_\+suivante, \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche\+\_\+prec, int is\+\_\+fst\+\_\+couche, int is\+\_\+lst\+\_\+couche)
+\begin{DoxyCompactList}\small\item\em Initialise et retourne une couche de neurone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_a2e5a2985a2c8319e8d719ebb6d1e0bc7}{init\+\_\+reseau}} (int nb\+\_\+couches, int taille\+\_\+max, int taille\+\_\+min, int nb\+\_\+entrees, int nb\+\_\+sorties)
+\begin{DoxyCompactList}\small\item\em Initialise et retourne un réseau de neurone avec 2 neurones en entrée. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{neuron_8h_a2326fc3543d0ee83b435001c9a818d41}{get\+Last\+Couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}reseau)
+\begin{DoxyCompactList}\small\item\em Retourne la dernière couche d\textquotesingle{}un réseau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a47587f0af380288dd6ad666f07256c50}{calcul\+\_\+couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche, \mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}tab\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Applique la fonction de propagation sur chacun des neurones d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a464fd37dc4427aa52ba9b25425531604}{calcul\+\_\+reseau}} (double \texorpdfstring{$\ast$}{*}tab\+\_\+val, \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}fst\+\_\+couche)
+\begin{DoxyCompactList}\small\item\em Applique la fonction de propagation sur tout un réseau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_aecdbee6e134111581ec5332d7b82540c}{print\+\_\+couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Affiche les poids synaptiques, output et delta de chaque neurone d\textquotesingle{}une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a66c7c5b6b57976a4b6360512140e4aac}{print\+\_\+reseau}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}reseau)
+\begin{DoxyCompactList}\small\item\em Affiche couche par couche les poids synaptiques, output et delta de chaque neurone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_a97db427b70f3e4625712231e2013bca4}{free\+\_\+neuron}} (\mbox{\hyperlink{structNeuron}{Neuron}} neuron)
+\begin{DoxyCompactList}\small\item\em Libère l\textquotesingle{}espace alloué par un neurone. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_aae6e38362a006c36d30979ee7d8bc841}{free\+\_\+couche}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}couche)
+\begin{DoxyCompactList}\small\item\em Libère l\textquotesingle{}espace alloué par une couche. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{neuron_8h_af0a17bbffd0963bc444cf3cb2bace423}{free\+\_\+reseau}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}reseau)
+\begin{DoxyCompactList}\small\item\em Libère l\textquotesingle{}espace alloué par un réseau. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions de gestion des neurones et réseaux (création, destruction, modification) 
+
+\begin{DoxyAuthor}{Author}
+Claire Besançon 
+
+Chloé Legendre Leprêtre 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{neuron_8h_a47587f0af380288dd6ad666f07256c50}\label{neuron_8h_a47587f0af380288dd6ad666f07256c50} 
+\index{neuron.h@{neuron.h}!calcul\_couche@{calcul\_couche}}
+\index{calcul\_couche@{calcul\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{calcul\_couche()}{calcul\_couche()}}
+{\footnotesize\ttfamily void calcul\+\_\+couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{tab\+\_\+val }\end{DoxyParamCaption})}
+
+
+
+Applique la fonction de propagation sur chacun des neurones d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em tab\+\_\+val} & Tableau de valeurs en entrée des neurones \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a464fd37dc4427aa52ba9b25425531604}\label{neuron_8h_a464fd37dc4427aa52ba9b25425531604} 
+\index{neuron.h@{neuron.h}!calcul\_reseau@{calcul\_reseau}}
+\index{calcul\_reseau@{calcul\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{calcul\_reseau()}{calcul\_reseau()}}
+{\footnotesize\ttfamily void calcul\+\_\+reseau (\begin{DoxyParamCaption}\item[{double \texorpdfstring{$\ast$}{*}}]{tab\+\_\+val,  }\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{fst\+\_\+couche }\end{DoxyParamCaption})}
+
+
+
+Applique la fonction de propagation sur tout un réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab\+\_\+val} & Tableau de valeur en entrée du réseau \\
+\hline
+{\em fst\+\_\+couche} & Pointeur sur la première couche du réseau \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_aeb7f1bf450e516568efc383902ecd629}\label{neuron_8h_aeb7f1bf450e516568efc383902ecd629} 
+\index{neuron.h@{neuron.h}!forward@{forward}}
+\index{forward@{forward}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily void forward (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{neuron,  }\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{entree,  }\item[{int}]{nb\+\_\+synapses }\end{DoxyParamCaption})}
+
+
+
+Fonction de propagation, modifie l\textquotesingle{}output d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Pointeur sur un neurone \\
+\hline
+{\em entree} & Tableau de neurone de la couche précédente \\
+\hline
+{\em nb\+\_\+synapses} & Nombre de neurone dans la couche précédente \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_aae6e38362a006c36d30979ee7d8bc841}\label{neuron_8h_aae6e38362a006c36d30979ee7d8bc841} 
+\index{neuron.h@{neuron.h}!free\_couche@{free\_couche}}
+\index{free\_couche@{free\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{free\_couche()}{free\_couche()}}
+{\footnotesize\ttfamily void free\+\_\+couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Libère l\textquotesingle{}espace alloué par une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche libérée \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a97db427b70f3e4625712231e2013bca4}\label{neuron_8h_a97db427b70f3e4625712231e2013bca4} 
+\index{neuron.h@{neuron.h}!free\_neuron@{free\_neuron}}
+\index{free\_neuron@{free\_neuron}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{free\_neuron()}{free\_neuron()}}
+{\footnotesize\ttfamily void free\+\_\+neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}}}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Libère l\textquotesingle{}espace alloué par un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neurone dont on libère l\textquotesingle{}espace \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_af0a17bbffd0963bc444cf3cb2bace423}\label{neuron_8h_af0a17bbffd0963bc444cf3cb2bace423} 
+\index{neuron.h@{neuron.h}!free\_reseau@{free\_reseau}}
+\index{free\_reseau@{free\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{free\_reseau()}{free\_reseau()}}
+{\footnotesize\ttfamily void free\+\_\+reseau (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{reseau }\end{DoxyParamCaption})}
+
+
+
+Libère l\textquotesingle{}espace alloué par un réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reseau} & Pointeur sur la première couche du réseau libéré \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_affe90434fbc490080bf47a69675caf44}\label{neuron_8h_affe90434fbc490080bf47a69675caf44} 
+\index{neuron.h@{neuron.h}!getDeltaC@{getDeltaC}}
+\index{getDeltaC@{getDeltaC}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getDeltaC()}{getDeltaC()}}
+{\footnotesize\ttfamily double get\+DeltaC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Retourne la valeur du delta du ième neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche de neurone \\
+\hline
+{\em i} & Position du neurone dans la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valeur du delta 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a60409a8e63ef5dcb0ccecb9b632b907d}\label{neuron_8h_a60409a8e63ef5dcb0ccecb9b632b907d} 
+\index{neuron.h@{neuron.h}!getDeltaN@{getDeltaN}}
+\index{getDeltaN@{getDeltaN}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getDeltaN()}{getDeltaN()}}
+{\footnotesize\ttfamily double get\+DeltaN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}}}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Retourne la valeur du delta d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neurone dont on récupère le delta \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valeur du delta 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a83aa17f07131b586ef704b5fddb4f9cf}\label{neuron_8h_a83aa17f07131b586ef704b5fddb4f9cf} 
+\index{neuron.h@{neuron.h}!getIsFstCouche@{getIsFstCouche}}
+\index{getIsFstCouche@{getIsFstCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getIsFstCouche()}{getIsFstCouche()}}
+{\footnotesize\ttfamily bool get\+Is\+Fst\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Retourne si une couche est la première du réseau ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si c\textquotesingle{}est la première, false sinon 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a340581d9784f3aa92abfbd19959ef48e}\label{neuron_8h_a340581d9784f3aa92abfbd19959ef48e} 
+\index{neuron.h@{neuron.h}!getIsLstCouche@{getIsLstCouche}}
+\index{getIsLstCouche@{getIsLstCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getIsLstCouche()}{getIsLstCouche()}}
+{\footnotesize\ttfamily bool get\+Is\+Lst\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Retourne si une couche est la dernière du réseau ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si c\textquotesingle{}est la dernière, false sinon 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a2326fc3543d0ee83b435001c9a818d41}\label{neuron_8h_a2326fc3543d0ee83b435001c9a818d41} 
+\index{neuron.h@{neuron.h}!getLastCouche@{getLastCouche}}
+\index{getLastCouche@{getLastCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getLastCouche()}{getLastCouche()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} get\+Last\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{reseau }\end{DoxyParamCaption})}
+
+
+
+Retourne la dernière couche d\textquotesingle{}un réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reseau} & Pointeur sur une couche du réseau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointeur sur la dernière couche du réseau 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a33945b52b61acdf11aab443e426df250}\label{neuron_8h_a33945b52b61acdf11aab443e426df250} 
+\index{neuron.h@{neuron.h}!getNbNeurones@{getNbNeurones}}
+\index{getNbNeurones@{getNbNeurones}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getNbNeurones()}{getNbNeurones()}}
+{\footnotesize\ttfamily int get\+Nb\+Neurones (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Retourne le nombre de neurone dans la couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nombre de neurones 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a9a526d36b34f753ddb9013cdc9501169}\label{neuron_8h_a9a526d36b34f753ddb9013cdc9501169} 
+\index{neuron.h@{neuron.h}!getNeuron@{getNeuron}}
+\index{getNeuron@{getNeuron}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getNeuron()}{getNeuron()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structNeuron}{Neuron}} get\+Neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Retourne la ième neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em i} & Position du neurone dans la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ième neurone dans la couche 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_ad70a16d472b89cb350dae0e74e1fa20e}\label{neuron_8h_ad70a16d472b89cb350dae0e74e1fa20e} 
+\index{neuron.h@{neuron.h}!getNeurons@{getNeurons}}
+\index{getNeurons@{getNeurons}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getNeurons()}{getNeurons()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*} get\+Neurons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Retourne le tableau de neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche dont on récupère le tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tableau de neurone 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a54244f9085cec9d1ca6af1a6ff118e6f}\label{neuron_8h_a54244f9085cec9d1ca6af1a6ff118e6f} 
+\index{neuron.h@{neuron.h}!getNextCouche@{getNextCouche}}
+\index{getNextCouche@{getNextCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getNextCouche()}{getNextCouche()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} get\+Next\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{curr\+Couche }\end{DoxyParamCaption})}
+
+
+
+Retourne la couche suivante dans le réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Couche} & Pointeur sur la couche dont on récupère la couche suivante \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointeur sur la couche suivante 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a8e598eaa43c1f549d0d5776414f2a821}\label{neuron_8h_a8e598eaa43c1f549d0d5776414f2a821} 
+\index{neuron.h@{neuron.h}!getOutputC@{getOutputC}}
+\index{getOutputC@{getOutputC}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getOutputC()}{getOutputC()}}
+{\footnotesize\ttfamily double get\+OutputC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Retourne la valeur en sortie du ième neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche de neurone \\
+\hline
+{\em i} & Position du neurone dans la couche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valeur en sortie du ième neurone 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a00940b39b9bd984726a2cba79971dac2}\label{neuron_8h_a00940b39b9bd984726a2cba79971dac2} 
+\index{neuron.h@{neuron.h}!getOutputN@{getOutputN}}
+\index{getOutputN@{getOutputN}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getOutputN()}{getOutputN()}}
+{\footnotesize\ttfamily double get\+OutputN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}}}]{neuron }\end{DoxyParamCaption})}
+
+
+
+Retourne la valeur en sortie d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neurone dont on récupère la valeur en sortie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Valeur en sortie 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a057e7a4889e519ea86a8507fa57f6b20}\label{neuron_8h_a057e7a4889e519ea86a8507fa57f6b20} 
+\index{neuron.h@{neuron.h}!getPrevCouche@{getPrevCouche}}
+\index{getPrevCouche@{getPrevCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getPrevCouche()}{getPrevCouche()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} get\+Prev\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{curr\+Couche }\end{DoxyParamCaption})}
+
+
+
+Retourne la couche précédente dans le réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Couche} & Poiteur sur la couche dont on récupère la couche précédente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointeur sur la couche précédente 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_a579371d50a5c4719930002d14abb6b02}\label{neuron_8h_a579371d50a5c4719930002d14abb6b02} 
+\index{neuron.h@{neuron.h}!getWeight@{getWeight}}
+\index{getWeight@{getWeight}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{getWeight()}{getWeight()}}
+{\footnotesize\ttfamily double get\+Weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}}}]{neuron,  }\item[{int}]{synapse }\end{DoxyParamCaption})}
+
+
+
+Retourne le poids d\textquotesingle{}un synapse d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neurone dont on récupère le poids d\textquotesingle{}un des synapses \\
+\hline
+{\em synapse} & Position du synapse dans le tableau des poids \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Poids du synapse souhaité 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_ae23e460db1781a3d23fc6febda84eb4a}\label{neuron_8h_ae23e460db1781a3d23fc6febda84eb4a} 
+\index{neuron.h@{neuron.h}!init\_couche@{init\_couche}}
+\index{init\_couche@{init\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{init\_couche()}{init\_couche()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} init\+\_\+couche (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+neurones,  }\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche\+\_\+suivante,  }\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche\+\_\+prec,  }\item[{int}]{is\+\_\+fst\+\_\+couche,  }\item[{int}]{is\+\_\+lst\+\_\+couche }\end{DoxyParamCaption})}
+
+
+
+Initialise et retourne une couche de neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\+\_\+neurones} & Nombre de neurone dans la couche \\
+\hline
+{\em couche\+\_\+suivante} & Pointeur vers la couche suivante \\
+\hline
+{\em couche\+\_\+prec} & Pointeur vers la couche précédente \\
+\hline
+{\em is\+\_\+fst\+\_\+couche} & true si c\textquotesingle{}est la première couche du réseau, false sinon \\
+\hline
+{\em is\+\_\+lst\+\_\+couche} & true si c\textquotesingle{}est la dernière couche du réseau, false sinon \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointeur sur la couche créée 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_aacb42db5b4339516361fcf12bfc07a1b}\label{neuron_8h_aacb42db5b4339516361fcf12bfc07a1b} 
+\index{neuron.h@{neuron.h}!init\_neuron@{init\_neuron}}
+\index{init\_neuron@{init\_neuron}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{init\_neuron()}{init\_neuron()}}
+{\footnotesize\ttfamily void init\+\_\+neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{curr\+\_\+couche,  }\item[{int}]{nb\+\_\+synapses }\end{DoxyParamCaption})}
+
+
+
+Initialise les valeurs des neurone d\textquotesingle{}un réseau. 
+
+Fonction récursive qui initialise tous les neurone d\textquotesingle{}un réseau jusqu\textquotesingle{}à la dernière couche
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+\_\+couche} & Pointeur sur la couche actuelle \\
+\hline
+{\em nb\+\_\+synapses} & Nombre de synapses par neurone de la couche actuelle \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a2e5a2985a2c8319e8d719ebb6d1e0bc7}\label{neuron_8h_a2e5a2985a2c8319e8d719ebb6d1e0bc7} 
+\index{neuron.h@{neuron.h}!init\_reseau@{init\_reseau}}
+\index{init\_reseau@{init\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{init\_reseau()}{init\_reseau()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} init\+\_\+reseau (\begin{DoxyParamCaption}\item[{int}]{nb\+\_\+couches,  }\item[{int}]{taille\+\_\+max,  }\item[{int}]{taille\+\_\+min,  }\item[{int}]{nb\+\_\+entrees,  }\item[{int}]{nb\+\_\+sorties }\end{DoxyParamCaption})}
+
+
+
+Initialise et retourne un réseau de neurone avec 2 neurones en entrée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\+\_\+couches} & Nombre de couches total du réseau \\
+\hline
+{\em taille\+\_\+max} & Nombre maximal de neurones dans les couches cachées \\
+\hline
+{\em taille\+\_\+min} & Nombre minimal de neurones dans les couches cachées \\
+\hline
+{\em nb\+\_\+entrees} & Nombre de synapses par neurones dans la première couche \\
+\hline
+{\em nb\+\_\+sorties} & Nombre de neurones dans la couche de sortie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Réseau de neurone 
+\end{DoxyReturn}
+\Hypertarget{neuron_8h_aecdbee6e134111581ec5332d7b82540c}\label{neuron_8h_aecdbee6e134111581ec5332d7b82540c} 
+\index{neuron.h@{neuron.h}!print\_couche@{print\_couche}}
+\index{print\_couche@{print\_couche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{print\_couche()}{print\_couche()}}
+{\footnotesize\ttfamily void print\+\_\+couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche }\end{DoxyParamCaption})}
+
+
+
+Affiche les poids synaptiques, output et delta de chaque neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche à afficher \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a66c7c5b6b57976a4b6360512140e4aac}\label{neuron_8h_a66c7c5b6b57976a4b6360512140e4aac} 
+\index{neuron.h@{neuron.h}!print\_reseau@{print\_reseau}}
+\index{print\_reseau@{print\_reseau}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{print\_reseau()}{print\_reseau()}}
+{\footnotesize\ttfamily void print\+\_\+reseau (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{reseau }\end{DoxyParamCaption})}
+
+
+
+Affiche couche par couche les poids synaptiques, output et delta de chaque neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reseau} & Pointeur sur l\textquotesingle{}une des couche du réseau \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a9ee68be3bd3aa9a357ed27e3f716928a}\label{neuron_8h_a9ee68be3bd3aa9a357ed27e3f716928a} 
+\index{neuron.h@{neuron.h}!setDelta@{setDelta}}
+\index{setDelta@{setDelta}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setDelta()}{setDelta()}}
+{\footnotesize\ttfamily void set\+Delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{neuron,  }\item[{double}]{new\+\_\+delta }\end{DoxyParamCaption})}
+
+
+
+Définit la valeur du delta d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Pointeur sur le neurone \\
+\hline
+{\em new\+\_\+delta} & Nouvelle valeur du delta \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a1d650d20109c1360872e1a02488bddf1}\label{neuron_8h_a1d650d20109c1360872e1a02488bddf1} 
+\index{neuron.h@{neuron.h}!setIsFstCouche@{setIsFstCouche}}
+\index{setIsFstCouche@{setIsFstCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setIsFstCouche()}{setIsFstCouche()}}
+{\footnotesize\ttfamily void set\+Is\+Fst\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{bool}]{is\+Fst\+Couche }\end{DoxyParamCaption})}
+
+
+
+Définit si une couche est la première du réseau ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em is\+Fst\+Couche} & true si c\textquotesingle{}est la première, false sinon \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a60394a6f79bf428518d70293a9d47ddd}\label{neuron_8h_a60394a6f79bf428518d70293a9d47ddd} 
+\index{neuron.h@{neuron.h}!setIsLstCouche@{setIsLstCouche}}
+\index{setIsLstCouche@{setIsLstCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setIsLstCouche()}{setIsLstCouche()}}
+{\footnotesize\ttfamily void set\+Is\+Lst\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{bool}]{is\+Lst\+Couche }\end{DoxyParamCaption})}
+
+
+
+Définit si une couche est la dernière du réseau ou non. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em is\+Fst\+Couche} & true si c\textquotesingle{}est la dernière, false sinon \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a26748be06258481708fa07a934e6f298}\label{neuron_8h_a26748be06258481708fa07a934e6f298} 
+\index{neuron.h@{neuron.h}!setNbNeurones@{setNbNeurones}}
+\index{setNbNeurones@{setNbNeurones}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setNbNeurones()}{setNbNeurones()}}
+{\footnotesize\ttfamily void set\+Nb\+Neurones (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{int}]{nb\+Neuron }\end{DoxyParamCaption})}
+
+
+
+Définit le nombre de neurone dans le couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em nb\+Neuron} & Nombre de neurone de la couche \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a2def707012f44a903ecfe6a067b91900}\label{neuron_8h_a2def707012f44a903ecfe6a067b91900} 
+\index{neuron.h@{neuron.h}!setNeuron@{setNeuron}}
+\index{setNeuron@{setNeuron}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setNeuron()}{setNeuron()}}
+{\footnotesize\ttfamily void set\+Neuron (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{int}]{i,  }\item[{\mbox{\hyperlink{structNeuron}{Neuron}}}]{new\+\_\+neuron }\end{DoxyParamCaption})}
+
+
+
+Place un neurone en ième position dans une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche \\
+\hline
+{\em i} & Position du neurone dans la couche \\
+\hline
+{\em new\+\_\+neuron} & Neurone ajouté a la couche \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a266c243b354c05f27ec74272c32e232d}\label{neuron_8h_a266c243b354c05f27ec74272c32e232d} 
+\index{neuron.h@{neuron.h}!setNeurons@{setNeurons}}
+\index{setNeurons@{setNeurons}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setNeurons()}{setNeurons()}}
+{\footnotesize\ttfamily void set\+Neurons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{couche,  }\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{tab\+\_\+n }\end{DoxyParamCaption})}
+
+
+
+Définit le tableau de neurone d\textquotesingle{}une couche. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em couche} & Pointeur sur la couche dont on définit le tableau \\
+\hline
+{\em tab\+\_\+n} & Tableau de neurone \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a0c33c3ffb4fc33f77a59c1de4d5e6109}\label{neuron_8h_a0c33c3ffb4fc33f77a59c1de4d5e6109} 
+\index{neuron.h@{neuron.h}!setNextCouche@{setNextCouche}}
+\index{setNextCouche@{setNextCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setNextCouche()}{setNextCouche()}}
+{\footnotesize\ttfamily void set\+Next\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{curr\+Couche,  }\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{next\+Couche }\end{DoxyParamCaption})}
+
+
+
+Définit la couche suivante dans le réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Couche} & Pointeur sur la couche dont on définit la couche suivante \\
+\hline
+{\em next\+Couche} & Pointeur sur la couche suivante \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a7d2ed81e1d9890cea8f5e30fca349423}\label{neuron_8h_a7d2ed81e1d9890cea8f5e30fca349423} 
+\index{neuron.h@{neuron.h}!setOutput@{setOutput}}
+\index{setOutput@{setOutput}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setOutput()}{setOutput()}}
+{\footnotesize\ttfamily void set\+Output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{neuron,  }\item[{double}]{new\+\_\+output }\end{DoxyParamCaption})}
+
+
+
+Définit la valeur en sortie d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Pointeur sur le neurone \\
+\hline
+{\em new\+\_\+output} & Nouvelle valeur en sortie du neurone \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_af1bd2526cbf2b270caddcbe07b92b22c}\label{neuron_8h_af1bd2526cbf2b270caddcbe07b92b22c} 
+\index{neuron.h@{neuron.h}!setPrevCouche@{setPrevCouche}}
+\index{setPrevCouche@{setPrevCouche}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setPrevCouche()}{setPrevCouche()}}
+{\footnotesize\ttfamily void set\+Prev\+Couche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{curr\+Couche,  }\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{prev\+Couche }\end{DoxyParamCaption})}
+
+
+
+Définit la couche précédente dans le réseau. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Couche} & Pointeur sur la couche dont on définit la couche précédente \\
+\hline
+{\em prev\+Couche} & Pointeur sur la couche précédente \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a1cf213dad546550563e95e06cb4dde88}\label{neuron_8h_a1cf213dad546550563e95e06cb4dde88} 
+\index{neuron.h@{neuron.h}!setWeight@{setWeight}}
+\index{setWeight@{setWeight}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setWeight()}{setWeight()}}
+{\footnotesize\ttfamily void set\+Weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{neuron,  }\item[{int}]{i,  }\item[{double}]{new\+\_\+weight }\end{DoxyParamCaption})}
+
+
+
+Définit le nouveau poids du ième synapse d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Pointeur sur le neurone dont on définit le poids d\textquotesingle{}un des synapses \\
+\hline
+{\em i} & Position du synapse dont on définit la valeur \\
+\hline
+{\em new\+\_\+weight} & Nouveau poids du synapse \\
+\hline
+\end{DoxyParams}
+\Hypertarget{neuron_8h_a20d6ca87c34546b921f242f6b3833907}\label{neuron_8h_a20d6ca87c34546b921f242f6b3833907} 
+\index{neuron.h@{neuron.h}!setWeights@{setWeights}}
+\index{setWeights@{setWeights}!neuron.h@{neuron.h}}
+\doxysubsubsection{\texorpdfstring{setWeights()}{setWeights()}}
+{\footnotesize\ttfamily void set\+Weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*}}]{neuron,  }\item[{double \texorpdfstring{$\ast$}{*}}]{new\+\_\+weights,  }\item[{int}]{nb\+\_\+synapses }\end{DoxyParamCaption})}
+
+
+
+Définit les nouveaux poids synaptiques d\textquotesingle{}un neurone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neuron} & Neurone dont on modifie les poids synaptiques \\
+\hline
+{\em new\+\_\+weights} & Tableau des nouveaux poids \\
+\hline
+{\em nb\+\_\+synapses} & Nombre de synapses du neurone \\
+\hline
+\end{DoxyParams}

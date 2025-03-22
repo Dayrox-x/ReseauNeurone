@@ -3,10 +3,9 @@
 
 /**
  * \file population.h
- * \brief Fonctions de gestion des populations (création, destruction, modifications)
+ * \brief Fonctions de gestion des populations (création, destruction, modification)
  * \author Simon Cossais
  * \author Paul Sarazin
- * \date 28/02/2025
  */
 
 #include <stdlib.h>
@@ -24,18 +23,19 @@ typedef SDL_Color* Color;
 
 /**
  * \struct pxl
+ * \brief Structure d'un Pixel
  * 
- * \var int x
- * Coordonnée en abscisse du pxl
- * \var int y
- * Coordonnée en ordonnée du pxl
- * \var Color color
- * Couleur du pxl
+ * \var pxl::x
+ * Coordonnée en abscisse du pixel
+ * \var pxl::y
+ * Coordonnée en ordonnée du pixel
+ * \var pxl::color
+ * Couleur du pixel
  */
 typedef struct {
     double x;
     double y;
-    Color color; // RGB
+    Color color;
 } pxl;
 
 /**
@@ -46,12 +46,12 @@ typedef pxl* Pixel;
 
 /**
  * \struct img
- * 
- * \var Pixel** tab
+ * \brief Structure d'une Image
+ * \var img::tab
  * Tableau à 2 dimensions de Pixel
- * \var int width
+ * \var img::width
  * Largeur du tableau
- * \var int height
+ * \var img::height
  * Hauteur du tableau
  */
 typedef struct {
@@ -65,90 +65,92 @@ typedef struct {
  */
 typedef img* Image;
 
-
+/**
+ * \struct data
+ * \brief Structure d'un jeu de donnée Dataset
+ * \var data::tab
+ * Tableau de pixel
+ * \var data::size
+ * Taille du jeu de donnée
+ */
 typedef struct {
     Pixel* tab;
     int size;
 } data;
 
+/**
+ * \typedef data* Dataset
+ * \brief Pointeur sur une structure data
+ */
 typedef data* Dataset;
 
 // getters setters de Color
 /**
- * \fn void setR(Color c, int r)
- * \brief Définie la valeur de r (rouge) de la couleur c
+ * \brief Définit la valeur de r (rouge) de la couleur c
  * \param c
  * Couleur dont on modifie la valeur de r
  * \param r
- * Nouvelle valeur de c->r, fait modulo 256
+ * Nouvelle valeur de r, fait modulo 256
  */
 void setR(Color c, int r);
 
 /**
- * \fn int getR(Color c)
- * \brief Renvoie la valeur de c->r
+ * \brief Renvoie la valeur de r d'une couleur
  * \param c
  * Couleur dont on renvoie la valeur de r
  */
 int getR(Color c);
 
 /**
- * \fn void setG(Color c, int g)
- * \brief Définie la valeur de g (vert) de la couleur c
+ * \brief Définit la valeur de g (vert) de la couleur c
  * \param c
  * Couleur dont on modifie la valeur de g
  * \param r
- * Nouvelle valeur de c->g, fait modulo 256
+ * Nouvelle valeur de g, fait modulo 256
  */
 void setG(Color c, int g);
 
 /**
- * \fn int getG(Color c)
- * \brief Renvoie la valeur de c->g
+ * \brief Renvoie la valeur de g
  * \param c
  * Couleur dont on renvoie la valeur de g
  */
 int getG(Color c);
 
 /**
- * \fn void setB(Color c, int b)
- * \brief Définie la valeur de b (bleu) de la couleur c
+ * \brief Définit la valeur de b (bleu) de la couleur c
  * \param c
  * Couleur dont on modifie la valeur de b
  * \param r
- * Nouvelle valeur de c->b, fait modulo 256
+ * Nouvelle valeur de b, fait modulo 256
  */
 void setB(Color c, int b);
 
 /**
- * \fn int getB(Color c)
- * \brief Renvoie la valeur de c->b
+ * \brief Renvoie la valeur de b
  * \param c
  * Couleur dont on renvoie la valeur de b
  */
 int getB(Color c);
 
 /**
- * \fn void setA(Color c, int a)
- * \brief Définie la valeur de a (alpha = opacité) de la couleur c
+ * \brief Définit la valeur de a (alpha = opacité) de la couleur c
  * \param c
  * Couleur dont on modifie la valeur de a
  * \param r
- * Nouvelle valeur de c->a, fait modulo 256
+ * Nouvelle valeur de a, fait modulo 256
  */
 void setA(Color c, int a);
 
 /**
- * \fn int getA(Color c)
- * \brief Renvoie la valeur de c->a
+ * \brief Renvoie la valeur de a
  * \param c
  * Couleur dont on renvoie la valeur de a
  */
 int getA(Color c);
 
 /**
- * \fn Color createColor(int r, int g, int b, int a)
- * \brief Alloue et crée une couleur depuis des valeur RGBa, penser à utiliser destroyColor
+ * \brief Alloue et crée une couleur depuis des valeur RGBA, penser à utiliser destroyColor
  * \param r
  * Intensité de la couleur rouge
  * \param g
@@ -162,7 +164,6 @@ int getA(Color c);
 Color createColor(int r, int g, int b, int a);
 
 /**
- * \fn void destroyColor(Color c)
  * \brief Détruit une couleur
  * \param c
  * Color a détruire
@@ -172,17 +173,15 @@ void destroyColor(Color c);
 // getters setters de Pixel
 
 /**
- * \fn void setColor(Pixel p, Color c)
- * \brief Définie la couleur d'un pixel
+ * \brief Définit la couleur d'un pixel
  * \param p
- * Pixel dont on définie la couleur
+ * Pixel dont on définit la couleur
  * \param c
  * Nouvelle couleur du pixel
  */
 void setColor(Pixel p, Color c);
 
 /**
- * \fn Color getColor(Pixel p)
  * \brief Renvoie la couleur d'un pixel
  * \param p
  * Pixel dont on récupère la couleur
@@ -191,43 +190,40 @@ void setColor(Pixel p, Color c);
 Color getColor(Pixel p);
 
 /**
- * \fn void setX(Pixel p, int x)
- * \brief Définie la position x d'un pixel
+ * \brief Définit la position x d'un pixel
  * \param p
- * Pixel dont on définie la position
+ * Pixel dont on définit la position
  * \param x
  * Nouvelle position en abscisse du pixel
  */
 void setX(Pixel p, double x);
 
 /**
- * \fn int getX(Pixel p)
  * \brief Renvoie la position en abscisse d'un pixel
  * \param p
  * Pixel dont on récupère la position
+ * \return Coordonnée x du Pixel
  */
 double getX(Pixel p);
 
 /**
- * \fn void setY(Pixel p, int y)
- * \brief Définie la position y d'un pixel
+ * \brief Définit la position y d'un pixel
  * \param p
- * Pixel dont on définie la position
+ * Pixel dont on définit la position
  * \param y
  * Nouvelle position en ordonnée du pixel
  */
 void setY(Pixel p, double y);
 
 /**
- * \fn int getY(Pixel p)
  * \brief Renvoie la position en ordonnée d'un pixel
  * \param p
  * Pixel dont on récupère la position
+ * \return Coordonnée x du Pixel
  */
 double getY(Pixel p);
 
 /**
- * \fn Pixel createPixel(int x, int y, Color c)
  * \brief Alloue et crée un pixel depuis des coordonnées et une couleur, penser à utiliser destroyPixel
  * \param x
  * Position en abscisse du nouveau pixel
@@ -240,16 +236,15 @@ double getY(Pixel p);
 Pixel createPixel(double x, double y, Color c);
 
 /**
- * \fn void destroyPixel(Pixel p)
- * \brief Détruit un pixel, ne détruit pas la couleur
+ * \brief Détruit un pixel
  * \param p
  * Pixel dont on libère l'espace
  */
 void destroyPixel(Pixel p);
 
 // getters setters de Image
+
 /**
- * \fn Pixel getPixel(Image image, int x, int y)
  * \brief Retourne le pixel de position (x, y) dans une image
  * \param image
  * Image dont on récupère le pixel
@@ -257,14 +252,13 @@ void destroyPixel(Pixel p);
  * Position en abscisse du pixel voulu
  * \param y
  * Position en ordonnée du pixel voulu
- * \return Pixel de position x, y
+ * \return Pixel de position (x, y) dans l'image
  */
 Pixel getPixel(Image image, int x, int y);
 
 /**
- * \fn void setPixel(Image image, int x, int y, Pixel p)
- * \brief Définie le pixel de position (x, y) dans une image
- * \param image Image dont on définie le pixel
+ * \brief Définit le pixel de position (x, y) dans une image
+ * \param image Image dont on définit le pixel
  * \param x
  * Position en abscisse du pixel défini
  * \param y
@@ -275,7 +269,6 @@ Pixel getPixel(Image image, int x, int y);
 void setPixel(Image image, int x, int y, Pixel p);
 
 /**
- * \fn int getWidth(Image image)
  * \brief Retourne la largeur d'une image
  * \param image
  * Image dont on récupère la largeur
@@ -284,7 +277,6 @@ void setPixel(Image image, int x, int y, Pixel p);
 int getWidth(Image image);
 
 /**
- * \fn int getHeight(Image image)
  * \brief Retourne la hauteur d'une image
  * \param image
  * Image dont on récupère la hauteur
@@ -293,7 +285,6 @@ int getWidth(Image image);
 int getHeight(Image image);
 
 /**
- * \fn Color getPixelColor(Image image, int x, int y)
  * \brief Retourne la couleur du pixel de coordonnées (x, y) dans une image
  * \param image
  * Image dont on veut récupérer le couleur d'un des pixels
@@ -306,10 +297,9 @@ int getHeight(Image image);
 Color getPixelColor(Image image, int x, int y);
 
 /**
- * \fn void setPixelColor(Image image, int x, int y, Color c)
- * \brief Définie la couleur du pixel de coordonnées (x, y) dans une image
+ * \brief Définit la couleur du pixel de coordonnées (x, y) dans une image
  * \param image
- * Image dont on définie la couleur d'un des pixels
+ * Image dont on définit la couleur d'un des pixels
  * \param x
  * Position en abscisse du pixel dans l'image
  * \param y
@@ -320,7 +310,6 @@ Color getPixelColor(Image image, int x, int y);
 void setPixelColor(Image image, int x, int y, Color c);
 
 /**
- * \fn Pixel** createPixelTab(int width, int height, Color c)
  * \brief Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d'utiliser destroyPixelTab
  * \param width
  * Largeur du tableau
@@ -333,7 +322,6 @@ void setPixelColor(Image image, int x, int y, Color c);
 Pixel** createPixelTab(int width, int height, Color c);
 
 /**
- * \fn Image createImage(int width, int height, Color c)
  * \brief Alloue et crée une image, ne pas oublier d'utiliser destroyImage
  * \param width
  * Largeur de l'image
@@ -346,8 +334,7 @@ Pixel** createPixelTab(int width, int height, Color c);
 Image createImage(int width, int height, Color c);
 
 /**
- * \fn void destroyPixelTab(Pixel ** tab, int width, int height)
- * \brief Détruit un tableau de pixels, ne détruit pas les couleurs associées
+ * \brief Détruit un tableau de pixels
  * \param tab
  * Tableau de Pixel à détruire
  * \param width
@@ -358,8 +345,7 @@ Image createImage(int width, int height, Color c);
 void destroyPixelTab(Pixel ** tab, int width, int height);
 
 /**
- * \fn void destroyImage(Image image)
- * \brief Détruit une Image, ne détruit pas les couleur associées aux pixels
+ * \brief Détruit une Image
  * \param image
  * Image à détruire
  */
@@ -367,22 +353,52 @@ void destroyImage(Image image);
 
 
 // getters setters de Dataset
+
+/**
+ * \brief Renvoie la taille du jeu de donnée passé en paramètre
+ * \param dataset
+ * Jeu de donnée dont on récupère la taille
+ * \return Taille du jeu de donnée
+ */
 int getDatasetSize(Dataset dataset);
 
+/**
+ * \brief Alloue l'espace pour un jeu de donnée vide, ne pas oublier d'utiliser destroyDataset
+ * \return Dataset vide
+ */
 Dataset createDataset();
 
+/**
+ * \brief Ajoute un pixel a un jeu de donnée
+ * \param d
+ * Jeu de donnée
+ * \param p
+ * Pixel a ajouter
+ */
 void addDatasetPixel(Dataset d, Pixel p);
 
+/**
+ * \brief Détruit un Dataset
+ * \param dataset
+ * Dataset a détruire
+ */
 void destroyDataset(Dataset dataset);
 
+/**
+ * \brief Renvoie le ième Pixel du Dataset
+ * \param dataset
+ * Dataset dont on récupère un pixel
+ * \param i
+ * Position du pixel a récupérer
+ * \return Pixel en ième position dans le Dataset
+ */
 Pixel getDatasetPixel(Dataset dataset, int i);
 
 
 /**
- * \fn void createPopulation(Image image, int populationSize, Color c, bool val)
  * \brief Crée une population de pixels de couleur c selon les fonctions géométriques sin et cos
- * \param image
- * Image dans laquelle est crée la population
+ * \param d
+ * Dataset dans laquelle est crée la population
  * \param c
  * Couleur de la population
  * \param val
@@ -390,6 +406,11 @@ Pixel getDatasetPixel(Dataset dataset, int i);
  */
 void createPopulation(Dataset d, Color c, double val, int size);
 
+/**
+ * \brief Crée une spirale rouge et noire
+ * \param d
+ * Dataset dans lequel est créée la spirale
+ */
 void createSpiral(Dataset d);
 
 #endif

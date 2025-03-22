@@ -1,0 +1,77 @@
+\doxysection{Couche Struct Reference}
+\hypertarget{structCouche}{}\label{structCouche}\index{Couche@{Couche}}
+
+
+Structure d\textquotesingle{}une couche de neurone.  
+
+
+
+
+{\ttfamily \#include $<$neuron.\+h$>$}
+
+
+
+Collaboration diagram for Couche\+:
+% FIG 0
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structNeuron}{Neuron}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structCouche_abf0995c4e47a191695eb0f6a7f315843}{tab\+\_\+n}}
+\item 
+struct \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structCouche_a52128721043d12ee3c9504961b0b114a}{next}}
+\item 
+struct \mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structCouche_a9205534effc1cd743bee706ca39f8270}{prev}}
+\item 
+bool \mbox{\hyperlink{structCouche_a431d06590209c074dd6a7b50b8082499}{is\+\_\+fst\+\_\+couche}}
+\item 
+bool \mbox{\hyperlink{structCouche_ad8ec68d968450fc3f78cd9fea0566ac3}{is\+\_\+lst\+\_\+couche}}
+\item 
+int \mbox{\hyperlink{structCouche_ac3b7c54c1375e01ab412d4fc75183e94}{nb\+\_\+neurones}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure d\textquotesingle{}une couche de neurone. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCouche_a431d06590209c074dd6a7b50b8082499}\label{structCouche_a431d06590209c074dd6a7b50b8082499} 
+\index{Couche@{Couche}!is\_fst\_couche@{is\_fst\_couche}}
+\index{is\_fst\_couche@{is\_fst\_couche}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{is\_fst\_couche}{is\_fst\_couche}}
+{\footnotesize\ttfamily Couche\+::is\+\_\+fst\+\_\+couche}
+
+Indique si l\textquotesingle{}on est dans la première couche du réseau \Hypertarget{structCouche_ad8ec68d968450fc3f78cd9fea0566ac3}\label{structCouche_ad8ec68d968450fc3f78cd9fea0566ac3} 
+\index{Couche@{Couche}!is\_lst\_couche@{is\_lst\_couche}}
+\index{is\_lst\_couche@{is\_lst\_couche}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{is\_lst\_couche}{is\_lst\_couche}}
+{\footnotesize\ttfamily Couche\+::is\+\_\+lst\+\_\+couche}
+
+Indique si l\textquotesingle{}on est dans la dernière couche du réseau \Hypertarget{structCouche_ac3b7c54c1375e01ab412d4fc75183e94}\label{structCouche_ac3b7c54c1375e01ab412d4fc75183e94} 
+\index{Couche@{Couche}!nb\_neurones@{nb\_neurones}}
+\index{nb\_neurones@{nb\_neurones}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{nb\_neurones}{nb\_neurones}}
+{\footnotesize\ttfamily Couche\+::nb\+\_\+neurones}
+
+Nombre de neurones dans la couche \Hypertarget{structCouche_a52128721043d12ee3c9504961b0b114a}\label{structCouche_a52128721043d12ee3c9504961b0b114a} 
+\index{Couche@{Couche}!next@{next}}
+\index{next@{next}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily Couche\+::next}
+
+Pointeur vers la couche suivante dans le réseau, NULL si l\textquotesingle{}on est dans la première couche \Hypertarget{structCouche_a9205534effc1cd743bee706ca39f8270}\label{structCouche_a9205534effc1cd743bee706ca39f8270} 
+\index{Couche@{Couche}!prev@{prev}}
+\index{prev@{prev}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily Couche\+::prev}
+
+Pointeur vers la couche précédente dans le réseau, NULL si l\textquotesingle{}on est dans le dernière couche \Hypertarget{structCouche_abf0995c4e47a191695eb0f6a7f315843}\label{structCouche_abf0995c4e47a191695eb0f6a7f315843} 
+\index{Couche@{Couche}!tab\_n@{tab\_n}}
+\index{tab\_n@{tab\_n}!Couche@{Couche}}
+\doxysubsubsection{\texorpdfstring{tab\_n}{tab\_n}}
+{\footnotesize\ttfamily Couche\+::tab\+\_\+n}
+
+Tableau de neurones 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{neuron_8h}{neuron.\+h}}\end{DoxyCompactItemize}

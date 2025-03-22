@@ -1,0 +1,917 @@
+\doxysection{ubench.\+h}
+\hypertarget{ubench_8h_source}{}\label{ubench_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ \ \ The\ latest\ version\ of\ this\ library\ is\ available\ on\ GitHub;}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ \ \ https://github.com/sheredom/ubench.h}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ \ This\ is\ free\ and\ unencumbered\ software\ released\ into\ the\ public\ domain.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ Anyone\ is\ free\ to\ copy,\ modify,\ publish,\ use,\ compile,\ sell,\ or}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ distribute\ this\ software,\ either\ in\ source\ code\ form\ or\ as\ a\ compiled}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ binary,\ for\ any\ purpose,\ commercial\ or\ non-\/commercial,\ and\ by\ any}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ means.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ In\ jurisdictions\ that\ recognize\ copyright\ laws,\ the\ author\ or\ authors}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ of\ this\ software\ dedicate\ any\ and\ all\ copyright\ interest\ in\ the}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ software\ to\ the\ public\ domain.\ We\ make\ this\ dedication\ for\ the\ benefit}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ of\ the\ public\ at\ large\ and\ to\ the\ detriment\ of\ our\ heirs\ and}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ successors.\ We\ intend\ this\ dedication\ to\ be\ an\ overt\ act\ of}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ relinquishment\ in\ perpetuity\ of\ all\ present\ and\ future\ rights\ to\ this}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ software\ under\ copyright\ law.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ ARISING\ FROM,\ OUT\ OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ For\ more\ information,\ please\ refer\ to\ <http://unlicense.org/>}}
+\DoxyCodeLine{00031\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifndef\ SHEREDOM\_UBENCH\_H\_INCLUDED}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ SHEREDOM\_UBENCH\_H\_INCLUDED}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00037\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ Disable\ warning\ about\ not\ inlining\ 'inline'\ functions.}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ TODO:\ We'll\ fix\ this\ later\ by\ not\ using\ fprintf\ within\ our\ macros,\ and}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ instead\ use\ snprintf\ to\ a\ realloc'ed\ buffer.}}
+\DoxyCodeLine{00041\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4710)}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ Disable\ warning\ about\ inlining\ functions\ that\ are\ not\ marked\ 'inline'.}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ TODO:\ add\ a\ UBENCH\_NOINLINE\ onto\ the\ macro\ generated\ functions\ to\ fix\ this.}}
+\DoxyCodeLine{00047\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4711)}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ Disable\ warning\ about\ replacing\ undefined\ preprocessor\ macro\ '\_\_cplusplus'}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ with\ 0\ emitted\ from\ microsofts\ own\ headers.\ See:}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ https://developercommunity.visualstudio.com/t/issue-\/in-\/corecrth-\/header-\/results-\/in-\/an-\/undefined-\/m/433021}}
+\DoxyCodeLine{00054\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4668)}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#if\ \_MSC\_VER\ >\ 1930}}
+\DoxyCodeLine{00058\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ Disable\ warning\ about\ 'const'\ variable\ is\ not\ used.}}
+\DoxyCodeLine{00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 5264)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#pragma\ warning(push,\ 1)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ UBENCH\_C\_FUNC\ extern\ "{}C"{}}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ UBENCH\_C\_FUNC}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ UBENCH\_NULL\ NULL}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ UBENCH\_NULL\ 0}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#if\ defined(\_\_TINYC\_\_)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ UBENCH\_ATTRIBUTE(a)\ \_\_attribute((a))}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ UBENCH\_ATTRIBUTE(a)\ \_\_attribute\_\_((a))}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ <\ 1920)}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{typedef}\ \_\_int64\ ubench\_int64\_t;}
+\DoxyCodeLine{00087\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \_\_int64\ ubench\_uint64\_t;}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00090\ \textcolor{keyword}{typedef}\ int64\_t\ ubench\_int64\_t;}
+\DoxyCodeLine{00091\ \textcolor{keyword}{typedef}\ uint64\_t\ ubench\_uint64\_t;}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#pragma\ warning(pop)}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00105\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ LowPart;}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{long}\ HighPart;}
+\DoxyCodeLine{00109\ \ \ \}\ DUMMYSTRUCTNAME;}
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ LowPart;}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{long}\ HighPart;}
+\DoxyCodeLine{00113\ \ \ \}\ u;}
+\DoxyCodeLine{00114\ \ \ ubench\_int64\_t\ QuadPart;}
+\DoxyCodeLine{00115\ \}\ ubench\_large\_integer;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ UBENCH\_C\_FUNC\ \_\_declspec(dllimport)\ \textcolor{keywordtype}{int}\ \_\_stdcall\ QueryPerformanceCounter(}
+\DoxyCodeLine{00118\ \ \ \ \ ubench\_large\_integer\ *);}
+\DoxyCodeLine{00119\ UBENCH\_C\_FUNC\ \_\_declspec(dllimport)\ \textcolor{keywordtype}{int}\ \_\_stdcall\ QueryPerformanceFrequency(}
+\DoxyCodeLine{00120\ \ \ \ \ ubench\_large\_integer\ *);}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#elif\ defined(\_\_linux\_\_)}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ slightly\ obscure\ include\ here\ -\/\ we\ need\ to\ include\ glibc's\ features.h,\ but}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ we\ don't\ want\ to\ just\ include\ a\ header\ that\ might\ not\ be\ defined\ for\ other}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ c\ libraries\ like\ musl.\ Instead\ we\ include\ limits.h,\ which\ we\ know\ on\ all}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ glibc\ distributions\ includes\ features.h}}
+\DoxyCodeLine{00128\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#include\ <limits.h>}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#if\ defined(\_\_GLIBC\_\_)\ \&\&\ defined(\_\_GLIBC\_MINOR\_\_)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#if\ ((2\ <\ \_\_GLIBC\_\_)\ ||\ ((2\ ==\ \_\_GLIBC\_\_)\ \&\&\ (17\ <=\ \_\_GLIBC\_MINOR\_\_)))}}
+\DoxyCodeLine{00135\ \textcolor{comment}{/*\ glibc\ is\ version\ 2.17\ or\ above,\ so\ we\ can\ just\ use\ clock\_gettime\ */}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ UBENCH\_USE\_CLOCKGETTIME}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#include\ <sys/syscall.h>}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#elif\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ UBENCH\_C\_FUNC\ extern\ "{}C"{}}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#define\ UBENCH\_C\_FUNC}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)\ \&\&\ (\_\_cplusplus\ >=\ 201103L)}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ UBENCH\_NOEXCEPT\ noexcept}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ UBENCH\_NOEXCEPT}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)\ \&\&\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ UBENCH\_NOTHROW\ \_\_declspec(nothrow)}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ UBENCH\_NOTHROW}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ <\ 1920)}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#define\ UBENCH\_PRId64\ "{}I64d"{}}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#define\ UBENCH\_PRIu64\ "{}I64u"{}}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ UBENCH\_PRId64\ PRId64}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#define\ UBENCH\_PRIu64\ PRIu64}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#define\ UBENCH\_INLINE\ inline}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#define\ UBENCH\_INLINE\ \_\_forceinline}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#define\ UBENCH\_INLINE\ inline}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#define\ UBENCH\_NOINLINE\ \_\_declspec(noinline)}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#define\ UBENCH\_NOINLINE\ UBENCH\_ATTRIBUTE(noinline)}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\ \ \_Pragma("{}clang\ diagnostic\ push"{})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\ \ \ \ \ \ \_Pragma("{}clang\ diagnostic\ ignored\ \(\backslash\)"{}-\/Wglobal-\/constructors\(\backslash\)"{}"{})}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS\ \_Pragma("{}clang\ diagnostic\ pop"{})}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS}}
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER(f)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\ \ struct\ f\#\#\_cpp\_struct\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\ \ \ \ f\#\#\_cpp\_struct();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\ \ \};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\ \ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS\ static\ f\#\#\_cpp\_struct\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\ \ \ \ \ \ f\#\#\_cpp\_global\ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\ \ f\#\#\_cpp\_struct::f\#\#\_cpp\_struct()}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#if\ defined(\_WIN64)}}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#define\ UBENCH\_SYMBOL\_PREFIX}}
+\DoxyCodeLine{00214\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#define\ UBENCH\_SYMBOL\_PREFIX\ "{}\_"{}}}
+\DoxyCodeLine{00216\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00219\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\ \ \_Pragma("{}clang\ diagnostic\ push"{})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\ \ \ \ \ \ \_Pragma("{}clang\ diagnostic\ ignored\ \(\backslash\)"{}-\/Wmissing-\/variable-\/declarations\(\backslash\)"{}"{})}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS\ \_Pragma("{}clang\ diagnostic\ pop"{})}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS}}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#pragma\ section("{}.CRT\$XCU"{},\ read)}}
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER(f)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\ \ static\ void\ \_\_cdecl\ f(void);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\ \ UBENCH\_INITIALIZER\_BEGIN\_DISABLE\_WARNINGS\ \_\_pragma(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\ \ \ \ \ \ comment(linker,\ "{}/include:"{}\ UBENCH\_SYMBOL\_PREFIX\ \#f\ "{}\_"{}))\ UBENCH\_C\_FUNC\ \ \(\backslash\)}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\ \ \ \ \ \ \_\_declspec(allocate("{}.CRT\$XCU"{}))\ void(\_\_cdecl\ *\ f\#\#\_)(void)\ =\ f;\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\ \ UBENCH\_INITIALIZER\_END\_DISABLE\_WARNINGS\ static\ void\ \_\_cdecl\ f(void)}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#if\ defined(\_\_linux\_\_)}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#if\ \_\_has\_warning("{}-\/Wreserved-\/id-\/macro"{})}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wreserved-\/id-\/macro"{}}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#define\ \_\_STDC\_FORMAT\_MACROS\ 1}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#if\ \_\_has\_warning("{}-\/Wreserved-\/id-\/macro"{})}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#define\ UBENCH\_INITIALIZER(f)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\ \ static\ void\ f(void)\ UBENCH\_ATTRIBUTE(constructor);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00256\ \textcolor{preprocessor}{\ \ static\ void\ f(void)}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#define\ UBENCH\_CAST(type,\ x)\ static\_cast<type>(x)}}
+\DoxyCodeLine{00261\ \textcolor{preprocessor}{\#define\ UBENCH\_PTR\_CAST(type,\ x)\ reinterpret\_cast<type>(x)}}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#define\ UBENCH\_EXTERN\ extern\ "{}C"{}}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\#define\ UBENCH\_CAST(type,\ x)\ ((type)(x))}}
+\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#define\ UBENCH\_PTR\_CAST(type,\ x)\ ((type)(x))}}
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#define\ UBENCH\_EXTERN\ extern}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00270\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ \ io.h\ contains\ definitions\ for\ some\ structures\ with\ natural\ padding.\ This\ is}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ \ uninteresting,\ but\ for\ some\ reason\ MSVC's\ behaviour\ is\ to\ warn\ about}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ \ including\ this\ system\ header.\ That\ *is*\ interesting}}
+\DoxyCodeLine{00274\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00275\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4820)}}
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#pragma\ warning(push,\ 1)}}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#include\ <io.h>}}
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#pragma\ warning(pop)}}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#define\ UBENCH\_COLOUR\_OUTPUT()\ (\_isatty(\_fileno(stdout)))}}
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ UBENCH\_COLOUR\_OUTPUT()\ (isatty(STDOUT\_FILENO))}}
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{comment}{//\ Prevent\ 64-\/bit\ integer\ overflow\ when\ computing\ a\ timestamp\ by\ using\ a\ trick}}
+\DoxyCodeLine{00286\ \textcolor{comment}{//\ from\ Sokol:}}
+\DoxyCodeLine{00287\ \textcolor{comment}{//\ https://github.com/floooh/sokol/blob/189843bf4f86969ca4cc4b6d94e793a37c5128a7/sokol\_time.h\#L204}}
+\DoxyCodeLine{00288\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ ubench\_int64\_t\ ubench\_mul\_div(\textcolor{keyword}{const}\ ubench\_int64\_t\ value,}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ numer,}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ denom)\ \{}
+\DoxyCodeLine{00291\ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ q\ =\ value\ /\ denom;}
+\DoxyCodeLine{00292\ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ r\ =\ value\ \%\ denom;}
+\DoxyCodeLine{00293\ \ \ \textcolor{keywordflow}{return}\ q\ *\ numer\ +\ r\ *\ numer\ /\ denom;}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ ubench\_int64\_t\ ubench\_ns(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ ||\ defined(\_\_MINGW64\_\_)\ ||\ defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{00298\ \ \ ubench\_large\_integer\ counter;}
+\DoxyCodeLine{00299\ \ \ ubench\_large\_integer\ frequency;}
+\DoxyCodeLine{00300\ \ \ QueryPerformanceCounter(\&counter);}
+\DoxyCodeLine{00301\ \ \ QueryPerformanceFrequency(\&frequency);}
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{return}\ ubench\_mul\_div(counter.QuadPart,\ 1000000000,\ frequency.QuadPart);}
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#elif\ defined(\_\_linux\_\_)\ \&\&\ defined(\_\_STRICT\_ANSI\_\_)}}
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordflow}{return}\ ubench\_mul\_div(clock(),\ 1000000000,\ CLOCKS\_PER\_SEC);}
+\DoxyCodeLine{00305\ \textcolor{preprocessor}{\#elif\ defined(\_\_linux\_\_)\ ||\ defined(\_\_FreeBSD\_\_)\ ||\ defined(\_\_OpenBSD\_\_)\ ||\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00306\ \textcolor{preprocessor}{\ \ \ \ defined(\_\_NetBSD\_\_)\ ||\ defined(\_\_DragonFly\_\_)\ ||\ defined(\_\_sun\_\_)\ ||\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00307\ \textcolor{preprocessor}{\ \ \ \ defined(\_\_HAIKU\_\_)}}
+\DoxyCodeLine{00308\ \ \ \textcolor{keyword}{struct\ }timespec\ ts;}
+\DoxyCodeLine{00309\ \textcolor{preprocessor}{\#if\ defined(\_\_STDC\_VERSION\_\_)\ \&\&\ (\_\_STDC\_VERSION\_\_\ >=\ 201112L)\ \&\&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\ \ \ \ !defined(\_\_HAIKU\_\_)}}
+\DoxyCodeLine{00311\ \ \ timespec\_get(\&ts,\ TIME\_UTC);}
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00313\ \ \ \textcolor{keyword}{const}\ clockid\_t\ cid\ =\ CLOCK\_REALTIME;}
+\DoxyCodeLine{00314\ \textcolor{preprocessor}{\#if\ defined(UBENCH\_USE\_CLOCKGETTIME)}}
+\DoxyCodeLine{00315\ \ \ clock\_gettime(cid,\ \&ts);}
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00317\ \ \ syscall(SYS\_clock\_gettime,\ cid,\ \&ts);}
+\DoxyCodeLine{00318\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00319\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00320\ \ \ \textcolor{keywordflow}{return}\ UBENCH\_CAST(ubench\_int64\_t,\ ts.tv\_sec)\ *\ 1000\ *\ 1000\ *\ 1000\ +}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ ts.tv\_nsec;}
+\DoxyCodeLine{00322\ \textcolor{preprocessor}{\#elif\ \_\_APPLE\_\_}}
+\DoxyCodeLine{00323\ \ \ \textcolor{keywordflow}{return}\ UBENCH\_CAST(ubench\_int64\_t,\ clock\_gettime\_nsec\_np(CLOCK\_UPTIME\_RAW));}
+\DoxyCodeLine{00324\ \textcolor{preprocessor}{\#elif\ \_\_EMSCRIPTEN\_\_}}
+\DoxyCodeLine{00325\ \ \ \textcolor{keywordflow}{return}\ emscripten\_performance\_now()\ *\ 1000000.0;}
+\DoxyCodeLine{00326\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00327\ \textcolor{preprocessor}{\#error\ Unsupported\ platform!}}
+\DoxyCodeLine{00328\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00329\ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__run__state__s}{ubench\_run\_state\_s}}\ \{}
+\DoxyCodeLine{00332\ \ \ ubench\_int64\_t\ *ns;}
+\DoxyCodeLine{00333\ \ \ ubench\_int64\_t\ size;}
+\DoxyCodeLine{00334\ \ \ ubench\_int64\_t\ sample;}
+\DoxyCodeLine{00335\ \};}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{keyword}{typedef}\ void\ (*ubench\_benchmark\_t)(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__run__state__s}{ubench\_run\_state\_s}}\ *ubs);}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__benchmark__state__s}{ubench\_benchmark\_state\_s}}\ \{}
+\DoxyCodeLine{00340\ \ \ ubench\_benchmark\_t\ func;}
+\DoxyCodeLine{00341\ \ \ \textcolor{keywordtype}{char}\ *name;}
+\DoxyCodeLine{00342\ \};}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__state__s}{ubench\_state\_s}}\ \{}
+\DoxyCodeLine{00345\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__benchmark__state__s}{ubench\_benchmark\_state\_s}}\ *benchmarks;}
+\DoxyCodeLine{00346\ \ \ \textcolor{keywordtype}{size\_t}\ benchmarks\_length;}
+\DoxyCodeLine{00347\ \ \ FILE\ *output;}
+\DoxyCodeLine{00348\ \ \ \textcolor{keywordtype}{double}\ confidence;}
+\DoxyCodeLine{00349\ \};}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \textcolor{comment}{/*\ extern\ to\ the\ global\ state\ ubench\ needs\ to\ execute\ */}}
+\DoxyCodeLine{00352\ UBENCH\_EXTERN\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__state__s}{ubench\_state\_s}}\ ubench\_state;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00355\ \textcolor{preprocessor}{\#define\ UBENCH\_UNUSED}}
+\DoxyCodeLine{00356\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00357\ \textcolor{preprocessor}{\#define\ UBENCH\_UNUSED\ UBENCH\_ATTRIBUTE(unused)}}
+\DoxyCodeLine{00358\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{00362\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wvariadic-\/macros"{}}}
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wc++98-\/compat-\/pedantic"{}}}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#define\ UBENCH\_PRINTF(...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00366\ \textcolor{preprocessor}{\ \ if\ (ubench\_state.output)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\ \ \ \ fprintf(ubench\_state.output,\ \_\_VA\_ARGS\_\_);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00368\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00369\ \textcolor{preprocessor}{\ \ printf(\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00370\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00375\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{00376\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wvariadic-\/macros"{}}}
+\DoxyCodeLine{00377\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wc++98-\/compat-\/pedantic"{}}}
+\DoxyCodeLine{00378\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00381\ \textcolor{preprocessor}{\#define\ UBENCH\_SNPRINTF(BUFFER,\ N,\ ...)\ \_snprintf\_s(BUFFER,\ N,\ N,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00382\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00383\ \textcolor{preprocessor}{\#define\ UBENCH\_SNPRINTF(...)\ snprintf(\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00384\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00387\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{00388\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00390\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00391\ \textcolor{preprocessor}{\#if\ \_\_has\_warning("{}-\/Wunsafe-\/buffer-\/usage"{})}}
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00393\ \textcolor{preprocessor}{\ \ \_Pragma("{}clang\ diagnostic\ push"{})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\ \ \ \ \ \ \_Pragma("{}clang\ diagnostic\ ignored\ \(\backslash\)"{}-\/Wunsafe-\/buffer-\/usage\(\backslash\)"{}"{})}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_END\ \_Pragma("{}clang\ diagnostic\ pop"{})}}
+\DoxyCodeLine{00396\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00397\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_BEGIN}}
+\DoxyCodeLine{00398\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_END}}
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00400\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)\ \&\&\ \_\_GNUC\_\_\ >=\ 8\ \&\&\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00401\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00402\ \textcolor{preprocessor}{\ \ \_Pragma("{}GCC\ diagnostic\ push"{})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00403\ \textcolor{preprocessor}{\ \ \ \ \ \ \_Pragma("{}GCC\ diagnostic\ ignored\ \(\backslash\)"{}-\/Wclass-\/memaccess\(\backslash\)"{}"{})}}
+\DoxyCodeLine{00404\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_END\ \_Pragma("{}GCC\ diagnostic\ pop"{})}}
+\DoxyCodeLine{00405\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00406\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_BEGIN}}
+\DoxyCodeLine{00407\ \textcolor{preprocessor}{\#define\ UBENCH\_SURPRESS\_WARNINGS\_END}}
+\DoxyCodeLine{00408\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \textcolor{preprocessor}{\#define\ UBENCH\_DO\_BENCHMARK()\ while\ (ubench\_do\_benchmark(ubench\_run\_state)\ >\ 0)}}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \textcolor{preprocessor}{\#define\ UBENCH\_EX(SET,\ NAME)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00413\ \textcolor{preprocessor}{\ \ UBENCH\_SURPRESS\_WARNINGS\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00414\ \textcolor{preprocessor}{\ \ UBENCH\_EXTERN\ struct\ ubench\_state\_s\ ubench\_state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00415\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_\#\#SET\#\#\_\#\#NAME(struct\ ubench\_run\_state\_s\ *ubs);\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00416\ \textcolor{preprocessor}{\ \ UBENCH\_INITIALIZER(ubench\_register\_\#\#SET\#\#\_\#\#NAME)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00417\ \textcolor{preprocessor}{\ \ \ \ const\ size\_t\ index\ =\ ubench\_state.benchmarks\_length++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00418\ \textcolor{preprocessor}{\ \ \ \ const\ char\ name\_part[]\ =\ \#SET\ "{}."{}\ \#NAME;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00419\ \textcolor{preprocessor}{\ \ \ \ const\ size\_t\ name\_size\ =\ strlen(name\_part)\ +\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00420\ \textcolor{preprocessor}{\ \ \ \ char\ *name\ =\ UBENCH\_PTR\_CAST(char\ *,\ malloc(name\_size));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00421\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks\ =\ UBENCH\_PTR\_CAST(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00422\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ struct\ ubench\_benchmark\_state\_s\ *,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00423\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ realloc(UBENCH\_PTR\_CAST(void\ *,\ ubench\_state.benchmarks),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00424\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sizeof(struct\ ubench\_benchmark\_state\_s)\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00425\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks\_length));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00426\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks[index].func\ =\ \&ubench\_\#\#SET\#\#\_\#\#NAME;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00427\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks[index].name\ =\ name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00428\ \textcolor{preprocessor}{\ \ \ \ UBENCH\_SNPRINTF(name,\ name\_size,\ "{}\%s"{},\ name\_part);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00429\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00430\ \textcolor{preprocessor}{\ \ UBENCH\_SURPRESS\_WARNINGS\_END\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00431\ \textcolor{preprocessor}{\ \ void\ ubench\_\#\#SET\#\#\_\#\#NAME(struct\ ubench\_run\_state\_s\ *ubench\_run\_state)}}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \textcolor{preprocessor}{\#define\ UBENCH(SET,\ NAME)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00434\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_run\_\#\#SET\#\#\_\#\#NAME(void);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00435\ \textcolor{preprocessor}{\ \ UBENCH\_EX(SET,\ NAME)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00436\ \textcolor{preprocessor}{\ \ \ \ UBENCH\_DO\_BENCHMARK()\ \{\ ubench\_run\_\#\#SET\#\#\_\#\#NAME();\ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00437\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00438\ \textcolor{preprocessor}{\ \ void\ ubench\_run\_\#\#SET\#\#\_\#\#NAME(void)}}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \textcolor{preprocessor}{\#define\ UBENCH\_F\_SETUP(FIXTURE)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00441\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_f\_setup\_\#\#FIXTURE(struct\ FIXTURE\ *ubench\_fixture)}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \textcolor{preprocessor}{\#define\ UBENCH\_F\_TEARDOWN(FIXTURE)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00444\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_f\_teardown\_\#\#FIXTURE(struct\ FIXTURE\ *ubench\_fixture)}}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \textcolor{preprocessor}{\#define\ UBENCH\_EX\_F(FIXTURE,\ NAME)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00447\ \textcolor{preprocessor}{\ \ UBENCH\_SURPRESS\_WARNINGS\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00448\ \textcolor{preprocessor}{\ \ UBENCH\_EXTERN\ struct\ ubench\_state\_s\ ubench\_state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00449\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_f\_setup\_\#\#FIXTURE(struct\ FIXTURE\ *);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00450\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_f\_teardown\_\#\#FIXTURE(struct\ FIXTURE\ *);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00451\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_run\_ex\_\#\#FIXTURE\#\#\_\#\#NAME(struct\ FIXTURE\ *,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00452\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ struct\ ubench\_run\_state\_s\ *);\ \ \ \(\backslash\)}}
+\DoxyCodeLine{00453\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_f\_\#\#FIXTURE\#\#\_\#\#NAME(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00454\ \textcolor{preprocessor}{\ \ \ \ \ \ struct\ ubench\_run\_state\_s\ *ubench\_run\_state)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00455\ \textcolor{preprocessor}{\ \ \ \ struct\ FIXTURE\ fixture;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00456\ \textcolor{preprocessor}{\ \ \ \ memset(\&fixture,\ 0,\ sizeof(fixture));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00457\ \textcolor{preprocessor}{\ \ \ \ ubench\_f\_setup\_\#\#FIXTURE(\&fixture);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\ \ \ \ ubench\_run\_ex\_\#\#FIXTURE\#\#\_\#\#NAME(\&fixture,\ ubench\_run\_state);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00459\ \textcolor{preprocessor}{\ \ \ \ ubench\_f\_teardown\_\#\#FIXTURE(\&fixture);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00460\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00461\ \textcolor{preprocessor}{\ \ UBENCH\_INITIALIZER(ubench\_register\_\#\#FIXTURE\#\#\_\#\#NAME)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00462\ \textcolor{preprocessor}{\ \ \ \ const\ size\_t\ index\ =\ ubench\_state.benchmarks\_length++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00463\ \textcolor{preprocessor}{\ \ \ \ const\ char\ name\_part[]\ =\ \#FIXTURE\ "{}."{}\ \#NAME;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00464\ \textcolor{preprocessor}{\ \ \ \ const\ size\_t\ name\_size\ =\ strlen(name\_part)\ +\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00465\ \textcolor{preprocessor}{\ \ \ \ char\ *name\ =\ UBENCH\_PTR\_CAST(char\ *,\ malloc(name\_size));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00466\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks\ =\ UBENCH\_PTR\_CAST(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00467\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ struct\ ubench\_benchmark\_state\_s\ *,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00468\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ realloc(UBENCH\_PTR\_CAST(void\ *,\ ubench\_state.benchmarks),\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00469\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sizeof(struct\ ubench\_benchmark\_state\_s)\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00470\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks\_length));\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00471\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks[index].func\ =\ \&ubench\_f\_\#\#FIXTURE\#\#\_\#\#NAME;\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00472\ \textcolor{preprocessor}{\ \ \ \ ubench\_state.benchmarks[index].name\ =\ name;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00473\ \textcolor{preprocessor}{\ \ \ \ UBENCH\_SNPRINTF(name,\ name\_size,\ "{}\%s"{},\ name\_part);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00474\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00475\ \textcolor{preprocessor}{\ \ UBENCH\_SURPRESS\_WARNINGS\_END\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00476\ \textcolor{preprocessor}{\ \ void\ ubench\_run\_ex\_\#\#FIXTURE\#\#\_\#\#NAME(\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00477\ \textcolor{preprocessor}{\ \ \ \ \ \ struct\ FIXTURE\ *ubench\_fixture,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00478\ \textcolor{preprocessor}{\ \ \ \ \ \ struct\ ubench\_run\_state\_s\ *ubench\_run\_state)}}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00480\ \textcolor{preprocessor}{\#define\ UBENCH\_F(FIXTURE,\ NAME)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00481\ \textcolor{preprocessor}{\ \ static\ void\ ubench\_run\_\#\#FIXTURE\#\#\_\#\#NAME(struct\ FIXTURE\ *);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00482\ \textcolor{preprocessor}{\ \ UBENCH\_EX\_F(FIXTURE,\ NAME)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00483\ \textcolor{preprocessor}{\ \ \ \ UBENCH\_DO\_BENCHMARK()\ \{\ ubench\_run\_\#\#FIXTURE\#\#\_\#\#NAME(ubench\_fixture);\ \}\ \ \ \(\backslash\)}}
+\DoxyCodeLine{00484\ \textcolor{preprocessor}{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00485\ \textcolor{preprocessor}{\ \ void\ ubench\_run\_\#\#FIXTURE\#\#\_\#\#NAME(struct\ FIXTURE\ *ubench\_fixture)}}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00488\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ push}}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ \textcolor{preprocessor}{\#if\ \_\_has\_warning("{}-\/Wunsafe-\/buffer-\/usage"{})}}
+\DoxyCodeLine{00491\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ ignored\ "{}-\/Wunsafe-\/buffer-\/usage"{}}}
+\DoxyCodeLine{00492\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00493\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00494\ }
+\DoxyCodeLine{00495\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00496\ ubench\_do\_benchmark(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structubench__run__state__s}{ubench\_run\_state\_s}}\ *\textcolor{keyword}{const}\ ubs)\ \{}
+\DoxyCodeLine{00497\ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ curr\_sample\ =\ ubs-\/>sample++;}
+\DoxyCodeLine{00498\ \ \ ubs-\/>ns[curr\_sample]\ =\ ubench\_ns();}
+\DoxyCodeLine{00499\ \ \ \textcolor{keywordflow}{return}\ curr\_sample\ <\ ubs-\/>size\ ?\ 1\ :\ 0;}
+\DoxyCodeLine{00500\ \}}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ \textcolor{keywordtype}{int}\ ubench\_should\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filter,}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *benchmark);}
+\DoxyCodeLine{00504\ \textcolor{keywordtype}{int}\ ubench\_should\_filter(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filter,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *benchmark)\ \{}
+\DoxyCodeLine{00505\ \ \ \textcolor{keywordflow}{if}\ (filter)\ \{}
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filter\_cur\ =\ filter;}
+\DoxyCodeLine{00507\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *benchmark\_cur\ =\ benchmark;}
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filter\_wildcard\ =\ UBENCH\_NULL;}
+\DoxyCodeLine{00509\ }
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordflow}{while}\ ((\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *filter\_cur)\ \&\&\ (\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *benchmark\_cur))\ \{}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{charliteral}{'*'}\ ==\ *filter\_cur)\ \{}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ store\ the\ position\ of\ the\ wildcard\ */}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ filter\_wildcard\ =\ filter\_cur;}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ skip\ the\ wildcard\ character\ */}}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ filter\_cur++;}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *filter\_cur)\ \&\&\ (\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *benchmark\_cur))\ \{}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{charliteral}{'*'}\ ==\ *filter\_cur)\ \{}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00521\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ we\ found\ another\ wildcard\ (filter\ is\ something\ like\ *foo*)\ so\ we}}
+\DoxyCodeLine{00522\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exit\ the\ current\ loop,\ and\ return\ to\ the\ parent\ loop\ to\ handle}}
+\DoxyCodeLine{00523\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ wildcard\ case}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (*filter\_cur\ !=\ *benchmark\_cur)\ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ otherwise\ our\ filter\ didn't\ match,\ so\ reset\ it\ */}}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ filter\_cur\ =\ filter\_wildcard;}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ move\ benchmark\ along\ */}}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ benchmark\_cur++;}
+\DoxyCodeLine{00533\ }
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ move\ filter\ along\ */}}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ filter\_cur++;}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\textcolor{charliteral}{'\(\backslash\)0'}\ ==\ *filter\_cur)\ \&\&\ (\textcolor{charliteral}{'\(\backslash\)0'}\ ==\ *benchmark\_cur))\ \{}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ if\ the\ benchmarks\ have\ been\ exhausted,\ we\ don't\ have\ a\ match!\ */}}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{charliteral}{'\(\backslash\)0'}\ ==\ *benchmark\_cur)\ \{}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*benchmark\_cur\ !=\ *filter\_cur)\ \{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ benchmark\ doesn't\ match\ filter\ */}}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ move\ our\ filter\ and\ benchmark\ forward\ */}}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ benchmark\_cur++;}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ filter\_cur++;}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00556\ \ \ \ \ \}}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *filter\_cur)\ ||}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ ((\textcolor{charliteral}{'\(\backslash\)0'}\ !=\ *benchmark\_cur)\ \&\&}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ ((filter\ ==\ filter\_cur)\ ||\ (\textcolor{charliteral}{'*'}\ !=\ filter\_cur[-\/1]))))\ \{}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \textcolor{comment}{/*\ we\ have\ a\ mismatch!\ */}}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00563\ \ \ \ \ \}}
+\DoxyCodeLine{00564\ \ \ \}}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00567\ \}}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00569\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ \textcolor{keywordtype}{int}\ ubench\_strncmp(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *b,}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n)\ \{}
+\DoxyCodeLine{00571\ \ \ \textcolor{comment}{/*\ strncmp\ breaks\ on\ Wall\ /\ Werror\ on\ gcc/clang,\ so\ we\ avoid\ using\ it\ */}}
+\DoxyCodeLine{00572\ \ \ \textcolor{keywordtype}{unsigned}\ i;}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{00575\ \ \ \ \ \textcolor{keywordflow}{if}\ (a[i]\ <\ b[i])\ \{}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00577\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (a[i]\ >\ b[i])\ \{}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00579\ \ \ \ \ \}}
+\DoxyCodeLine{00580\ \ \ \}}
+\DoxyCodeLine{00581\ }
+\DoxyCodeLine{00582\ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00583\ \}}
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00585\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ FILE\ *ubench\_fopen(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filename,}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *mode)\ \{}
+\DoxyCodeLine{00587\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00588\ \ \ FILE\ *file;}
+\DoxyCodeLine{00589\ \ \ \textcolor{keywordflow}{if}\ (0\ ==\ fopen\_s(\&file,\ filename,\ mode))\ \{}
+\DoxyCodeLine{00590\ \ \ \ \ \textcolor{keywordflow}{return}\ file;}
+\DoxyCodeLine{00591\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00592\ \ \ \ \ \textcolor{keywordflow}{return}\ UBENCH\_NULL;}
+\DoxyCodeLine{00593\ \ \ \}}
+\DoxyCodeLine{00594\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00595\ \ \ \textcolor{keywordflow}{return}\ fopen(filename,\ mode);}
+\DoxyCodeLine{00596\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00597\ \}}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \textcolor{keyword}{static}\ UBENCH\_INLINE\ \textcolor{keywordtype}{int}\ ubench\_main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ argv[]);}
+\DoxyCodeLine{00600\ \textcolor{keywordtype}{int}\ ubench\_main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ argv[])\ \{}
+\DoxyCodeLine{00601\ \ \ ubench\_uint64\_t\ failed\ =\ 0;}
+\DoxyCodeLine{00602\ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ 0;}
+\DoxyCodeLine{00603\ \ \ \textcolor{keywordtype}{size\_t}\ *failed\_benchmarks\ =\ UBENCH\_NULL;}
+\DoxyCodeLine{00604\ \ \ \textcolor{keywordtype}{size\_t}\ failed\_benchmarks\_length\ =\ 0;}
+\DoxyCodeLine{00605\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filter\ =\ UBENCH\_NULL;}
+\DoxyCodeLine{00606\ \ \ ubench\_uint64\_t\ ran\_benchmarks\ =\ 0;}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ \ \ \textcolor{keyword}{enum}\ colours\ \{\ RESET,\ GREEN,\ RED\ \};}
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00610\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ use\_colours\ =\ UBENCH\_COLOUR\_OUTPUT();}
+\DoxyCodeLine{00611\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *colours[]\ =\ \{\textcolor{stringliteral}{"{}\(\backslash\)033[0m"{}},\ \textcolor{stringliteral}{"{}\(\backslash\)033[32m"{}},\ \textcolor{stringliteral}{"{}\(\backslash\)033[31m"{}}\};}
+\DoxyCodeLine{00612\ \ \ \textcolor{keywordflow}{if}\ (!use\_colours)\ \{}
+\DoxyCodeLine{00613\ \ \ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ \textcolor{keyword}{sizeof}\ colours\ /\ \textcolor{keyword}{sizeof}\ colours[0];\ index++)\ \{}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ colours[index]\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00615\ \ \ \ \ \}}
+\DoxyCodeLine{00616\ \ \ \}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \ \ \textcolor{comment}{/*\ loop\ through\ all\ arguments\ looking\ for\ our\ options\ */}}
+\DoxyCodeLine{00619\ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 1;\ index\ <\ UBENCH\_CAST(\textcolor{keywordtype}{size\_t},\ argc);\ index++)\ \{}
+\DoxyCodeLine{00620\ \ \ \ \ \textcolor{comment}{/*\ Informational\ switches\ */}}
+\DoxyCodeLine{00621\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ help\_str[]\ =\ \textcolor{stringliteral}{"{}-\/-\/help"{}};}
+\DoxyCodeLine{00622\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ list\_str[]\ =\ \textcolor{stringliteral}{"{}-\/-\/list-\/benchmarks"{}};}
+\DoxyCodeLine{00623\ \ \ \ \ \textcolor{comment}{/*\ Benchmark\ config\ switches\ */}}
+\DoxyCodeLine{00624\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ filter\_str[]\ =\ \textcolor{stringliteral}{"{}-\/-\/filter="{}};}
+\DoxyCodeLine{00625\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ output\_str[]\ =\ \textcolor{stringliteral}{"{}-\/-\/output="{}};}
+\DoxyCodeLine{00626\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ confidence\_str[]\ =\ \textcolor{stringliteral}{"{}-\/-\/confidence="{}};}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ \ \ \ \ \textcolor{keywordflow}{if}\ (0\ ==\ ubench\_strncmp(argv[index],\ help\_str,\ strlen(help\_str)))\ \{}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}ubench.h\ -\/\ the\ single\ file\ benchmarking\ solution\ for\ C/C++!\(\backslash\)n"{}}}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Command\ line\ Options:\(\backslash\)n"{}});}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \ -\/-\/help\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Show\ this\ message\ and\ exit.\(\backslash\)n"{}}}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ -\/-\/filter=<filter>\ \ \ \ \ \ \ \ \ Filter\ the\ benchmarks\ to\ run\ (EG.\ "{}}}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MyBench*.a\ would\ run\ MyBenchmark.a\ but\ not\ MyBenchmark.b).\(\backslash\)n"{}}}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ -\/-\/list-\/benchmarks\ \ \ \ \ \ \ \ \ List\ benchmarks,\ one\ per\ line.\ "{}}}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Output\ names\ can\ be\ passed\ to\ -\/-\/filter.\(\backslash\)n"{}}}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ -\/-\/output=<output>\ \ \ \ \ \ \ \ \ Output\ a\ CSV\ file\ of\ the\ results.\(\backslash\)n"{}}}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ -\/-\/confidence=<confidence>\ Change\ the\ confidence\ cut-\/off\ for\ a\ "{}}}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}failed\ test.\ Defaults\ to\ 2.5\%\%\(\backslash\)n"{}});}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ cleanup;}
+\DoxyCodeLine{00640\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (0\ ==}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_strncmp(argv[index],\ filter\_str,\ strlen(filter\_str)))\ \{}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \textcolor{comment}{/*\ user\ wants\ to\ filter\ what\ benchmarks\ run!\ */}}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ filter\ =\ argv[index]\ +\ strlen(filter\_str);}
+\DoxyCodeLine{00644\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (0\ ==}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_strncmp(argv[index],\ output\_str,\ strlen(output\_str)))\ \{}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ ubench\_state.output\ =}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ ubench\_fopen(argv[index]\ +\ strlen(output\_str),\ \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{00648\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (0\ ==\ ubench\_strncmp(argv[index],\ list\_str,\ strlen(list\_str)))\ \{}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ ubench\_state.benchmarks\_length;\ index++)\ \{}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ UBENCH\_PRINTF(\textcolor{stringliteral}{"{}\%s\(\backslash\)n"{}},\ ubench\_state.benchmarks[index].name);}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00652\ }
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \textcolor{comment}{/*\ when\ printing\ the\ benchmark\ list,\ don't\ actually\ run\ the\ benchmarks\ */}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ cleanup;}
+\DoxyCodeLine{00655\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (0\ ==\ ubench\_strncmp(argv[index],\ confidence\_str,}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strlen(confidence\_str)))\ \{}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \textcolor{comment}{/*\ user\ wants\ to\ specify\ a\ different\ confidence\ */}}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ ubench\_state.confidence\ =\ atof(argv[index]\ +\ strlen(confidence\_str));}
+\DoxyCodeLine{00659\ }
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \textcolor{comment}{/*\ must\ be\ between\ 0\ and\ 100\ */}}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((ubench\_state.confidence\ <\ 0)\ ||\ (ubench\_state.confidence\ >\ 100))\ \{}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ fprintf(stderr,}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Confidence\ must\ be\ in\ the\ range\ [0..100]\ (you\ specified\ \%f)\(\backslash\)n"{}},}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.confidence);}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ cleanup;}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00667\ \ \ \ \ \}}
+\DoxyCodeLine{00668\ \ \ \}}
+\DoxyCodeLine{00669\ }
+\DoxyCodeLine{00670\ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ ubench\_state.benchmarks\_length;\ index++)\ \{}
+\DoxyCodeLine{00671\ \ \ \ \ \textcolor{keywordflow}{if}\ (ubench\_should\_filter(filter,\ ubench\_state.benchmarks[index].name))\ \{}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00673\ \ \ \ \ \}}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00675\ \ \ \ \ ran\_benchmarks++;}
+\DoxyCodeLine{00676\ \ \ \}}
+\DoxyCodeLine{00677\ }
+\DoxyCodeLine{00678\ \ \ printf(\textcolor{stringliteral}{"{}\%s[==========]\%s\ Running\ \%"{}}\ UBENCH\_PRIu64\ \textcolor{stringliteral}{"{}\ benchmarks.\(\backslash\)n"{}},}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ colours[GREEN],\ colours[RESET],}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ UBENCH\_CAST(ubench\_uint64\_t,\ ran\_benchmarks));}
+\DoxyCodeLine{00681\ }
+\DoxyCodeLine{00682\ \ \ \textcolor{keywordflow}{if}\ (ubench\_state.output)\ \{}
+\DoxyCodeLine{00683\ \ \ \ \ fprintf(ubench\_state.output,}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}name,\ mean\ (ns),\ stddev\ (\%\%),\ confidence\ (\%\%)\(\backslash\)n"{}});}
+\DoxyCodeLine{00685\ \ \ \}}
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00687\ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ ubench\_state.benchmarks\_length;\ index++)\ \{}
+\DoxyCodeLine{00688\ \ \ \ \ \textcolor{keywordtype}{int}\ result\ =\ 1;}
+\DoxyCodeLine{00689\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ mndex\ =\ 0;}
+\DoxyCodeLine{00690\ \ \ \ \ ubench\_int64\_t\ best\_avg\_ns\ =\ 0;}
+\DoxyCodeLine{00691\ \ \ \ \ \textcolor{keywordtype}{double}\ best\_deviation\ =\ 0;}
+\DoxyCodeLine{00692\ \ \ \ \ \textcolor{keywordtype}{double}\ best\_confidence\ =\ 101.0;}
+\DoxyCodeLine{00693\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structubench__run__state__s}{ubench\_run\_state\_s}}\ ubs;}
+\DoxyCodeLine{00694\ }
+\DoxyCodeLine{00695\ \textcolor{preprocessor}{\#define\ UBENCH\_MIN\_ITERATIONS\ 10}}
+\DoxyCodeLine{00696\ \textcolor{preprocessor}{\#define\ UBENCH\_MAX\_ITERATIONS\ 500}}
+\DoxyCodeLine{00697\ \ \ \ \ ubench\_int64\_t\ iterations\ =\ 10;}
+\DoxyCodeLine{00698\ \ \ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ max\_iterations\ =\ UBENCH\_MAX\_ITERATIONS;}
+\DoxyCodeLine{00699\ \ \ \ \ \textcolor{keyword}{const}\ ubench\_int64\_t\ min\_iterations\ =\ UBENCH\_MIN\_ITERATIONS;}
+\DoxyCodeLine{00700\ \ \ \ \ \textcolor{comment}{/*\ Add\ one\ extra\ timestamp\ slot,\ as\ we\ save\ times\ between\ runs\ and\ time}}
+\DoxyCodeLine{00701\ \textcolor{comment}{\ \ \ \ \ *\ after\ exiting\ the\ last\ one\ */}}
+\DoxyCodeLine{00702\ \ \ \ \ ubench\_int64\_t\ ns[UBENCH\_MAX\_ITERATIONS\ +\ 1];}
+\DoxyCodeLine{00703\ \textcolor{preprocessor}{\#undef\ UBENCH\_MAX\_ITERATIONS}}
+\DoxyCodeLine{00704\ \textcolor{preprocessor}{\#undef\ UBENCH\_MIN\_ITERATIONS}}
+\DoxyCodeLine{00705\ }
+\DoxyCodeLine{00706\ \ \ \ \ \textcolor{keywordflow}{if}\ (ubench\_should\_filter(filter,\ ubench\_state.benchmarks[index].name))\ \{}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00708\ \ \ \ \ \}}
+\DoxyCodeLine{00709\ }
+\DoxyCodeLine{00710\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s[\ RUN\ \ \ \ \ \ ]\%s\ \%s\(\backslash\)n"{}},\ colours[GREEN],\ colours[RESET],}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks[index].name);}
+\DoxyCodeLine{00712\ }
+\DoxyCodeLine{00713\ \ \ \ \ ubs.ns\ =\ ns;}
+\DoxyCodeLine{00714\ \ \ \ \ ubs.size\ =\ 1;}
+\DoxyCodeLine{00715\ \ \ \ \ ubs.sample\ =\ 0;}
+\DoxyCodeLine{00716\ }
+\DoxyCodeLine{00717\ \ \ \ \ \textcolor{comment}{/*\ Time\ once\ to\ work\ out\ the\ base\ number\ of\ iterations\ to\ use.\ */}}
+\DoxyCodeLine{00718\ \ \ \ \ ubench\_state.benchmarks[index].func(\&ubs);}
+\DoxyCodeLine{00719\ }
+\DoxyCodeLine{00720\ \ \ \ \ iterations\ =\ (100\ *\ 1000\ *\ 1000)\ /\ ((ns[1]\ <=\ ns[0])\ ?\ 1\ :\ ns[1]\ -\/\ ns[0]);}
+\DoxyCodeLine{00721\ \ \ \ \ iterations\ =\ iterations\ <\ min\_iterations\ ?\ min\_iterations\ :\ iterations;}
+\DoxyCodeLine{00722\ \ \ \ \ iterations\ =\ iterations\ >\ max\_iterations\ ?\ max\_iterations\ :\ iterations;}
+\DoxyCodeLine{00723\ }
+\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keywordflow}{for}\ (mndex\ =\ 0;\ (mndex\ <\ 100)\ \&\&\ (result\ !=\ 0);\ mndex++)\ \{}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ ubench\_int64\_t\ kndex\ =\ 0;}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ ubench\_int64\_t\ avg\_ns\ =\ 0;}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deviation\ =\ 0;}
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ confidence\ =\ 0;}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00730\ \ \ \ \ \ \ iterations\ =\ iterations\ *\ (UBENCH\_CAST(ubench\_int64\_t,\ mndex)\ +\ 1);}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ iterations\ =\ iterations\ >\ max\_iterations\ ?\ max\_iterations\ :\ iterations;}
+\DoxyCodeLine{00732\ }
+\DoxyCodeLine{00733\ \ \ \ \ \ \ ubs.sample\ =\ 0;}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ ubs.size\ =\ iterations;}
+\DoxyCodeLine{00735\ \ \ \ \ \ \ ubench\_state.benchmarks[index].func(\&ubs);}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ benchmark\ run-\/times\ */}}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (kndex\ =\ 0;\ kndex\ <\ iterations;\ kndex++)\ \{}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ ns[kndex]\ =\ ns[kndex\ +\ 1]\ -\/\ ns[kndex];}
+\DoxyCodeLine{00740\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00741\ }
+\DoxyCodeLine{00742\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (kndex\ =\ 0;\ kndex\ <\ iterations;\ kndex++)\ \{}
+\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ avg\_ns\ +=\ ns[kndex];}
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00745\ }
+\DoxyCodeLine{00746\ \ \ \ \ \ \ avg\_ns\ /=\ iterations;}
+\DoxyCodeLine{00747\ }
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (kndex\ =\ 0;\ kndex\ <\ iterations;\ kndex++)\ \{}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ v\ =\ UBENCH\_CAST(\textcolor{keywordtype}{double},\ ns[kndex]\ -\/\ avg\_ns);}
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ deviation\ +=\ v\ *\ v;}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00752\ }
+\DoxyCodeLine{00753\ \ \ \ \ \ \ deviation\ =\ sqrt(deviation\ /\ UBENCH\_CAST(\textcolor{keywordtype}{double},\ iterations));}
+\DoxyCodeLine{00754\ }
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \textcolor{comment}{/*\ Confidence\ is\ the\ 99\%\ confidence\ index\ -\/\ whose\ magic\ value\ is\ 2.576.\ */}}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ confidence\ =\ 2.576\ *\ deviation\ /\ sqrt(UBENCH\_CAST(\textcolor{keywordtype}{double},\ iterations));}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ confidence\ =\ (confidence\ /\ UBENCH\_CAST(\textcolor{keywordtype}{double},\ avg\_ns))\ *\ 100.0;}
+\DoxyCodeLine{00758\ }
+\DoxyCodeLine{00759\ \ \ \ \ \ \ deviation\ =\ (deviation\ /\ UBENCH\_CAST(\textcolor{keywordtype}{double},\ avg\_ns))\ *\ 100.0;}
+\DoxyCodeLine{00760\ }
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ we've\ found\ a\ more\ confident\ solution,\ use\ that.\ */}}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ result\ =\ confidence\ >\ ubench\_state.confidence;}
+\DoxyCodeLine{00763\ }
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ deviation\ beats\ our\ previous\ best,\ record\ it.\ */}}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (confidence\ <\ best\_confidence)\ \{}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ best\_avg\_ns\ =\ avg\_ns;}
+\DoxyCodeLine{00767\ \ \ \ \ \ \ \ \ best\_deviation\ =\ deviation;}
+\DoxyCodeLine{00768\ \ \ \ \ \ \ \ \ best\_confidence\ =\ confidence;}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00770\ \ \ \ \ \}}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \ \ \ \ \textcolor{keywordflow}{if}\ (result)\ \{}
+\DoxyCodeLine{00773\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}confidence\ interval\ \%f\%\%\ exceeds\ maximum\ permitted\ \%f\%\%\(\backslash\)n"{}},}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_confidence,\ ubench\_state.confidence);}
+\DoxyCodeLine{00775\ \ \ \ \ \}}
+\DoxyCodeLine{00776\ }
+\DoxyCodeLine{00777\ \ \ \ \ \textcolor{keywordflow}{if}\ (ubench\_state.output)\ \{}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ fprintf(ubench\_state.output,\ \textcolor{stringliteral}{"{}\%s,\ \%"{}}\ UBENCH\_PRId64\ \textcolor{stringliteral}{"{},\ \%f,\ \%f,\(\backslash\)n"{}},}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks[index].name,\ best\_avg\_ns,\ best\_deviation,}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_confidence);}
+\DoxyCodeLine{00781\ \ \ \ \ \}}
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ \ \ \ \ \{}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ colour\ =\ (0\ !=\ result)\ ?\ colours[RED]\ :\ colours[GREEN];}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\textcolor{keyword}{const}\ status\ =}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ (0\ !=\ result)\ ?\ \textcolor{stringliteral}{"{}[\ \ FAILED\ \ ]"{}}\ :\ \textcolor{stringliteral}{"{}[\ \ \ \ \ \ \ OK\ ]"{}};}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *unit\ =\ \textcolor{stringliteral}{"{}us"{}};}
+\DoxyCodeLine{00788\ }
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (0\ !=\ result)\ \{}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ failed\_benchmark\_index\ =\ failed\_benchmarks\_length++;}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ failed\_benchmarks\ =\ UBENCH\_PTR\_CAST(}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ *,\ realloc(UBENCH\_PTR\_CAST(\textcolor{keywordtype}{void}\ *,\ failed\_benchmarks),}
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})\ *\ failed\_benchmarks\_length));}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ failed\_benchmarks[failed\_benchmark\_index]\ =\ index;}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ failed++;}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00798\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\%s\%s\ \%s\ (mean\ "{}},\ colour,\ status,\ colours[RESET],}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks[index].name);}
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (mndex\ =\ 0;\ mndex\ <\ 2;\ mndex++)\ \{}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (best\_avg\_ns\ <=\ 1000000)\ \{}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00805\ }
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ average\ is\ greater\ than\ a\ million,\ we\ reduce\ it\ and\ change\ the}}
+\DoxyCodeLine{00807\ \textcolor{comment}{\ \ \ \ \ \ \ \ unit\ we\ report.\ */}}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ best\_avg\_ns\ /=\ 1000;}
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (mndex)\ \{}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ unit\ =\ \textcolor{stringliteral}{"{}ms"{}};}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ unit\ =\ \textcolor{stringliteral}{"{}s"{}};}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00820\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%"{}}\ UBENCH\_PRId64\ \textcolor{stringliteral}{"{}.\%03"{}}\ UBENCH\_PRId64}
+\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\%s,\ confidence\ interval\ +-\/\ \%f\%\%)\(\backslash\)n"{}},}
+\DoxyCodeLine{00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_avg\_ns\ /\ 1000,\ best\_avg\_ns\ \%\ 1000,\ unit,\ best\_confidence);}
+\DoxyCodeLine{00823\ \ \ \ \ \}}
+\DoxyCodeLine{00824\ \ \ \}}
+\DoxyCodeLine{00825\ }
+\DoxyCodeLine{00826\ \ \ printf(\textcolor{stringliteral}{"{}\%s[==========]\%s\ \%"{}}\ UBENCH\_PRIu64\ \textcolor{stringliteral}{"{}\ benchmarks\ ran.\(\backslash\)n"{}},}
+\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \ colours[GREEN],\ colours[RESET],\ ran\_benchmarks);}
+\DoxyCodeLine{00828\ \ \ printf(\textcolor{stringliteral}{"{}\%s[\ \ PASSED\ \ ]\%s\ \%"{}}\ UBENCH\_PRIu64\ \textcolor{stringliteral}{"{}\ benchmarks.\(\backslash\)n"{}},\ colours[GREEN],}
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ colours[RESET],\ ran\_benchmarks\ -\/\ failed);}
+\DoxyCodeLine{00830\ }
+\DoxyCodeLine{00831\ \ \ \textcolor{keywordflow}{if}\ (0\ !=\ failed)\ \{}
+\DoxyCodeLine{00832\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s[\ \ FAILED\ \ ]\%s\ \%"{}}\ UBENCH\_PRIu64\ \textcolor{stringliteral}{"{}\ benchmarks,\ listed\ below:\(\backslash\)n"{}},}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ colours[RED],\ colours[RESET],\ failed);}
+\DoxyCodeLine{00834\ \ \ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ failed\_benchmarks\_length;\ index++)\ \{}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s[\ \ FAILED\ \ ]\%s\ \%s\(\backslash\)n"{}},\ colours[RED],\ colours[RESET],}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ ubench\_state.benchmarks[failed\_benchmarks[index]].name);}
+\DoxyCodeLine{00837\ \ \ \ \ \}}
+\DoxyCodeLine{00838\ \ \ \}}
+\DoxyCodeLine{00839\ }
+\DoxyCodeLine{00840\ cleanup:}
+\DoxyCodeLine{00841\ \ \ \textcolor{keywordflow}{for}\ (index\ =\ 0;\ index\ <\ ubench\_state.benchmarks\_length;\ index++)\ \{}
+\DoxyCodeLine{00842\ \ \ \ \ free(UBENCH\_PTR\_CAST(\textcolor{keywordtype}{void}\ *,\ ubench\_state.benchmarks[index].name));}
+\DoxyCodeLine{00843\ \ \ \}}
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \ \ free(UBENCH\_PTR\_CAST(\textcolor{keywordtype}{void}\ *,\ failed\_benchmarks));}
+\DoxyCodeLine{00846\ \ \ free(UBENCH\_PTR\_CAST(\textcolor{keywordtype}{void}\ *,\ ubench\_state.benchmarks));}
+\DoxyCodeLine{00847\ }
+\DoxyCodeLine{00848\ \ \ \textcolor{keywordflow}{if}\ (ubench\_state.output)\ \{}
+\DoxyCodeLine{00849\ \ \ \ \ fclose(ubench\_state.output);}
+\DoxyCodeLine{00850\ \ \ \}}
+\DoxyCodeLine{00851\ }
+\DoxyCodeLine{00852\ \ \ \textcolor{keywordflow}{return}\ UBENCH\_CAST(\textcolor{keywordtype}{int},\ failed);}
+\DoxyCodeLine{00853\ \}}
+\DoxyCodeLine{00854\ }
+\DoxyCodeLine{00855\ \textcolor{preprocessor}{\#ifdef\ \_\_clang\_\_}}
+\DoxyCodeLine{00856\ \textcolor{preprocessor}{\#pragma\ clang\ diagnostic\ pop}}
+\DoxyCodeLine{00857\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00858\ }
+\DoxyCodeLine{00859\ UBENCH\_C\_FUNC\ UBENCH\_NOINLINE\ \textcolor{keywordtype}{void}\ ubench\_do\_nothing(\textcolor{keywordtype}{void}\ *\textcolor{keyword}{const});}
+\DoxyCodeLine{00860\ }
+\DoxyCodeLine{00861\ \textcolor{preprocessor}{\#define\ UBENCH\_DO\_NOTHING(x)\ ubench\_do\_nothing(x)}}
+\DoxyCodeLine{00862\ }
+\DoxyCodeLine{00863\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00864\ UBENCH\_C\_FUNC\ \textcolor{keywordtype}{void}\ \_ReadWriteBarrier(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00865\ }
+\DoxyCodeLine{00866\ \textcolor{preprocessor}{\#define\ UBENCH\_DECLARE\_DO\_NOTHING()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00867\ \textcolor{preprocessor}{\ \ void\ ubench\_do\_nothing(void\ *ptr)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00868\ \textcolor{preprocessor}{\ \ \ \ (void)ptr;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00869\ \textcolor{preprocessor}{\ \ \ \ \_ReadWriteBarrier();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00870\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00871\ \textcolor{preprocessor}{\#elif\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00872\ \textcolor{preprocessor}{\#define\ UBENCH\_DECLARE\_DO\_NOTHING()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00873\ \textcolor{preprocessor}{\ \ void\ ubench\_do\_nothing(void\ *ptr)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00874\ \textcolor{preprocessor}{\ \ \ \ \_Pragma("{}clang\ diagnostic\ push"{})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00875\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_Pragma("{}clang\ diagnostic\ ignored\ \(\backslash\)"{}-\/Wlanguage-\/extension-\/token\(\backslash\)"{}"{});\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00876\ \textcolor{preprocessor}{\ \ \ \ asm\ volatile("{}"{}\ :\ :\ "{}r"{}(ptr),\ "{}m"{}(ptr)\ :\ "{}memory"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00877\ \textcolor{preprocessor}{\ \ \ \ \_Pragma("{}clang\ diagnostic\ pop"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00878\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00879\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00880\ \textcolor{preprocessor}{\#define\ UBENCH\_DECLARE\_DO\_NOTHING()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00881\ \textcolor{preprocessor}{\ \ void\ ubench\_do\_nothing(void\ *ptr)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00882\ \textcolor{preprocessor}{\ \ \ \ asm\ volatile("{}"{}\ :\ :\ "{}r"{}(ptr),\ "{}m"{}(ptr)\ :\ "{}memory"{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00883\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00884\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00885\ }
+\DoxyCodeLine{00886\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00887\ \textcolor{comment}{\ \ \ We\ need,\ in\ exactly\ one\ source\ file,\ define\ the\ global\ struct\ that\ will\ hold}}
+\DoxyCodeLine{00888\ \textcolor{comment}{\ \ \ the\ data\ we\ need\ to\ run\ ubench.\ This\ macro\ allows\ the\ user\ to\ declare\ the}}
+\DoxyCodeLine{00889\ \textcolor{comment}{\ \ \ data\ without\ having\ to\ use\ the\ UBENCH\_MAIN\ macro,\ thus\ allowing\ them\ to\ write}}
+\DoxyCodeLine{00890\ \textcolor{comment}{\ \ \ their\ own\ main()\ function.}}
+\DoxyCodeLine{00891\ \textcolor{comment}{}}
+\DoxyCodeLine{00892\ \textcolor{comment}{\ \ \ We\ also\ use\ this\ to\ define\ the\ 'do\ nothing'\ method\ that\ lets\ us\ keep\ data}}
+\DoxyCodeLine{00893\ \textcolor{comment}{\ \ \ that\ the\ compiler\ would\ normally\ deem\ is\ dead\ for\ the\ purposes\ of\ timing.}}
+\DoxyCodeLine{00894\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00895\ \textcolor{preprocessor}{\#define\ UBENCH\_STATE()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00896\ \textcolor{preprocessor}{\ \ UBENCH\_DECLARE\_DO\_NOTHING()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00897\ \textcolor{preprocessor}{\ \ struct\ ubench\_state\_s\ ubench\_state\ =\ \{0,\ 0,\ 0,\ 2.5\}}}
+\DoxyCodeLine{00898\ }
+\DoxyCodeLine{00899\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00900\ \textcolor{comment}{\ \ \ define\ a\ main()\ function\ to\ call\ into\ ubench.h\ and\ start\ executing}}
+\DoxyCodeLine{00901\ \textcolor{comment}{\ \ \ benchmarks!\ A\ user\ can\ optionally\ not\ use\ this\ macro,\ and\ instead\ define}}
+\DoxyCodeLine{00902\ \textcolor{comment}{\ \ \ their\ own\ main()\ function\ and\ manually\ call\ ubench\_main.\ The\ user\ must,\ in}}
+\DoxyCodeLine{00903\ \textcolor{comment}{\ \ \ exactly\ one\ source\ file,\ use\ the\ UBENCH\_STATE\ macro\ to\ declare\ a\ global}}
+\DoxyCodeLine{00904\ \textcolor{comment}{\ \ \ struct\ variable\ that\ ubench\ requires.}}
+\DoxyCodeLine{00905\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00906\ \textcolor{preprocessor}{\#define\ UBENCH\_MAIN()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00907\ \textcolor{preprocessor}{\ \ UBENCH\_STATE();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00908\ \textcolor{preprocessor}{\ \ int\ main(int\ argc,\ const\ char\ *const\ argv[])\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00909\ \textcolor{preprocessor}{\ \ \ \ return\ ubench\_main(argc,\ argv);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00910\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00911\ }
+\DoxyCodeLine{00912\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SHEREDOM\_UBENCH\_H\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

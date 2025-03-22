@@ -1,0 +1,62 @@
+\doxysection{save.\+h File Reference}
+\hypertarget{save_8h}{}\label{save_8h}\index{save.h@{save.h}}
+
+
+Fonctions de sauvegarde et de chargement d\textquotesingle{}un reseau de neurones.  
+
+
+{\ttfamily \#include "{}neuron.\+h"{}}\newline
+{\ttfamily \#include "{}population.\+h"{}}\newline
+Include dependency graph for save.\+h\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{save_8h_aef2eb274a8991cc6b93ef2eb2006dc1f}{save}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}reseau)
+\begin{DoxyCompactList}\small\item\em Sauvegarder les données du réseau de neurones. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{save_8h_a06a76452f84876fcf62c48e2677ed71b}{read}} (\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}reseau)
+\begin{DoxyCompactList}\small\item\em Récupérer les données du dernier réseau de neurones sauvegardé \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions de sauvegarde et de chargement d\textquotesingle{}un reseau de neurones. 
+
+\begin{DoxyAuthor}{Author}
+Claire Besançon 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+20/03/2025 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{save_8h_a06a76452f84876fcf62c48e2677ed71b}\label{save_8h_a06a76452f84876fcf62c48e2677ed71b} 
+\index{save.h@{save.h}!read@{read}}
+\index{read@{read}!save.h@{save.h}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{reseau }\end{DoxyParamCaption})}
+
+
+
+Récupérer les données du dernier réseau de neurones sauvegardé 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reseau} & Réseau de neurones -\/\texorpdfstring{$>$}{>} pointeur sur la première couche du réseau \\
+\hline
+\end{DoxyParams}
+\Hypertarget{save_8h_aef2eb274a8991cc6b93ef2eb2006dc1f}\label{save_8h_aef2eb274a8991cc6b93ef2eb2006dc1f} 
+\index{save.h@{save.h}!save@{save}}
+\index{save@{save}!save.h@{save.h}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void save (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCouche}{Couche}} \texorpdfstring{$\ast$}{*}}]{reseau }\end{DoxyParamCaption})}
+
+
+
+Sauvegarder les données du réseau de neurones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reseau} & Réseau de neurones -\/\texorpdfstring{$>$}{>} pointeur sur la première couche du réseau \\
+\hline
+\end{DoxyParams}

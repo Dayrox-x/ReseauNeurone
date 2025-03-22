@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['save_0',['save',['../save_8h.html#aef2eb274a8991cc6b93ef2eb2006dc1f',1,'save.c']]],
+  ['save_2eh_1',['save.h',['../save_8h.html',1,'']]],
+  ['seta_2',['setA',['../population_8h.html#aabf633ca5dee0e45a7baefd5b10dab6b',1,'population.c']]],
+  ['setb_3',['setB',['../population_8h.html#a6baa3a368fbcbd415628fee1a6354a25',1,'population.c']]],
+  ['setcolor_4',['setColor',['../population_8h.html#a448627e7b6e34aebce066bb7a93b0dc9',1,'population.c']]],
+  ['setdelta_5',['setDelta',['../neuron_8h.html#a9ee68be3bd3aa9a357ed27e3f716928a',1,'neuron.c']]],
+  ['setg_6',['setG',['../population_8h.html#ad4f7814357de41bb447576447590fb81',1,'population.c']]],
+  ['setisfstcouche_7',['setIsFstCouche',['../neuron_8h.html#a1d650d20109c1360872e1a02488bddf1',1,'neuron.c']]],
+  ['setislstcouche_8',['setIsLstCouche',['../neuron_8h.html#a60394a6f79bf428518d70293a9d47ddd',1,'neuron.c']]],
+  ['setnbneurones_9',['setNbNeurones',['../neuron_8h.html#a26748be06258481708fa07a934e6f298',1,'neuron.c']]],
+  ['setneuron_10',['setNeuron',['../neuron_8h.html#a2def707012f44a903ecfe6a067b91900',1,'neuron.c']]],
+  ['setneurons_11',['setNeurons',['../neuron_8h.html#a266c243b354c05f27ec74272c32e232d',1,'neuron.c']]],
+  ['setnextcouche_12',['setNextCouche',['../neuron_8h.html#a0c33c3ffb4fc33f77a59c1de4d5e6109',1,'neuron.c']]],
+  ['setoutput_13',['setOutput',['../neuron_8h.html#a7d2ed81e1d9890cea8f5e30fca349423',1,'neuron.c']]],
+  ['setpixel_14',['setPixel',['../population_8h.html#afc76fd987d6c8adf52c2b670e2c1a46e',1,'population.c']]],
+  ['setpixelcolor_15',['setPixelColor',['../population_8h.html#a788e44591b2c1c2e70b2ed2bd1da1627',1,'population.c']]],
+  ['setprevcouche_16',['setPrevCouche',['../neuron_8h.html#af1bd2526cbf2b270caddcbe07b92b22c',1,'neuron.c']]],
+  ['setr_17',['setR',['../population_8h.html#a0faaa3b3f59bafaef2787f703c0e700a',1,'population.c']]],
+  ['setweight_18',['setWeight',['../neuron_8h.html#a1cf213dad546550563e95e06cb4dde88',1,'neuron.c']]],
+  ['setweights_19',['setWeights',['../neuron_8h.html#a20d6ca87c34546b921f242f6b3833907',1,'neuron.c']]],
+  ['setx_20',['setX',['../population_8h.html#ac8174058bfb37376990978f37fb1b98e',1,'population.c']]],
+  ['sety_21',['setY',['../population_8h.html#a204df88ec09a17a540737ae271444775',1,'population.c']]],
+  ['size_22',['size',['../structdata.html#a009251604d979d26652bbd672d6face8',1,'data']]]
+];
