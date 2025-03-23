@@ -10,10 +10,6 @@
 #include "log.h"
 #include "saveRead.h"
 
-// pour compiler : gcc *.c -g -o main -lm -lSDL2
-// -lm pour la librairie mathematique, -lSDL2 pour la librairie SDL2
-// pour executer : ./main
-
 #define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE

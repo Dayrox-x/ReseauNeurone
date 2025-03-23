@@ -75,7 +75,6 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
     double* v_x = malloc(sizeof(double) * 2);
     double* v_y;
     int i = 0;
-    int iteration = 0;
     double lowest = di_max;
 
     while (di_max - threshold >= 0.) {
@@ -87,19 +86,7 @@ void learn(Couche* reseau, Dataset d, double epsilon, double threshold) {
         v_y = colorToVector(getColor(getDatasetPixel(d, i)));
         di_max = backpropagate(reseau, v_x, v_y, epsilon);
         free(v_y);
-
-        // Log de la progression
-        iteration++;
-        if (lowest - di_max > 0.0) {
-            lowest = di_max;
-            printf("Iteration %d, lowest di_max: %lf\n", iteration, lowest);
-        }
-        if (iteration % 10000 == 0){
-            printf("Iteration : %d, di_max : %2f\n", iteration, di_max);
-        }
     }
-    
-    printf("Learning completed in %d iterations with final di_max: %f\n", iteration, di_max);
     free(v_x);
 }
 
