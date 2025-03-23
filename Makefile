@@ -44,4 +44,4 @@ run_benchmarks: $(BENCHMARK)
 
 # Nettoyer les fichiers compilés
 clean:
-	rm -f $(PROJECT) $(BENCHMARK)
+	rm -f $(PROJECT) $(BENCHMARK) *.cls

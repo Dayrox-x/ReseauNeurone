@@ -9,6 +9,7 @@
 
  #include "neuron.h"
  #include "population.h"
+ #include "sdl.h"
  
  /**
   * \fn void save(Couche *reseau)
