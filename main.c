@@ -17,8 +17,8 @@
 #define PIXEL_SIZE 10
 #define WIDTH 640/PIXEL_SIZE
 #define HEIGHT 640/PIXEL_SIZE
-#define EPSILON 0.00001
-#define THRESHOLD 0.00001
+#define EPSILON 0.001
+#define THRESHOLD 0.001
  
 int main( int argc, char* args[] ) {
 	log_info("Démarrage du programme");
