@@ -13,19 +13,15 @@
 //Un point "." signifie que le test a réussi, un "F" signifie qu'il a échoué
 
 
-void TestTransfer(CuTest *tc) {
-    double input = 1.5;
-    double expected = tanh(input);
-    double actual = transfer(input);
-    printf("TestTransfer: expected=%.6f, actual=%.6f\n", expected, actual);
-    CuAssertDblEquals(tc, expected, actual, 0.001);
-}
-
 void TestForward(CuTest *tc) {
-    Neuron neuron = {{0.5, -0.3}};
-    double inputs[INPUT_SIZE] = {1.0, 2.0};
-    double expected = transfer(0.5 * 1.0 + (-0.3) * 2.0); // résultat = 0.5 - 0.6 = -0.1
-    double actual = forward(&neuron, inputs);
+    Neuron neuron;
+    double weights[] = {0.5, -0.3};
+    neuron.weights = weights;
+    neuron.output = 0;
+    Neuron inputs[2] = {{.output = 1.0}, {.output = 2.0}};
+    forward(&neuron, inputs, 2);
+    double expected = tanh(0.5 * 1.0 + (-0.3) * 2.0);
+    double actual = neuron.output;
     printf("TestForward: expected=%.6f, actual=%.6f\n", expected, actual);
     CuAssertDblEquals(tc, expected, actual, 0.001);
 }
@@ -125,7 +121,6 @@ void TestInitReseau(CuTest *tc) {
 // Ajout des tests pour fichier AllTests.c
 CuSuite* NeuronGetSuite() {
     CuSuite* suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, TestTransfer);
     SUITE_ADD_TEST(suite, TestForward);
     SUITE_ADD_TEST(suite, TestInitCouche);
     SUITE_ADD_TEST(suite, TestCalculCouche);
