@@ -291,6 +291,18 @@ void setNbNeurones(Couche *couche, int nbNeuron);
 void init_neuron(Couche* curr_couche, int nb_synapses);
 
 /**
+ * \brief Initialise le tableau de neurones d'une couchec
+ * 
+ * Fonction qui alloue l'espace mémoire nécessaire au tableau de neurones d'une couche
+ * 
+ * \param nb_neurones
+ * Nombre de neurones de la couche actuelle
+ * \param curr_couche
+ * Pointeur sur la couche actuelle
+ */
+void init_tab_neuron(int nb_neurones, Couche* couche);
+
+/**
  * \brief Initialise et retourne une couche de neurone
  * \param nb_neurones
  * Nombre de neurone dans la couche
@@ -374,6 +386,13 @@ void free_neuron(Neuron neuron);
  * \param couche
  * Pointeur sur la couche libérée
  */
+void free_tab_neurons(Couche* couche);
+
+/**
+ * \brief Libère l'espace alloué par une couche
+ * \param couche
+ * Pointeur sur la couche libérée
+ */
 void free_couche(Couche* couche);
 
 /**
@@ -382,5 +401,6 @@ void free_couche(Couche* couche);
  * Pointeur sur la première couche du réseau libéré
  */
 void free_reseau(Couche* reseau);
+
 
 #endif // NEURON_H

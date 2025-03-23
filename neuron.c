@@ -115,14 +115,23 @@ void init_neuron(Couche* curr_couche, int nb_synapses){
             curr_couche->tab_n[i].weights = malloc(sizeof(double) * nb_synapses);
             for (int j = 0; j < nb_synapses; j++) {
                 double weight;
-                double range = curr_couche->is_lst_couche ? 1.0 : sqrt(6.0 / (curr_couche->nb_neurones + curr_couche->next->nb_neurones));
-                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX) * 2. * range - range;
+                weight = curr_couche->is_fst_couche ? 1.0 : ((double)rand() / (double)RAND_MAX) * 2. - 1.;
                 curr_couche->tab_n[i].weights[j] = weight;
-                curr_couche->tab_n[i].output = 0.0;
-                curr_couche->tab_n[i].delta = 0.0;
+                curr_couche->tab_n[i].output = 1.0;
+                curr_couche->tab_n[i].delta = 1.0;
             }
         }
         init_neuron(curr_couche->next, curr_couche->nb_neurones);
+    }
+}
+
+void init_tab_neuron(int nb_neurones, Couche* couche)
+{
+    couche->tab_n = malloc(nb_neurones * sizeof(Neuron));
+    if (!couche->tab_n) {
+        printf("Erreur d'allocation mémoire\n");
+        free(couche);
+        exit(1);
     }
 }
 
@@ -135,12 +144,8 @@ Couche *init_couche(int nb_neurones, Couche *couche_suivante, Couche* couche_pre
     }
 
     couche->nb_neurones = nb_neurones;
-    couche->tab_n = malloc(nb_neurones * sizeof(Neuron));
-    if (!couche->tab_n) {
-        printf("Erreur d'allocation mémoire\n");
-        free(couche);
-        exit(1);
-    }
+    
+    init_tab_neuron(nb_neurones, couche);
 
     couche->next = couche_suivante;
     couche->prev = couche_prec;
@@ -228,7 +233,6 @@ void print_reseau(Couche* reseau) {
     }
 }
 
-
 // Fonctions de liberation de mémoire
 // on free le neuron, la couche, et l'ensemble du reseau
 
@@ -239,13 +243,17 @@ void free_neuron(Neuron neuron) {
     }
 }
 
+void free_tab_neurons(Couche* couche){
+    for (int i = 0; i < couche->nb_neurones; i++) {
+        free_neuron(couche->tab_n[i]);
+    }
+    free(couche->tab_n);
+    couche->tab_n = NULL;
+}
+
 void free_couche(Couche* couche) {
     if (couche != NULL) {
-        for (int i = 0; i < couche->nb_neurones; i++) {
-            free_neuron(couche->tab_n[i]);
-        }
-        free(couche->tab_n);
-        couche->tab_n = NULL;
+        free_tab_neurons(couche);
 
         free(couche);
         couche = NULL;
