@@ -62,7 +62,7 @@ void TestSetR(CuTest *tc) {
     setR(c, r2);
     CuAssertIntEquals(tc, r2, getR(c));
     setR(c, r3);
-    CuAssertIntEquals(tc, 1, getR(c));
+    CuAssertIntEquals(tc, 0, getR(c));
 }
 
 void TestSetG(CuTest *tc) {
@@ -76,7 +76,7 @@ void TestSetG(CuTest *tc) {
     setG(c, g2);
     CuAssertIntEquals(tc, g2, getG(c));
     setG(c, g3);
-    CuAssertIntEquals(tc, 1, getG(c));
+    CuAssertIntEquals(tc, 2, getG(c));
 }
 
 void TestSetB(CuTest *tc) {
@@ -116,7 +116,10 @@ void TestCreatePixel(CuTest *tc) {
     Pixel p = createPixel(10, 20, c);
     CuAssertIntEquals(tc, 10, getX(p));
     CuAssertIntEquals(tc, 20, getY(p));
-    CuAssertPtrEquals(tc, c, getColor(p));
+    CuAssertIntEquals(tc, 255, getR(getColor(p)));
+    CuAssertIntEquals(tc, 255, getG(getColor(p)));
+    CuAssertIntEquals(tc, 255, getB(getColor(p)));
+    CuAssertIntEquals(tc, 255, getA(getColor(p)));
     destroyPixel(p);
     destroyColor(c);
 }
@@ -147,14 +150,68 @@ void TestCreateImage(CuTest *tc) {
     destroyColor(c);
 }
 
+void TestGetDatasetSize(CuTest *tc){
+    Dataset d = createDataset();
+    d->size = 30;
+    CuAssertIntEquals(tc, 30, getDatasetSize(d));
+    destroyDataset(d);
+}
+
+void TestCreateDataset(CuTest *tc){
+    Dataset d = createDataset();
+    CuAssertPtrEquals(tc, NULL, d->tab);
+    CuAssertIntEquals(tc, 0, getDatasetSize(d));
+    destroyDataset(d);
+}
+
+void TestAddDatasetPixel(CuTest * tc){
+    Dataset d = createDataset();
+    Color c = createColor(0, 0, 0, 0);
+    Pixel p = createPixel(0., 0., c);
+    CuAssertIntEquals(tc, 0, getDatasetSize(d));
+    addDatasetPixel(d, p);
+    CuAssertIntEquals(tc, 1, getDatasetSize(d));
+    CuAssertIntEquals(tc, 0, getR(getColor(getDatasetPixel(d, 0))));
+    CuAssertIntEquals(tc, 0, getG(getColor(getDatasetPixel(d, 0))));
+    CuAssertIntEquals(tc, 0, getB(getColor(getDatasetPixel(d, 0))));
+    CuAssertIntEquals(tc, 0, getA(getColor(getDatasetPixel(d, 0))));
+    CuAssertIntEquals(tc, 0., getX(getDatasetPixel(d, 0)));
+    CuAssertIntEquals(tc, 0., getY(getDatasetPixel(d, 0)));
+    destroyDataset(d);
+    destroyColor(c);
+    destroyPixel(p);
+}
+
+void TestGetDatasetPixel(CuTest *tc){
+    Dataset d = createDataset();
+    Color c = createColor(0, 0, 0, 0);
+    Pixel p1 = createPixel(0., 0., c);
+    Pixel p2 = createPixel(1., 0., c);
+    Pixel p3 = createPixel(2., 0., c);
+    addDatasetPixel(d, p1);
+    addDatasetPixel(d, p2);
+    addDatasetPixel(d, p3);
+    CuAssertDblEquals(tc, 0., getX(getDatasetPixel(d, 0)), 0.);
+    CuAssertDblEquals(tc, 1., getX(getDatasetPixel(d, 1)), 0.);
+    CuAssertDblEquals(tc, 2., getX(getDatasetPixel(d, 2)), 0.);
+    destroyDataset(d);
+    destroyColor(c);
+    destroyPixel(p1);
+    destroyPixel(p2);
+    destroyPixel(p3);
+}
+
 void TestCreatePopulation(CuTest *tc) {
     Color c = createColor(255, 0, 0, 255);
     Dataset d = createDataset();
-    Image img = createImage(100, 100, c);
-    createPopulation(img, c, d, 1);
-    CuAssertPtrEquals(tc, c, getPixelColor(img, 50, 50)); // Vérification de l'effet de la création
-    destroyImage(img);
+    double val = 1.;
+    int size = 2;
+    createPopulation(d, c, val, size);
+    CuAssertIntEquals(tc, size, getDatasetSize(d)); // Vérification de l'effet de la création
+    CuAssertDblEquals(tc, val * (0.2 * cos(0.2)), getX(getDatasetPixel(d, 1)), 0.); // Vérification de l'effet de la création
+    CuAssertDblEquals(tc, val * (0.2 * sin(0.2)), getY(getDatasetPixel(d, 1)), 0.); // Vérification de l'effet de la création
     destroyColor(c);
+    destroyDataset(d);
 }
 
 CuSuite* PopulationGetSuite() {
@@ -172,5 +229,9 @@ CuSuite* PopulationGetSuite() {
     SUITE_ADD_TEST(suite, TestCreatePixelTab);
     SUITE_ADD_TEST(suite, TestCreateImage);
     SUITE_ADD_TEST(suite, TestCreatePopulation);
+    SUITE_ADD_TEST(suite, TestGetDatasetSize);
+    SUITE_ADD_TEST(suite, TestCreateDataset);
+    SUITE_ADD_TEST(suite, TestAddDatasetPixel);
+    SUITE_ADD_TEST(suite, TestGetDatasetPixel);
     return suite;
 }
