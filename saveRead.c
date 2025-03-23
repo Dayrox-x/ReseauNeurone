@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "saveRead.h"
 
-#define SORTIE_SEQ ""
+#define SORTIE_SEQ "sauvegardeReseau.cls"
 
 void save(Couche *reseau)
 {
