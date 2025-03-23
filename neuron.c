@@ -200,7 +200,7 @@ void calcul_reseau(double *tab_val, Couche *fst_couche) {
     }
     Couche *current = fst_couche->next;
     while (current) { // tant qu'on n'est pas à la dernière couche => sorties deviennent les entrées de couche suivante.
-        calcul_couche(current, current->prev->tab_n); //stocke tempo les sorties de chaque couche avant d’être transmises à suivante
+        calcul_couche(current, current->prev->tab_n);
         current = current->next;
     }
 }
