@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include "saveRead.h"
 
-#define SORTIE_SEQ "partieseq.cls"
+#define SORTIE_SEQ ""
 
 void save(Couche *reseau)
 {
+    // printf("Fonction save() appelée\n");
+    // char* sortie_seq;
+    // inputNameFicSave(sortie_seq);
     FILE * fichier = fopen(SORTIE_SEQ, "w");
     if (fichier == NULL) {
         printf("Echec de l'ouverture du fichier de sauvegarde\n");
@@ -42,7 +45,12 @@ void save(Couche *reseau)
 }
 
 
-void read(Couche *currCouche) {
+void read(Couche *currCouche) 
+{
+    // printf("Fonction read() appelée\n");
+    // char* sortie_seq;
+    // inputNameFicSave(sortie_seq);
+
     FILE *fichier = fopen(SORTIE_SEQ, "r");
     if (fichier == NULL) {
         printf("Echec de l'ouverture du fichier de sauvegarde\n");

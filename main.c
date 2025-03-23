@@ -123,6 +123,7 @@ int main( int argc, char* args[] ) {
 			}
 			else if (e.type == SDL_KEYDOWN)
 			{
+				printf("Touche pressée : %d\n", e.key.keysym.sym);  // Debug
 				switch (e.key.keysym.sym){
 					case SDLK_s:
 						save(reseau);
