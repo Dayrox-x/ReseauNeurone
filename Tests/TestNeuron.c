@@ -13,19 +13,15 @@
 //Un point "." signifie que le test a réussi, un "F" signifie qu'il a échoué
 
 
-void TestTransfer(CuTest *tc) {
-    double input = 1.5;
-    double expected = tanh(input);
-    double actual = transfer(input);
-    printf("TestTransfer: expected=%.6f, actual=%.6f\n", expected, actual);
-    CuAssertDblEquals(tc, expected, actual, 0.001);
-}
-
 void TestForward(CuTest *tc) {
-    Neuron neuron = {{0.5, -0.3}};
-    double inputs[INPUT_SIZE] = {1.0, 2.0};
-    double expected = transfer(0.5 * 1.0 + (-0.3) * 2.0); // résultat = 0.5 - 0.6 = -0.1
-    double actual = forward(&neuron, inputs);
+    Neuron neuron;
+    double weights[] = {0.5, -0.3};
+    neuron.weights = weights;
+    neuron.output = 0;
+    Neuron inputs[2] = {{.output = 1.0}, {.output = 2.0}};
+    forward(&neuron, inputs, 2);
+    double expected = tanh(0.5 * 1.0 + (-0.3) * 2.0);
+    double actual = neuron.output;
     printf("TestForward: expected=%.6f, actual=%.6f\n", expected, actual);
     CuAssertDblEquals(tc, expected, actual, 0.001);
 }
@@ -33,55 +29,89 @@ void TestForward(CuTest *tc) {
 void TestInitCouche(CuTest *tc) {
     int nb_neurones = 3;
     Couche *suivante = NULL;
-    Couche *couche = init_couche(nb_neurones, suivante, 1, 0);
+    Couche *couche = init_couche(nb_neurones, suivante, NULL, true, false);
     printf("TestInitCouche: couche=%p \n", (void*)couche);
 
     // Vérification de l'allocation
     CuAssertPtrNotNull(tc, couche);
     CuAssertIntEquals(tc, nb_neurones, couche->nb_neurones);
-    CuAssertPtrEquals(tc, suivante, couche->p);
-    CuAssertIntEquals(tc, 1, couche->is_fst_couche);
+    CuAssertPtrEquals(tc, suivante, couche->next);
+    CuAssertTrue(tc, couche->is_fst_couche);
     CuAssertIntEquals(tc, 0, couche->is_lst_couche);
 
-    // Vérification des neurones et des poids
-    CuAssertPtrNotNull(tc, couche->tab_n);
-    for (int i = 0; i < nb_neurones; i++) {
-        for (int j = 0; j < INPUT_SIZE; j++) {
-            CuAssertTrue(tc, couche->tab_n[i].weights[j] != 0.0);
-        }
-    }
     free(couche->tab_n);
     free(couche);
 }
 
 void TestCalculCouche(CuTest *tc) {
-    Couche *couche = init_couche(3, NULL, 1, 0);
-    double tab_val[2] = {1.0, 2.0};
-    double *tab_result = calcul_couche(couche, tab_val, 2);
-    CuAssertPtrNotNull(tc, tab_result);
-    for (int i = 0; i < couche->nb_neurones; i++) {
-        CuAssertTrue(tc, tab_result[i] == forward(&couche->tab_n[i], tab_val));
+    int nb_neuron = 2;
+    Couche *couche1 = init_couche(nb_neuron, NULL, NULL, false, true);
+    Couche *couche0 = init_couche(nb_neuron, couche1, NULL, true, false);
+    Couche *coucheB = init_couche(nb_neuron, NULL, NULL, false, true);
+    Couche *coucheA = init_couche(nb_neuron, coucheB, NULL, true, false);
+    couche1->prev = couche0;
+    coucheB->prev = coucheA;
+    init_neuron(couche0, 1);
+    for (int i = 0; i < 2; i++){
+        coucheA->tab_n[i].weights = couche0->tab_n[i].weights;
+        coucheA->tab_n[i].output = couche0->tab_n[i].output;
+        coucheA->tab_n[i].delta = couche0->tab_n[i].delta;
+        coucheB->tab_n[i].weights = couche1->tab_n[i].weights;
+        coucheB->tab_n[i].output = couche1->tab_n[i].output;
+        coucheB->tab_n[i].delta = couche1->tab_n[i].delta;
     }
-    free(tab_result);
-    free(couche->tab_n);
-    free(couche);
+
+    calcul_couche(couche1, couche0->tab_n);
+    for (int i = 0; i < couche1->nb_neurones; i++) {
+        forward(&coucheB->tab_n[i], coucheA->tab_n, coucheA->nb_neurones);
+        CuAssertTrue(tc, coucheB->tab_n[i].output == couche1->tab_n[i].output);
+    }
+    free(couche0->tab_n);
+    free(couche0);
+    free(couche1->tab_n);
+    free(couche1);
+    free(coucheB->tab_n);
+    free(coucheB);
+    free(coucheA->tab_n);
+    free(coucheA);
 }
 
 void TestCalculReseau(CuTest *tc) {
-    Couche *couche1 = init_couche(3, NULL, 1, 0);
-    Couche *couche2 = init_couche(2, NULL, 0, 1);
-    couche1->p = couche2;
-    double tab_val[2] = {1.0, 2.0};
-    double *tab_result = calcul_reseau(tab_val, couche1);
-    CuAssertPtrNotNull(tc, tab_result);
-    for (int i = 0; i < 2; i++){
-        CuAssertTrue(tc, tab_result[i] == calcul_couche(couche2, calcul_couche(couche1, tab_val, 2), 3)[i]);
+    int nb_neuron = 2;
+    Couche *couche1 = init_couche(nb_neuron, NULL, NULL, false, true);
+    Couche *couche0 = init_couche(nb_neuron, couche1, NULL, true, false);
+    Couche *coucheB = init_couche(nb_neuron, NULL, NULL, false, true);
+    Couche *coucheA = init_couche(nb_neuron, coucheB, NULL, true, false);
+    couche1->prev = couche0;
+    coucheB->prev = coucheA;
+    init_neuron(couche0, 1);
+    double tab_val[nb_neuron];
+    for (int i = 0; i < nb_neuron; i++){
+        tab_val[i] = 1.0;
+        coucheA->tab_n[i].weights = couche0->tab_n[i].weights;
+        coucheA->tab_n[i].output = 1.0;
+        coucheA->tab_n[i].delta = couche0->tab_n[i].delta;
+        coucheB->tab_n[i].weights = couche1->tab_n[i].weights;
+        coucheB->tab_n[i].output = couche1->tab_n[i].output;
+        coucheB->tab_n[i].delta = couche1->tab_n[i].delta;
     }
-    free(tab_result);
+    calcul_reseau(tab_val, couche0);
+    Couche * curr = coucheA;
+    for (int i = 0; i < nb_neuron; i++) {
+        calcul_couche(coucheB, coucheA->tab_n);
+        double outputB = coucheB->tab_n[i].output;
+        double output1 = couche1->tab_n[i].output;
+        CuAssertDblEquals(tc, outputB, output1, 0.);
+    }
+
     free(couche1->tab_n);
-    free(couche2->tab_n);
+    free(couche0->tab_n);
     free(couche1);
-    free(couche2);
+    free(couche0);
+    free(coucheA->tab_n);
+    free(coucheB->tab_n);
+    free(coucheA);
+    free(coucheB);
 }
 
 void TestInitReseau(CuTest *tc) {
@@ -101,14 +131,14 @@ void TestInitReseau(CuTest *tc) {
     // Test couches cachées
     Couche *hidden_layer = reseau;
     for (int i = 0; i < nb_couches - 2; i++){
-        hidden_layer = hidden_layer->p;
+        hidden_layer = hidden_layer->next;
         CuAssertTrue(tc, hidden_layer != NULL);
         CuAssertTrue(tc, !hidden_layer->is_fst_couche);
         CuAssertTrue(tc, !hidden_layer->is_lst_couche);
     }
 
     // Test derniere couche
-    Couche *last_layer = hidden_layer->p;
+    Couche *last_layer = hidden_layer->next;
     CuAssertIntEquals(tc, nb_sorties, last_layer->nb_neurones);
     CuAssertTrue(tc, !last_layer->is_fst_couche);
     CuAssertTrue(tc, last_layer->is_lst_couche);
@@ -125,7 +155,6 @@ void TestInitReseau(CuTest *tc) {
 // Ajout des tests pour fichier AllTests.c
 CuSuite* NeuronGetSuite() {
     CuSuite* suite = CuSuiteNew();
-    SUITE_ADD_TEST(suite, TestTransfer);
     SUITE_ADD_TEST(suite, TestForward);
     SUITE_ADD_TEST(suite, TestInitCouche);
     SUITE_ADD_TEST(suite, TestCalculCouche);
