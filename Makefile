@@ -39,7 +39,7 @@ run: $(PROJECT)
 	./$(PROJECT)
 
 # Règle pour exécuter les benchmarks
-run_benchmarks: $(BENCHMARK)
+benchmarks: $(BENCHMARK)
 	./$(BENCHMARK)
 
 # Nettoyer les fichiers compilés
