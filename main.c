@@ -44,10 +44,6 @@ int main( int argc, char* args[] ) {
         return EXIT_FAILURE;
     }
 	log_info("Réseau de neurones initialisé");
-	
-	log_warn("Début de l'apprentissage");
-	learn(reseau, d, EPSILON, THRESHOLD);
-	log_info("Fin de l'apprentissage");
 
 	//Demarrer SDL
 	log_debug("Initialisation de SDL");
@@ -98,6 +94,10 @@ int main( int argc, char* args[] ) {
 	renderImage(image, renderer, window, PIXEL_SIZE);
 
 	renderDataset(d, renderer, window, PIXEL_SIZE);
+	
+	log_warn("Début de l'apprentissage");
+	learn(reseau, d, EPSILON, THRESHOLD);
+	log_info("Fin de l'apprentissage");
 
 	bool end = false;
 	
@@ -126,6 +126,7 @@ int main( int argc, char* args[] ) {
 		}
 		generalize(reseau, image);
 		renderImage(image, renderer, window, PIXEL_SIZE);
+		renderDataset(d, renderer, window, PIXEL_SIZE);
 		learn(reseau, d, EPSILON, THRESHOLD);
 	}
 
