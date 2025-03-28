@@ -242,6 +242,29 @@ Pixel createPixel(double x, double y, Color c);
  */
 void destroyPixel(Pixel p);
 
+/**
+ * \brief Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d'utiliser destroyPixelTab
+ * \param width
+ * Largeur du tableau
+ * \param height
+ * Hauteur du tableau
+ * \param c
+ * Couleur des pixels du tableau
+ * \return Tableau de taille width*height de pixels de couleur c
+ */
+Pixel** createPixelTab(int width, int height, Color c);
+
+/**
+ * \brief Détruit un tableau de pixels
+ * \param tab
+ * Tableau de Pixel à détruire
+ * \param width
+ * Largeur du tableau
+ * \param height
+ * Hauteur du tableau
+ */
+void destroyPixelTab(Pixel ** tab, int width, int height);
+
 // getters setters de Image
 
 /**
@@ -310,18 +333,6 @@ Color getPixelColor(Image image, int x, int y);
 void setPixelColor(Image image, int x, int y, Color c);
 
 /**
- * \brief Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d'utiliser destroyPixelTab
- * \param width
- * Largeur du tableau
- * \param height
- * Hauteur du tableau
- * \param c
- * Couleur des pixels du tableau
- * \return Tableau de taille width*height de pixels de couleur c
- */
-Pixel** createPixelTab(int width, int height, Color c);
-
-/**
  * \brief Alloue et crée une image, ne pas oublier d'utiliser destroyImage
  * \param width
  * Largeur de l'image
@@ -332,17 +343,6 @@ Pixel** createPixelTab(int width, int height, Color c);
  * \return Image de taille width*height de couleur c
  */
 Image createImage(int width, int height, Color c);
-
-/**
- * \brief Détruit un tableau de pixels
- * \param tab
- * Tableau de Pixel à détruire
- * \param width
- * Largeur du tableau
- * \param height
- * Hauteur du tableau
- */
-void destroyPixelTab(Pixel ** tab, int width, int height);
 
 /**
  * \brief Détruit une Image

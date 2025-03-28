@@ -78,6 +78,10 @@ double \mbox{\hyperlink{population_8h_a9b004c12a3f0fd6042118f74288c5fa1}{getY}} 
 \begin{DoxyCompactList}\small\item\em Alloue et crée un pixel depuis des coordonnées et une couleur, penser à utiliser destroy\+Pixel. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{population_8h_a1f1d96feb4ce919b5e5cd2dc84c2d090}{destroy\+Pixel}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
 \begin{DoxyCompactList}\small\item\em Détruit un pixel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{population_8h_a3b2cd6142173aaadd8c979252e4b19d0}{create\+Pixel\+Tab}} (int width, int height, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
+\begin{DoxyCompactList}\small\item\em Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d\textquotesingle{}utiliser destroy\+Pixel\+Tab. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2}{destroy\+Pixel\+Tab}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}tab, int width, int height)
+\begin{DoxyCompactList}\small\item\em Détruit un tableau de pixels. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \mbox{\hyperlink{population_8h_a981dbd5ce45085cf21969fb512489f83}{get\+Pixel}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y)
 \begin{DoxyCompactList}\small\item\em Retourne le pixel de position (x, y) dans une image. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{population_8h_afc76fd987d6c8adf52c2b670e2c1a46e}{set\+Pixel}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y, \mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} p)
@@ -90,12 +94,8 @@ int \mbox{\hyperlink{population_8h_a1eb3e38119e76cb09af0eb8c4d22f3c4}{get\+Heigh
 \begin{DoxyCompactList}\small\item\em Retourne la couleur du pixel de coordonnées (x, y) dans une image. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{population_8h_a788e44591b2c1c2e70b2ed2bd1da1627}{set\+Pixel\+Color}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image, int x, int y, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
 \begin{DoxyCompactList}\small\item\em Définit la couleur du pixel de coordonnées (x, y) dans une image. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{population_8h_a3b2cd6142173aaadd8c979252e4b19d0}{create\+Pixel\+Tab}} (int width, int height, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
-\begin{DoxyCompactList}\small\item\em Alloue et crée un tableau à deux dimensions de pixels, ne pas oublier d\textquotesingle{}utiliser destroy\+Pixel\+Tab. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} \mbox{\hyperlink{population_8h_a3711caed2be9083275d814c14533263b}{create\+Image}} (int width, int height, \mbox{\hyperlink{population_8h_a6dfd6ab1be13c76b8b735952b6199b48}{Color}} c)
 \begin{DoxyCompactList}\small\item\em Alloue et crée une image, ne pas oublier d\textquotesingle{}utiliser destroy\+Image. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{population_8h_af1fdf22a69e4d17c56b4dc0c04935bc2}{destroy\+Pixel\+Tab}} (\mbox{\hyperlink{population_8h_a06903669d0ae34c35d85bf50abc3364c}{Pixel}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}tab, int width, int height)
-\begin{DoxyCompactList}\small\item\em Détruit un tableau de pixels. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{population_8h_a2b3f2b6a3c14e6506888d0343aaebbe1}{destroy\+Image}} (\mbox{\hyperlink{population_8h_ad3ac06807275a5f8e874be71c1575520}{Image}} image)
 \begin{DoxyCompactList}\small\item\em Détruit une Image. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{population_8h_a8b84d154f0b93cd44ecbd6584188b816}{get\+Dataset\+Size}} (\mbox{\hyperlink{population_8h_a840efa5d244459492a0e1cdf9b619b2c}{Dataset}} dataset)

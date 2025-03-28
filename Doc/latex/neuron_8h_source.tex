@@ -76,26 +76,31 @@
 \DoxyCodeLine{00280\ }
 \DoxyCodeLine{00291\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aacb42db5b4339516361fcf12bfc07a1b}{init\_neuron}}(\mbox{\hyperlink{structCouche}{Couche}}*\ curr\_couche,\ \textcolor{keywordtype}{int}\ nb\_synapses);}
 \DoxyCodeLine{00292\ }
-\DoxyCodeLine{00307\ \mbox{\hyperlink{structCouche}{Couche}}\ *\mbox{\hyperlink{neuron_8h_ae23e460db1781a3d23fc6febda84eb4a}{init\_couche}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_ac3b7c54c1375e01ab412d4fc75183e94}{nb\_neurones}},\ \mbox{\hyperlink{structCouche}{Couche}}\ *couche\_suivante,\ \mbox{\hyperlink{structCouche}{Couche}}*\ couche\_prec,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_a431d06590209c074dd6a7b50b8082499}{is\_fst\_couche}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_ad8ec68d968450fc3f78cd9fea0566ac3}{is\_lst\_couche}});}
-\DoxyCodeLine{00308\ }
-\DoxyCodeLine{00323\ \mbox{\hyperlink{structCouche}{Couche}}\ *\mbox{\hyperlink{neuron_8h_a2e5a2985a2c8319e8d719ebb6d1e0bc7}{init\_reseau}}(\textcolor{keywordtype}{int}\ nb\_couches,\ \textcolor{keywordtype}{int}\ taille\_max,\ \textcolor{keywordtype}{int}\ taille\_min,\ \textcolor{keywordtype}{int}\ nb\_entrees,\ \textcolor{keywordtype}{int}\ nb\_sorties);}
-\DoxyCodeLine{00324\ }
-\DoxyCodeLine{00331\ \mbox{\hyperlink{structCouche}{Couche}}*\ \mbox{\hyperlink{neuron_8h_a2326fc3543d0ee83b435001c9a818d41}{getLastCouche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
-\DoxyCodeLine{00332\ }
-\DoxyCodeLine{00340\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a47587f0af380288dd6ad666f07256c50}{calcul\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}\ *couche,\ \mbox{\hyperlink{structNeuron}{Neuron}}\ *tab\_val);}
-\DoxyCodeLine{00341\ }
-\DoxyCodeLine{00349\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a464fd37dc4427aa52ba9b25425531604}{calcul\_reseau}}(\textcolor{keywordtype}{double}\ *tab\_val,\ \mbox{\hyperlink{structCouche}{Couche}}\ *fst\_couche);}
-\DoxyCodeLine{00350\ }
-\DoxyCodeLine{00356\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aecdbee6e134111581ec5332d7b82540c}{print\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
-\DoxyCodeLine{00357\ }
-\DoxyCodeLine{00363\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a66c7c5b6b57976a4b6360512140e4aac}{print\_reseau}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
-\DoxyCodeLine{00364\ }
-\DoxyCodeLine{00370\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a97db427b70f3e4625712231e2013bca4}{free\_neuron}}(\mbox{\hyperlink{structNeuron}{Neuron}}\ neuron);}
-\DoxyCodeLine{00371\ }
-\DoxyCodeLine{00377\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aae6e38362a006c36d30979ee7d8bc841}{free\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
-\DoxyCodeLine{00378\ }
-\DoxyCodeLine{00384\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_af0a17bbffd0963bc444cf3cb2bace423}{free\_reseau}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
-\DoxyCodeLine{00385\ }
-\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NEURON\_H}}
+\DoxyCodeLine{00303\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a9df87eb637d3628852e350cef8f1ff34}{init\_tab\_neuron}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_ac3b7c54c1375e01ab412d4fc75183e94}{nb\_neurones}},\ \mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00319\ \mbox{\hyperlink{structCouche}{Couche}}\ *\mbox{\hyperlink{neuron_8h_ae23e460db1781a3d23fc6febda84eb4a}{init\_couche}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_ac3b7c54c1375e01ab412d4fc75183e94}{nb\_neurones}},\ \mbox{\hyperlink{structCouche}{Couche}}\ *couche\_suivante,\ \mbox{\hyperlink{structCouche}{Couche}}*\ couche\_prec,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_a431d06590209c074dd6a7b50b8082499}{is\_fst\_couche}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCouche_ad8ec68d968450fc3f78cd9fea0566ac3}{is\_lst\_couche}});}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00335\ \mbox{\hyperlink{structCouche}{Couche}}\ *\mbox{\hyperlink{neuron_8h_a2e5a2985a2c8319e8d719ebb6d1e0bc7}{init\_reseau}}(\textcolor{keywordtype}{int}\ nb\_couches,\ \textcolor{keywordtype}{int}\ taille\_max,\ \textcolor{keywordtype}{int}\ taille\_min,\ \textcolor{keywordtype}{int}\ nb\_entrees,\ \textcolor{keywordtype}{int}\ nb\_sorties);}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00343\ \mbox{\hyperlink{structCouche}{Couche}}*\ \mbox{\hyperlink{neuron_8h_a2326fc3543d0ee83b435001c9a818d41}{getLastCouche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00352\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a47587f0af380288dd6ad666f07256c50}{calcul\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}\ *couche,\ \mbox{\hyperlink{structNeuron}{Neuron}}\ *tab\_val);}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00361\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a464fd37dc4427aa52ba9b25425531604}{calcul\_reseau}}(\textcolor{keywordtype}{double}\ *tab\_val,\ \mbox{\hyperlink{structCouche}{Couche}}\ *fst\_couche);}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00368\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aecdbee6e134111581ec5332d7b82540c}{print\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00375\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a66c7c5b6b57976a4b6360512140e4aac}{print\_reseau}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00382\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_a97db427b70f3e4625712231e2013bca4}{free\_neuron}}(\mbox{\hyperlink{structNeuron}{Neuron}}\ neuron);}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00389\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aec32463acf8d24bcbd1b43cfd880e494}{free\_tab\_neurons}}(\mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00396\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_aae6e38362a006c36d30979ee7d8bc841}{free\_couche}}(\mbox{\hyperlink{structCouche}{Couche}}*\ couche);}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00403\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{neuron_8h_af0a17bbffd0963bc444cf3cb2bace423}{free\_reseau}}(\mbox{\hyperlink{structCouche}{Couche}}*\ reseau);}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NEURON\_H}}
 
 \end{DoxyCode}
