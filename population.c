@@ -67,6 +67,27 @@ void destroyPixel(Pixel p) {
    free(p);
 }
 
+Pixel ** createPixelTab(int width, int height, Color c) {
+   Pixel ** tab = (Pixel**)malloc(sizeof(Pixel*) * width);
+   for (int i = 0; i < width; i++) {
+      tab[i] = (Pixel*)malloc(sizeof(Pixel) * height);
+      for (int j = 0; j < height; j++) {
+         tab[i][j] = createPixel((double)i - (double)(width / 2), (double)j - (double)(height / 2), c);
+      }
+   }
+   return tab;
+}
+
+void destroyPixelTab(Pixel ** tab, int width, int height) {
+   for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+         destroyPixel(tab[i][j]);
+      }
+      free(tab[i]);
+   }
+   free(tab);
+}
+
 // getters setters de Image
 Pixel getPixel(Image image, int x, int y) {
    return image->tab[x][y];
@@ -94,34 +115,12 @@ void setPixelColor(Image image, int x, int y, Color c) {
 }
 
 
-
-Pixel ** createPixelTab(int width, int height, Color c) {
-   Pixel ** tab = (Pixel**)malloc(sizeof(Pixel*) * width);
-   for (int i = 0; i < width; i++) {
-      tab[i] = (Pixel*)malloc(sizeof(Pixel) * height);
-      for (int j = 0; j < height; j++) {
-         tab[i][j] = createPixel((double)i - (double)(width / 2), (double)j - (double)(height / 2), c);
-      }
-   }
-   return tab;
-}
-
 Image createImage(int width, int height, Color c) {
    Image image = (Image)malloc(sizeof(img));
    image->width = width;
    image->height = height;
    image->tab = createPixelTab(width, height, c);
    return image;
-}
-
-void destroyPixelTab(Pixel ** tab, int width, int height) {
-   for (int i = 0; i < width; i++) {
-      for (int j = 0; j < height; j++) {
-         destroyPixel(tab[i][j]);
-      }
-      free(tab[i]);
-   }
-   free(tab);
 }
 
 void destroyImage(Image image) {
